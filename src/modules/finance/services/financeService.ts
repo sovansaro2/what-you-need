@@ -166,21 +166,20 @@ export const financeService = {
         })),
       ];
 
-      const { data: inserted, error: insertError } = await supabase
+      const { error: insertError } = await supabase
         .from('categories')
-        .insert(defaultsToInsert)
-        .select('*');
+        .upsert(defaultsToInsert, { onConflict: 'user_id, name', ignoreDuplicates: true });
 
       if (insertError) {
         console.error('Error seeding default categories:', insertError.message);
-        const { data: fallback } = await supabase
-          .from('categories')
-          .select('*')
-          .eq('user_id', userId);
-        return (fallback as TransactionCategory[]) || [];
       }
 
-      return (inserted as TransactionCategory[]) || [];
+      const { data: allCategories } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('user_id', userId);
+
+      return (allCategories as TransactionCategory[]) || [];
     } catch (err: any) {
       console.error('financeService.ensureDefaultCategories error:', err);
       return [];
@@ -246,6 +245,16 @@ export const financeService = {
         .single();
 
       if (error) {
+        // If category with same name already exists for this user, fetch and return it
+        if (error.code === '23505' || error.message?.includes('unique constraint') || error.message?.includes('duplicate')) {
+          const { data: existing } = await supabase
+            .from('categories')
+            .select('*')
+            .eq('user_id', input.user_id)
+            .eq('name', input.name)
+            .single();
+          if (existing) return existing as TransactionCategory;
+        }
         console.error('Error creating category:', error.message);
         throw new Error(error.message);
       }

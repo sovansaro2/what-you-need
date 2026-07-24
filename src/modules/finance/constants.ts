@@ -17,5 +17,5 @@ export const DEFAULT_EXPENSE_CATEGORIES = [
   'ដឹកជញ្ជូន',
   'អាហារ',
   'ថ្លៃផ្ទះ',
-  'ផ្សេងៗ',
+  'ចំណាយផ្សេងៗ',
 ];

@@ -40,7 +40,7 @@ export const RecentActivity: React.FC<RecentActivityProps> = ({ activities }) =>
           សកម្មភាពថ្មីៗ
         </h3>
         <span id="recent-activity-badge" className="text-[11px] font-medium text-slate-400">
-          ទិន្នន័យគំរូ
+          {activities.length > 0 ? `${activities.length} ថ្មីៗ` : 'មិនទាន់មានទិន្នន័យ'}
         </span>
       </div>
 

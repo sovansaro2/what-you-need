@@ -1,131 +1,80 @@
 import React from 'react';
-import { DollarSign, ArrowUpRight, ArrowDownRight, TrendingUp, Package } from 'lucide-react';
+import { DollarSign, ArrowUpRight, ArrowDownRight, TrendingUp, Wallet } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { SummaryCard } from '@/modules/dashboard/components/SummaryCard';
 import { QuickActions } from '@/modules/dashboard/components/QuickActions';
 import { RecentActivity } from '@/modules/dashboard/components/RecentActivity';
 import { SummaryMetric, QuickActionItem, RecentActivityItem } from '@/modules/dashboard/types';
+import { useDashboardSummary } from '@/modules/dashboard/hooks/useDashboardSummary';
+import { formatCurrency } from '@/utils/formatters';
 
 export const Home: React.FC = () => {
   const { user, profile } = useAuth();
+  const { totalIncome, totalExpense, balance, recentTransactions, loading } = useDashboardSummary();
 
   const userName = profile?.full_name || user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User';
 
-  const todayDate = new Date().toLocaleDateString('en-US', {
+  const todayDate = new Date().toLocaleDateString('km-KH', {
     weekday: 'long',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   });
 
-  const mockMetrics: SummaryMetric[] = [
+  const summaryMetrics: SummaryMetric[] = [
     {
       id: 'metric-income',
-      label: 'ចំណូល',
-      value: '$12,450.00',
-      change: '+12.5%',
+      label: 'ចំណូលសរុប',
+      value: loading ? '...' : formatCurrency(totalIncome),
       isPositive: true,
       type: 'income',
       icon: ArrowUpRight,
     },
     {
       id: 'metric-expense',
-      label: 'ចំណាយ',
-      value: '$3,820.00',
-      change: '-4.2%',
-      isPositive: true,
+      label: 'ចំណាយសរុប',
+      value: loading ? '...' : formatCurrency(totalExpense),
+      isPositive: false,
       type: 'expense',
       icon: ArrowDownRight,
     },
     {
       id: 'metric-profit',
-      label: 'ប្រាក់ចំណេញ',
-      value: '$8,630.00',
-      change: '+18.4%',
-      isPositive: true,
+      label: 'ប្រាក់នៅសល់',
+      value: loading ? '...' : formatCurrency(balance),
+      isPositive: balance >= 0,
       type: 'profit',
-      icon: TrendingUp,
-    },
-    {
-      id: 'metric-sales',
-      label: 'ប្រាក់លក់',
-      value: '$15,890.00',
-      change: '+8.1%',
-      isPositive: true,
-      type: 'sales',
-      icon: DollarSign,
-    },
-    {
-      id: 'metric-inventory',
-      label: 'ស្តុកទំនិញ',
-      value: '148 ប្រភេទ',
-      change: '12 ជិតអស់',
-      isPositive: false,
-      type: 'inventory',
-      icon: Package,
+      icon: Wallet,
     },
   ];
 
-  const mockQuickActions: QuickActionItem[] = [
+  const quickActions: QuickActionItem[] = [
     {
       id: 'action-finance',
-      label: 'ហិរញ្ញវត្ថុ',
+      label: 'កត់ត្រាហិរញ្ញវត្ថុ',
       description: 'ចំណូល និង ចំណាយ',
-      path: '/features',
+      path: '/finance',
       icon: DollarSign,
       color: 'bg-emerald-100 text-emerald-700',
     },
     {
-      id: 'action-inventory',
-      label: 'ស្តុកទំនិញ',
-      description: 'គ្រប់គ្រងស្តុក',
-      path: '/features',
-      icon: Package,
-      color: 'bg-amber-100 text-amber-700',
-    },
-    {
-      id: 'action-sales',
-      label: 'ការលក់',
-      description: 'កត់ត្រាការលក់',
+      id: 'action-features',
+      label: 'មុខងារទាំងអស់',
+      description: 'បញ្ជីមុខងារ',
       path: '/features',
       icon: TrendingUp,
-      color: 'bg-blue-100 text-blue-700',
+      color: 'bg-indigo-100 text-indigo-700',
     },
   ];
 
-  const mockActivities: RecentActivityItem[] = [
-    {
-      id: 'act-1',
-      title: 'ប្រតិបត្តិការលក់ #1042',
-      subtitle: 'លក់បាន 3 មុខ • អតិថិជនទូទៅ',
-      amount: '+$240.00',
-      date: '10 នាទីមុន',
-      type: 'sale',
-    },
-    {
-      id: 'act-2',
-      title: 'ចំណាយលើសម្ភារការិយាល័យ',
-      subtitle: 'ក្រដាស និងទឹកថ្នាំម៉ាស៊ីនបោះពុម្ព',
-      amount: '-$85.50',
-      date: '2 ម៉ោងមុន',
-      type: 'expense',
-    },
-    {
-      id: 'act-3',
-      title: 'ទទួលបានថ្លៃសេវាពិគ្រោះយោបល់',
-      subtitle: 'ការទូទាត់ថ្លៃសេវាកម្ម',
-      amount: '+$500.00',
-      date: 'ម្សិលមិញ',
-      type: 'income',
-    },
-    {
-      id: 'act-4',
-      title: 'ការរំលឹកស្តុកទំនិញ',
-      subtitle: 'ក្តារចុចឥតខ្សែជិតអស់ពីស្តុក (នៅសល់ 2)',
-      date: 'ម្សិលមិញ',
-      type: 'inventory',
-    },
-  ];
+  const recentActivities: RecentActivityItem[] = recentTransactions.map((tx) => ({
+    id: tx.id,
+    title: tx.note || (tx.type === 'income' ? 'កំណត់ត្រាចំណូល' : 'កំណត់ត្រាចំណាយ'),
+    subtitle: tx.type === 'income' ? 'ចំណូលសាច់ប្រាក់' : 'ចំណាយសាច់ប្រាក់',
+    amount: `${tx.type === 'income' ? '+' : '-'}${formatCurrency(tx.amount)}`,
+    date: tx.transaction_date || 'ថ្មីៗ',
+    type: tx.type as 'income' | 'expense',
+  }));
 
   return (
     <div id="home-dashboard-page" className="space-y-5">
@@ -140,7 +89,7 @@ export const Home: React.FC = () => {
               សួស្តី, {userName}! 👋
             </h2>
             <p id="dashboard-tagline" className="text-indigo-100 text-xs mt-1">
-              នេះជាទិដ្ឋភាពទូទៅនៃអាជីវកម្មរបស់អ្នកថ្ងៃនេះ។
+              នេះជាទិដ្ឋភាពទូទៅនៃអាជីវកម្ម និងហិរញ្ញវត្ថុរបស់អ្នកថ្ងៃនេះ។
             </p>
           </div>
         </div>
@@ -151,18 +100,19 @@ export const Home: React.FC = () => {
         <h3 id="summary-cards-title" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
           ទិដ្ឋភាពទូទៅនៃហិរញ្ញវត្ថុ
         </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {mockMetrics.map((metric) => (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {summaryMetrics.map((metric) => (
             <SummaryCard key={metric.id} metric={metric} />
           ))}
         </div>
       </div>
 
       {/* Quick Actions */}
-      <QuickActions actions={mockQuickActions} />
+      <QuickActions actions={quickActions} />
 
       {/* Recent Activity */}
-      <RecentActivity activities={mockActivities} />
+      <RecentActivity activities={recentActivities} />
     </div>
   );
 };
+
