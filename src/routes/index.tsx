@@ -16,6 +16,7 @@ import { NotFound } from '@/pages/NotFound';
 import { ModulePlaceholder } from '@/pages/ModulePlaceholder';
 import { Finance } from '@/modules/finance/Finance';
 import { Products } from '@/pages/Products';
+import { Onboarding } from '@/pages/Onboarding';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -34,9 +35,11 @@ export const AppRoutes: React.FC = () => {
           <Route element={<ProtectedRoute />}>
             <Route element={<AppLayout />}>
               <Route path="/home" element={<Home />} />
+              <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/features" element={<Features />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/settings" element={<Account />} />
 
               {/* Finance Module Route */}
               <Route path="/finance" element={<Finance />} />

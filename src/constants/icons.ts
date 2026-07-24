@@ -1,0 +1,76 @@
+import {
+  ArrowLeft,
+  PlusCircle,
+  Plus,
+  Trash2,
+  Edit2,
+  Search,
+  RefreshCw,
+  X,
+  Check,
+  Package,
+  PackagePlus,
+  PackageX,
+  DollarSign,
+  TrendingUp,
+  TrendingDown,
+  Wallet,
+  Tag,
+  Hash,
+  Barcode,
+  Layers,
+  AlertTriangle,
+  Calendar,
+  FileText,
+  User,
+  Settings,
+  Grid,
+  ChevronRight,
+  ChevronDown,
+  Filter,
+  CheckCircle,
+  XCircle,
+} from 'lucide-react';
+
+export const APP_ICONS = {
+  // Navigation & Structure
+  back: ArrowLeft,
+  grid: Grid,
+  user: User,
+  settings: Settings,
+  chevronRight: ChevronRight,
+  chevronDown: ChevronDown,
+  close: X,
+  check: Check,
+
+  // Common Actions
+  add: PlusCircle,
+  addSimple: Plus,
+  edit: Edit2,
+  delete: Trash2,
+  search: Search,
+  refresh: RefreshCw,
+  filter: Filter,
+
+  // Finance Module
+  wallet: Wallet,
+  income: TrendingUp,
+  expense: TrendingDown,
+  dollar: DollarSign,
+  calendar: Calendar,
+  note: FileText,
+
+  // Sales & Inventory
+  product: Package,
+  addProduct: PackagePlus,
+  emptyProduct: PackageX,
+  tag: Tag,
+  hash: Hash,
+  barcode: Barcode,
+  category: Layers,
+  alertWarning: AlertTriangle,
+
+  // Status Indicators
+  success: CheckCircle,
+  error: XCircle,
+} as const;

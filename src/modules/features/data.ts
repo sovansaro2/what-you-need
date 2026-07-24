@@ -1,7 +1,17 @@
-import { DollarSign, Package, ShoppingCart, BarChart3 } from 'lucide-react';
+import { DollarSign, Package, ShoppingCart, BarChart3, Store } from 'lucide-react';
 import { FeatureItem } from './types';
 
 export const featuresData: FeatureItem[] = [
+  {
+    id: 'feature-onboarding',
+    title: 'ការរៀបចំអាជីវកម្មដំបូង',
+    description: 'កំណត់ឈ្មោះហាង ប្រភេទទូទៅនៃអាជីវកម្ម ព័ត៌មានទំនាក់ទំនង និងរូបិយវត្ថុគោល។',
+    route: '/onboarding',
+    status: 'available',
+    icon: Store,
+    badgeText: 'ការកំណត់អាជីវកម្ម',
+    badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+  },
   {
     id: 'feature-finance',
     title: 'កត់ត្រាចំណូល និង ចំណាយ',
