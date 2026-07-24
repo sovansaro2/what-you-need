@@ -14,13 +14,13 @@ export const featuresData: FeatureItem[] = [
   },
   {
     id: 'feature-inventory',
-    title: 'ការគ្រប់គ្រងស្តុកទំនិញ',
-    description: 'គ្រប់គ្រងផលិតផល ចំនួនស្តុក តម្លៃរាយ ប្រភេទ និងការដាស់តឿនស្តុកទាប។',
-    route: '/inventory',
-    status: 'coming_soon',
+    title: 'គ្រប់គ្រងទំនិញ',
+    description: 'គ្រប់គ្រងផលិតផល ចំនួនស្តុក តម្លៃដើម តម្លៃលក់ និងកាតាឡុកទំនិញ។',
+    route: '/products',
+    status: 'available',
     icon: Package,
     badgeText: 'ស្តុក និងកាតាឡុក',
-    badgeColor: 'bg-amber-100 text-amber-800 border-amber-200',
+    badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-200',
   },
   {
     id: 'feature-sales',
