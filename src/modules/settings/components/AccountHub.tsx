@@ -22,24 +22,34 @@ import { BusinessSettings } from '../types';
 
 interface AccountHubProps {
   businessSettings: BusinessSettings;
+  isLoading?: boolean;
   onNavigate?: (view: 'settings-list' | 'help' | 'about') => void;
 }
 
 export const AccountHub: React.FC<AccountHubProps> = ({
   businessSettings,
+  isLoading,
   onNavigate,
 }) => {
   const navigate = useNavigate();
   const { user, profile, signOut } = useAuth();
   const [isSigningOut, setIsSigningOut] = React.useState(false);
 
-  const displayName = profile?.full_name || user?.user_metadata?.full_name || 'អ្នកប្រើប្រាស់';
-  const phone = profile?.phone || businessSettings?.phone || user?.user_metadata?.phone || 'មិនបានបញ្ចូល';
-  const address = businessSettings?.address || user?.user_metadata?.address || 'មិនបានបញ្ចូល';
-  const businessName = businessSettings?.businessName || user?.user_metadata?.business_name || 'ហាងអាជីវកម្ម';
+  const displayName = profile?.full_name || user?.user_metadata?.full_name;
+  const phone = profile?.phone || businessSettings?.phone || user?.user_metadata?.phone;
+  const address = businessSettings?.address || user?.user_metadata?.address;
+  const businessName = businessSettings?.businessName || user?.user_metadata?.business_name;
   const avatarUrl = profile?.avatar_url || user?.user_metadata?.avatar_url;
 
-  const initialLetter = (displayName || 'U').charAt(0).toUpperCase();
+  const displayShowName = displayName || 'អ្នកប្រើប្រាស់';
+  const displayShowPhone = phone || 'មិនបានបញ្ចូល';
+  const displayShowAddress = address || 'មិនបានបញ្ចូល';
+  const displayShowBusiness = businessName || 'ហាងអាជីវកម្ម';
+
+  const initialLetter = (displayShowName || 'U').charAt(0).toUpperCase();
+
+  const isProfileDataReady = Boolean(profile || businessSettings?.businessName || user);
+  const showSkeleton = Boolean(isLoading && !isProfileDataReady);
 
   const handleSignOut = async () => {
     try {
@@ -80,61 +90,70 @@ export const AccountHub: React.FC<AccountHubProps> = ({
     <div className="space-y-6 animate-fade-in pb-8">
       {/* 1. HERO PROFILE SECTION (IDENTITY DISPLAY ONLY) */}
       <Card className="p-5 border-slate-200/80 shadow-2xs">
-        <div className="flex flex-col items-center justify-center text-center space-y-2">
-          {/* Centered Profile Avatar (112px) */}
-          <div className="w-28 h-28 rounded-full border-4 border-indigo-50 shadow-md overflow-hidden bg-indigo-600 text-white flex items-center justify-center text-3xl font-extrabold shrink-0">
-            {avatarUrl ? (
-              <img
-                src={avatarUrl}
-                alt={displayName}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-            ) : (
-              <span>{initialLetter}</span>
-            )}
+        {showSkeleton ? (
+          <div className="flex flex-col items-center justify-center text-center space-y-3 py-2 animate-pulse">
+            <div className="w-28 h-28 rounded-full bg-slate-200 shrink-0" />
+            <div className="h-5 w-36 bg-slate-200 rounded-md" />
+            <div className="h-4 w-28 bg-slate-200 rounded-md" />
+            <div className="h-3.5 w-48 bg-slate-200 rounded-md" />
           </div>
-
-          {/* User Name & Blue Verified Badge (Inline, Centered) */}
-          <div className="flex items-center justify-center gap-1.5 pt-0.5">
-            <h2 className="text-lg font-bold text-slate-900 tracking-tight leading-snug">
-              {displayName}
-            </h2>
-            <div
-              className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white shrink-0 shadow-2xs"
-              title="ផ្ទៀងផ្ទាត់រួច"
-              aria-label="Verified"
-            >
-              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clipRule="evenodd"
+        ) : (
+          <div className="flex flex-col items-center justify-center text-center space-y-2">
+            {/* Centered Profile Avatar (112px) */}
+            <div className="w-28 h-28 rounded-full border-4 border-indigo-50 shadow-md overflow-hidden bg-indigo-600 text-white flex items-center justify-center text-3xl font-extrabold shrink-0">
+              {avatarUrl ? (
+                <img
+                  src={avatarUrl}
+                  alt={displayShowName}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLElement).style.display = 'none';
+                  }}
                 />
-              </svg>
+              ) : (
+                <span>{initialLetter}</span>
+              )}
             </div>
-          </div>
 
-          {/* Business Name with Store Icon */}
-          <div className="flex items-center justify-center gap-1.5 text-sm font-semibold text-slate-600">
-            <Building2 className="w-4 h-4 shrink-0 text-indigo-600" />
-            <span className="truncate max-w-xs">{businessName}</span>
-          </div>
+            {/* User Name & Blue Verified Badge (Inline, Centered) */}
+            <div className="flex items-center justify-center gap-1.5 pt-0.5">
+              <h2 className="text-lg font-bold text-slate-900 tracking-tight leading-snug">
+                {displayShowName}
+              </h2>
+              <div
+                className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white shrink-0 shadow-2xs"
+                title="ផ្ទៀងផ្ទាត់រួច"
+                aria-label="Verified"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
 
-          {/* Address & Phone in One Horizontal Row */}
-          <div className="w-full pt-1 flex items-center justify-center gap-3 text-xs font-medium text-slate-500 divide-x divide-slate-200">
-            <div className="flex items-center gap-1.5 min-w-0 max-w-[60%] truncate justify-end">
-              <MapPin className="w-3.5 h-3.5 shrink-0 text-slate-400" />
-              <span className="truncate">{address}</span>
+            {/* Business Name with Store Icon */}
+            <div className="flex items-center justify-center gap-1.5 text-sm font-semibold text-slate-600">
+              <Building2 className="w-4 h-4 shrink-0 text-indigo-600" />
+              <span className="truncate max-w-xs">{displayShowBusiness}</span>
             </div>
-            <div className="flex items-center gap-1.5 shrink-0 pl-3">
-              <Phone className="w-3.5 h-3.5 shrink-0 text-slate-400" />
-              <span className="whitespace-nowrap">{phone}</span>
+
+            {/* Address & Phone in One Horizontal Row */}
+            <div className="w-full pt-1 flex items-center justify-center gap-3 text-xs font-medium text-slate-500 divide-x divide-slate-200">
+              <div className="flex items-center gap-1.5 min-w-0 max-w-[60%] truncate justify-end">
+                <MapPin className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+                <span className="truncate">{displayShowAddress}</span>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0 pl-3">
+                <Phone className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+                <span className="whitespace-nowrap">{displayShowPhone}</span>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </Card>
 
       {/* 2. GROUPED ACCOUNT MENU SECTIONS */}

@@ -20,6 +20,7 @@ export const sanitizeSupabaseUrl = (url: string): string => {
   return cleaned;
 };
 
-const supabaseUrl = sanitizeSupabaseUrl(rawUrl);
+export const supabaseUrl = sanitizeSupabaseUrl(rawUrl);
+export const supabaseKey = supabaseAnonKey;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);

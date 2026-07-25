@@ -1,28 +1,70 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { settingsService } from '@/services/settingsService';
 import { authService } from '@/services/authService';
 import { BusinessSettings, UserPreferences } from '../types';
 
-export const useSettings = () => {
+interface UseSettingsOptions {
+  fetchPreferences?: boolean;
+}
+
+export const useSettings = (options?: UseSettingsOptions) => {
+  const fetchPreferences = options?.fetchPreferences ?? true;
   const { user, profile, signOut } = useAuth();
   const userId = user?.id || 'guest';
 
-  const [loading, setLoading] = useState<boolean>(true);
   const [saving, setSaving] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [businessSettings, setBusinessSettings] = useState<BusinessSettings>({
-    userId,
-    businessName: '',
-    logoUrl: '',
-    phone: profile?.phone || '',
-    email: user?.email || '',
-    address: '',
-    primaryCurrency: 'KHR',
-    language: 'km',
-  });
+  // Synchronously compute initial business settings from local cache or auth context
+  const initialBusinessSettings = useMemo<BusinessSettings>(() => {
+    const defaults: BusinessSettings = {
+      userId,
+      businessName: user?.user_metadata?.business_name || '',
+      logoUrl: user?.user_metadata?.avatar_url || '',
+      phone: profile?.phone || user?.user_metadata?.phone || '',
+      email: user?.email || '',
+      address: user?.user_metadata?.address || '',
+      primaryCurrency: 'KHR',
+      language: 'km',
+    };
+
+    if (!userId) return defaults;
+
+    try {
+      const local = localStorage.getItem(`wyn_business_settings_${userId}`);
+      if (local) {
+        const parsed = JSON.parse(local);
+        return {
+          ...defaults,
+          ...parsed,
+          businessName: parsed.businessName || defaults.businessName,
+          phone: parsed.phone || defaults.phone,
+          address: parsed.address || defaults.address,
+          email: parsed.email || defaults.email,
+        };
+      }
+    } catch {
+      // Ignore local storage error
+    }
+
+    return defaults;
+  }, [userId, user, profile]);
+
+  const [businessSettings, setBusinessSettings] = useState<BusinessSettings>(initialBusinessSettings);
+
+  // Keep state updated with context/cache changes
+  useEffect(() => {
+    setBusinessSettings((prev) => ({
+      ...initialBusinessSettings,
+      ...prev,
+      businessName: prev.businessName || initialBusinessSettings.businessName,
+      phone: prev.phone || initialBusinessSettings.phone,
+      address: prev.address || initialBusinessSettings.address,
+      email: prev.email || initialBusinessSettings.email,
+    }));
+  }, [initialBusinessSettings]);
 
   const [userPreferences, setUserPreferences] = useState<UserPreferences>({
     userId,
@@ -32,6 +74,15 @@ export const useSettings = () => {
     reportNotifications: true,
   });
 
+  const hasInitialData = Boolean(
+    initialBusinessSettings.businessName ||
+      initialBusinessSettings.phone ||
+      profile?.full_name ||
+      user?.email
+  );
+
+  const [loading, setLoading] = useState<boolean>(!hasInitialData);
+
   const clearMessages = useCallback(() => {
     setSuccessMessage(null);
     setErrorMessage(null);
@@ -39,36 +90,54 @@ export const useSettings = () => {
 
   const loadSettings = useCallback(async () => {
     if (!userId) return;
-    setLoading(true);
     try {
-      const [bs, up] = await Promise.all([
-        settingsService.getBusinessSettings(userId),
-        settingsService.getUserPreferences(userId),
-      ]);
+      if (fetchPreferences) {
+        const [bs, up] = await Promise.all([
+          settingsService.getBusinessSettings(userId),
+          settingsService.getUserPreferences(userId),
+        ]);
 
-      // If fields are empty, try pulling from profile or user metadata
-      if (!bs.businessName && user?.user_metadata?.business_name) {
-        bs.businessName = user.user_metadata.business_name;
-      }
-      if (!bs.address && user?.user_metadata?.address) {
-        bs.address = user.user_metadata.address;
-      }
-      if (!bs.phone && (profile?.phone || user?.user_metadata?.phone)) {
-        bs.phone = profile?.phone || user?.user_metadata?.phone || '';
-      }
-      if (!bs.email && user?.email) {
-        bs.email = user.email;
-      }
+        if (!bs.businessName && user?.user_metadata?.business_name) {
+          bs.businessName = user.user_metadata.business_name;
+        }
+        if (!bs.address && user?.user_metadata?.address) {
+          bs.address = user.user_metadata.address;
+        }
+        if (!bs.phone && (profile?.phone || user?.user_metadata?.phone)) {
+          bs.phone = profile?.phone || user?.user_metadata?.phone || '';
+        }
+        if (!bs.email && user?.email) {
+          bs.email = user.email;
+        }
 
-      setBusinessSettings(bs);
-      setUserPreferences(up);
+        setBusinessSettings(bs);
+        setUserPreferences(up);
+      } else {
+        // Load ONLY business settings required for Account page (skips userPreferences query)
+        const bs = await settingsService.getBusinessSettings(userId);
+
+        if (!bs.businessName && user?.user_metadata?.business_name) {
+          bs.businessName = user.user_metadata.business_name;
+        }
+        if (!bs.address && user?.user_metadata?.address) {
+          bs.address = user.user_metadata.address;
+        }
+        if (!bs.phone && (profile?.phone || user?.user_metadata?.phone)) {
+          bs.phone = profile?.phone || user?.user_metadata?.phone || '';
+        }
+        if (!bs.email && user?.email) {
+          bs.email = user.email;
+        }
+
+        setBusinessSettings(bs);
+      }
     } catch (err: any) {
-      console.error('Failed to load settings:', err);
+      console.warn('Failed to load settings:', err);
       setErrorMessage('មិនអាចទាញយកការកំណត់បានទេ');
     } finally {
       setLoading(false);
     }
-  }, [userId, user]);
+  }, [userId, user, profile, fetchPreferences]);
 
   useEffect(() => {
     loadSettings();

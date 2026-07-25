@@ -67,18 +67,17 @@ export const financeService = {
         .order('transaction_date', { ascending: false });
 
       if (error) {
-        console.warn('Supabase getTransactions warning:', error.message);
         return cached;
       }
 
       const txList = (data as Transaction[]) || [];
       setLocalTransactions(userId, txList);
       return txList;
-    } catch (err: any) {
-      console.warn('financeService.getTransactions network fallback to local cache:', err?.message || err);
+    } catch {
       return cached;
     }
   },
+
 
   /**
    * Insert a new transaction record for the user.
