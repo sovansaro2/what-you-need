@@ -16,7 +16,13 @@ import { Profile } from '@/pages/Profile';
 import { EditProfile } from '@/pages/EditProfile';
 import { Settings } from '@/pages/Settings';
 import { Help } from '@/pages/Help';
-import { About } from '@/pages/About';
+import { SupportPage } from '@/pages/SupportPage';
+import { BusinessInfoPage } from '@/pages/settings/BusinessInfoPage';
+import { GeneralSettingsPage } from '@/pages/settings/GeneralSettingsPage';
+import { CurrencyPage } from '@/pages/settings/CurrencyPage';
+import { SecurityPage } from '@/pages/settings/SecurityPage';
+import { VersionPage } from '@/pages/about/VersionPage';
+import { DeveloperPage } from '@/pages/about/DeveloperPage';
 import { NotFound } from '@/pages/NotFound';
 import { ModulePlaceholder } from '@/pages/ModulePlaceholder';
 import { Finance } from '@/modules/finance/Finance';
@@ -46,9 +52,21 @@ export const AppRoutes: React.FC = () => {
               <Route path="/account" element={<Account />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/profile/edit" element={<EditProfile />} />
-              <Route path="/settings" element={<Settings />} />
+              {/* Settings Routes */}
+              <Route path="/settings" element={<Navigate to="/settings/business" replace />} />
+              <Route path="/settings/business" element={<BusinessInfoPage />} />
+              <Route path="/settings/general" element={<GeneralSettingsPage />} />
+              <Route path="/settings/currency" element={<CurrencyPage />} />
+              <Route path="/settings/security" element={<SecurityPage />} />
+
+              {/* Help & Support Routes */}
               <Route path="/help" element={<Help />} />
-              <Route path="/about" element={<About />} />
+              <Route path="/support" element={<SupportPage />} />
+
+              {/* About Routes */}
+              <Route path="/about" element={<Navigate to="/about/version" replace />} />
+              <Route path="/about/version" element={<VersionPage />} />
+              <Route path="/about/developer" element={<DeveloperPage />} />
 
               {/* Finance Module Route */}
               <Route path="/finance" element={<Finance />} />

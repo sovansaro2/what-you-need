@@ -177,7 +177,7 @@ export const AccountHub: React.FC<AccountHubProps> = ({
           {/* ព័ត៌មានអាជីវកម្ម */}
           <button
             type="button"
-            onClick={handleSettingsClick}
+            onClick={() => navigate('/settings/business')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
@@ -196,10 +196,10 @@ export const AccountHub: React.FC<AccountHubProps> = ({
             <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0" />
           </button>
 
-          {/* ស្តាយកម្មវិធី */}
+          {/* ស្តាយកម្មវិធី / General Settings */}
           <button
             type="button"
-            onClick={handleSettingsClick}
+            onClick={() => navigate('/settings/general')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
@@ -208,7 +208,7 @@ export const AccountHub: React.FC<AccountHubProps> = ({
               </div>
               <div className="min-w-0">
                 <p className="text-sm font-bold text-slate-900 leading-snug">
-                  ស្តាយកម្មវិធី
+                  ការកំណត់ទូទៅ
                 </p>
                 <p className="text-xs text-slate-500 leading-normal truncate">
                   ភាសា និងរចនាប័ទ្ម
@@ -218,10 +218,10 @@ export const AccountHub: React.FC<AccountHubProps> = ({
             <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0" />
           </button>
 
-          {/* រូបិយវត្ថុ */}
+          {/* រូបិយវត្ថុ / Currency */}
           <button
             type="button"
-            onClick={handleSettingsClick}
+            onClick={() => navigate('/settings/currency')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
@@ -240,10 +240,10 @@ export const AccountHub: React.FC<AccountHubProps> = ({
             <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0" />
           </button>
 
-          {/* សុវត្ថិភាព */}
+          {/* សុវត្ថិភាព / Security */}
           <button
             type="button"
-            onClick={handleSettingsClick}
+            onClick={() => navigate('/settings/security')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
@@ -270,10 +270,10 @@ export const AccountHub: React.FC<AccountHubProps> = ({
           ជំនួយ
         </h3>
         <div className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-2xs divide-y divide-slate-100">
-          {/* ការណែនាំអំពីការប្រើប្រាស់ */}
+          {/* ការណែនាំអំពីការប្រើប្រាស់ / User Guide */}
           <button
             type="button"
-            onClick={handleHelpClick}
+            onClick={() => navigate('/help')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
@@ -292,10 +292,10 @@ export const AccountHub: React.FC<AccountHubProps> = ({
             <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0" />
           </button>
 
-          {/* ទំនាក់ទំនងអ្នកគ្រប់គ្រង */}
+          {/* ទំនាក់ទំនងអ្នកគ្រប់គ្រង / Contact Administrator */}
           <button
             type="button"
-            onClick={handleHelpClick}
+            onClick={() => navigate('/support')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
@@ -322,10 +322,10 @@ export const AccountHub: React.FC<AccountHubProps> = ({
           អំពីកម្មវិធី
         </h3>
         <div className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-2xs divide-y divide-slate-100">
-          {/* កំណែកម្មវិធី */}
+          {/* កំណែកម្មវិធី / Version */}
           <button
             type="button"
-            onClick={handleAboutClick}
+            onClick={() => navigate('/about/version')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
@@ -344,10 +344,10 @@ export const AccountHub: React.FC<AccountHubProps> = ({
             <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-slate-600 transition-colors shrink-0" />
           </button>
 
-          {/* អ្នកអភិវឌ្ឍន៍ */}
+          {/* អ្នកអភិវឌ្ឍន៍ / Developer Info */}
           <button
             type="button"
-            onClick={handleAboutClick}
+            onClick={() => navigate('/about/developer')}
             className="w-full flex items-center justify-between p-4 hover:bg-slate-50/80 transition-colors min-h-[56px] text-left cursor-pointer group"
           >
             <div className="flex items-center gap-3.5 min-w-0 pr-2">
