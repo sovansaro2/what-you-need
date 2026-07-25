@@ -25,12 +25,21 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const fetchProfile = async (userId: string) => {
+  const fetchProfile = async (userId: string, currentMetadata?: any) => {
     const userProfile = await authService.getProfile(userId);
     if (userProfile) {
-      setProfile(userProfile);
+      const merged: UserProfile = {
+        ...userProfile,
+        full_name: userProfile.full_name || currentMetadata?.full_name || null,
+        phone: userProfile.phone || currentMetadata?.phone || null,
+        avatar_url: userProfile.avatar_url !== undefined ? userProfile.avatar_url : (currentMetadata?.avatar_url || null),
+      };
+      setProfile(merged);
     } else {
-      const created = await authService.ensureProfileExists(userId);
+      const created = await authService.ensureProfileExists(userId, {
+        full_name: currentMetadata?.full_name,
+        phone: currentMetadata?.phone,
+      });
       setProfile(created);
     }
   };
@@ -45,7 +54,7 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
           setSession(initialSession);
           setUser(initialSession?.user ?? null);
           if (initialSession?.user) {
-            await fetchProfile(initialSession.user.id);
+            await fetchProfile(initialSession.user.id, initialSession.user.user_metadata);
           }
         }
       } catch (err) {
@@ -65,9 +74,9 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
 
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED' || event === 'USER_UPDATED') {
         if (currentSession?.user) {
-          await fetchProfile(currentSession.user.id);
+          await fetchProfile(currentSession.user.id, currentSession.user.user_metadata);
         }
       } else if (event === 'SIGNED_OUT') {
         setProfile(null);
@@ -106,8 +115,16 @@ export const SessionProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const refreshProfile = async () => {
-    if (user) {
-      await fetchProfile(user.id);
+    try {
+      const { data: { user: updatedUser } } = await supabase.auth.getUser();
+      if (updatedUser) {
+        setUser(updatedUser);
+        await fetchProfile(updatedUser.id, updatedUser.user_metadata);
+      } else if (user) {
+        await fetchProfile(user.id, user.user_metadata);
+      }
+    } catch (err) {
+      console.warn('Error refreshing profile:', err);
     }
   };
 

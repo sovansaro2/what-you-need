@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import { SignUpData, SignInData, UserProfile } from '@/types/auth';
+import { settingsService } from '@/services/settingsService';
 
 export const authService = {
   async signUp({ email, password, fullName, phone }: SignUpData) {
@@ -123,6 +124,172 @@ export const authService = {
     } catch (err) {
       console.warn('Error ensuring profile exists:', err);
       return null;
+    }
+  },
+
+  async updateUserProfile(userId: string, updates: {
+    full_name?: string;
+    phone?: string | null;
+    avatar_url?: string | null;
+    address?: string | null;
+    business_name?: string | null;
+  }): Promise<{
+    success: boolean;
+    rowsUpdated: number;
+    errorMessage?: string;
+    verifiedProfile?: UserProfile | null;
+    data?: any;
+  }> {
+    try {
+      // 1. Get authenticated user from Supabase
+      const { data: { user: authUser }, error: authUserErr } = await supabase.auth.getUser();
+      const targetUserId = authUser?.id || userId;
+
+      console.log('[PROFILE DEBUG] Step 1: Authenticated User ID:', authUser?.id);
+      console.log('[PROFILE DEBUG] Step 1: Target user_id:', targetUserId);
+      console.log('[PROFILE DEBUG] Step 1: Payload being sent:', updates);
+
+      if (authUserErr) {
+        console.warn('[PROFILE DEBUG] Warning getting auth user:', authUserErr.message);
+      }
+
+      // 2. Update Supabase Auth user metadata
+      const { data: authUpdateData, error: authUpdateErr } = await supabase.auth.updateUser({
+        data: {
+          full_name: updates.full_name,
+          phone: updates.phone,
+          avatar_url: updates.avatar_url,
+          business_name: updates.business_name,
+          address: updates.address,
+        },
+      });
+
+      if (authUpdateErr) {
+        console.error('[PROFILE DEBUG] Supabase Auth updateUser error:', authUpdateErr);
+      } else {
+        console.log('[PROFILE DEBUG] Supabase Auth updateUser success response:', authUpdateData);
+      }
+
+      // 3. Prepare payload for profiles table
+      const now = new Date().toISOString();
+      const profilePayload: Record<string, any> = {
+        updated_at: now,
+      };
+      if (updates.full_name !== undefined) profilePayload.full_name = updates.full_name;
+      if (updates.phone !== undefined) profilePayload.phone = updates.phone;
+      if (updates.avatar_url !== undefined) profilePayload.avatar_url = updates.avatar_url;
+
+      let affectedRows = 0;
+      let lastError: any = null;
+      let updateData: any = null;
+
+      // 4a. Attempt UPDATE targeting `user_id`
+      console.log('[PROFILE DEBUG] Attempting UPDATE on profiles table WHERE user_id =', targetUserId);
+      const resByUserId = await supabase
+        .from('profiles')
+        .update(profilePayload)
+        .eq('user_id', targetUserId)
+        .select();
+
+      console.log('[PROFILE DEBUG] UPDATE by user_id response:', {
+        data: resByUserId.data,
+        error: resByUserId.error,
+        rowsAffected: resByUserId.data?.length ?? 0,
+      });
+
+      if (resByUserId.data && resByUserId.data.length > 0) {
+        affectedRows = resByUserId.data.length;
+        updateData = resByUserId.data;
+      } else {
+        if (resByUserId.error) lastError = resByUserId.error;
+
+        // 4b. Fallback UPDATE targeting `id`
+        console.log('[PROFILE DEBUG] Attempting UPDATE on profiles table WHERE id =', targetUserId);
+        const resById = await supabase
+          .from('profiles')
+          .update(profilePayload)
+          .eq('id', targetUserId)
+          .select();
+
+        console.log('[PROFILE DEBUG] UPDATE by id response:', {
+          data: resById.data,
+          error: resById.error,
+          rowsAffected: resById.data?.length ?? 0,
+        });
+
+        if (resById.data && resById.data.length > 0) {
+          affectedRows = resById.data.length;
+          updateData = resById.data;
+        } else {
+          if (resById.error) lastError = resById.error;
+
+          // 4c. Fallback UPSERT if row does not exist yet
+          console.log('[PROFILE DEBUG] Zero rows updated via UPDATE query. Attempting UPSERT...');
+          const upsertPayload = {
+            id: targetUserId,
+            user_id: targetUserId,
+            ...profilePayload,
+          };
+          const resUpsert = await supabase
+            .from('profiles')
+            .upsert(upsertPayload, { onConflict: 'id' })
+            .select();
+
+          console.log('[PROFILE DEBUG] UPSERT response:', {
+            data: resUpsert.data,
+            error: resUpsert.error,
+            rowsAffected: resUpsert.data?.length ?? 0,
+          });
+
+          if (resUpsert.data && resUpsert.data.length > 0) {
+            affectedRows = resUpsert.data.length;
+            updateData = resUpsert.data;
+          } else if (resUpsert.error) {
+            lastError = resUpsert.error;
+          }
+        }
+      }
+
+      // 5. Synchronize business_settings table and local cache
+      if (updates.business_name !== undefined || updates.address !== undefined || updates.phone !== undefined) {
+        console.log('[PROFILE DEBUG] Syncing business settings for user_id =', targetUserId);
+        await settingsService.updateBusinessSettings(targetUserId, {
+          ...(updates.business_name !== undefined ? { businessName: updates.business_name || '' } : {}),
+          ...(updates.address !== undefined ? { address: updates.address || '' } : {}),
+          ...(updates.phone !== undefined ? { phone: updates.phone || '' } : {}),
+        });
+      }
+
+      // 6. Verify by immediately re-reading profile from database
+      const verifiedProfile = await this.getProfile(targetUserId);
+      console.log('[PROFILE DEBUG] Step 5: Verified Profile re-read from Supabase:', verifiedProfile);
+
+      // Check for zero updated rows or errors
+      if (affectedRows === 0 && !authUpdateData?.user) {
+        const errorMsg = lastError?.message || 'Zero rows updated in profiles database table and auth update failed.';
+        console.error('[PROFILE DEBUG] FAILURE:', errorMsg);
+        return {
+          success: false,
+          rowsUpdated: 0,
+          errorMessage: errorMsg,
+          verifiedProfile,
+        };
+      }
+
+      console.log(`[PROFILE DEBUG] SUCCESS: ${affectedRows} row(s) updated in database.`);
+      return {
+        success: true,
+        rowsUpdated: affectedRows > 0 ? affectedRows : 1, // 1 if updated via auth metadata
+        verifiedProfile,
+        data: updateData,
+      };
+    } catch (err: any) {
+      console.error('[PROFILE DEBUG] Exception during updateUserProfile:', err);
+      return {
+        success: false,
+        rowsUpdated: 0,
+        errorMessage: err.message || 'Error updating profile',
+      };
     }
   },
 

@@ -12,6 +12,11 @@ import { Home } from '@/pages/Home';
 import { Features } from '@/pages/Features';
 import { Chat } from '@/pages/Chat';
 import { Account } from '@/pages/Account';
+import { Profile } from '@/pages/Profile';
+import { EditProfile } from '@/pages/EditProfile';
+import { Settings } from '@/pages/Settings';
+import { Help } from '@/pages/Help';
+import { About } from '@/pages/About';
 import { NotFound } from '@/pages/NotFound';
 import { ModulePlaceholder } from '@/pages/ModulePlaceholder';
 import { Finance } from '@/modules/finance/Finance';
@@ -39,7 +44,11 @@ export const AppRoutes: React.FC = () => {
               <Route path="/features" element={<Features />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/account" element={<Account />} />
-              <Route path="/settings" element={<Account />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/edit" element={<EditProfile />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/help" element={<Help />} />
+              <Route path="/about" element={<About />} />
 
               {/* Finance Module Route */}
               <Route path="/finance" element={<Finance />} />

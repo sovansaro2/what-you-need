@@ -46,9 +46,15 @@ export const useSettings = () => {
         settingsService.getUserPreferences(userId),
       ]);
 
-      // If businessName is empty, try pulling from profile or user metadata
+      // If fields are empty, try pulling from profile or user metadata
       if (!bs.businessName && user?.user_metadata?.business_name) {
         bs.businessName = user.user_metadata.business_name;
+      }
+      if (!bs.address && user?.user_metadata?.address) {
+        bs.address = user.user_metadata.address;
+      }
+      if (!bs.phone && (profile?.phone || user?.user_metadata?.phone)) {
+        bs.phone = profile?.phone || user?.user_metadata?.phone || '';
       }
       if (!bs.email && user?.email) {
         bs.email = user.email;

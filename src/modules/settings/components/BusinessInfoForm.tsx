@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Store, Phone, Mail, MapPin, Image, Save } from 'lucide-react';
+import { Store, Phone, Mail, MapPin, Save } from 'lucide-react';
 import { Button, Input, Card } from '@/components/common';
 import { BusinessSettings } from '../types';
+import { LogoUploader } from './LogoUploader';
 
 interface BusinessInfoFormProps {
   initialData: BusinessSettings;
@@ -28,6 +29,18 @@ export const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({
     setAddress(initialData.address || '');
   }, [initialData]);
 
+  const handleLogoChange = async (newUrl: string) => {
+    setLogoUrl(newUrl);
+    // Auto save logo update into business_settings
+    await onSave({
+      businessName: businessName.trim(),
+      logoUrl: newUrl,
+      phone: phone.trim(),
+      email: email.trim(),
+      address: address.trim(),
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await onSave({
@@ -51,7 +64,7 @@ export const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-3.5">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Business Name */}
         <Input
           label="ឈ្មោះអាជីវកម្ម / ហាង"
@@ -62,29 +75,13 @@ export const BusinessInfoForm: React.FC<BusinessInfoFormProps> = ({
           icon={<Store className="w-4 h-4" />}
         />
 
-        {/* Logo URL */}
-        <div className="space-y-1">
-          <Input
-            label="តំណភ្ជាប់ ឡូហ្គោ (Logo URL)"
-            value={logoUrl}
-            onChange={(e) => setLogoUrl(e.target.value)}
-            placeholder="https://example.com/logo.png"
-            icon={<Image className="w-4 h-4" />}
-          />
-          {logoUrl && (
-            <div className="flex items-center gap-2 pt-1">
-              <span className="text-[11px] text-slate-400">មើលជាមុន:</span>
-              <img
-                src={logoUrl}
-                alt="Logo preview"
-                className="w-8 h-8 rounded-lg object-cover border border-slate-200"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
-              />
-            </div>
-          )}
-        </div>
+        {/* Logo Image Upload Workflow */}
+        <LogoUploader
+          userId={initialData.userId || 'guest'}
+          currentLogoUrl={logoUrl}
+          onLogoChange={handleLogoChange}
+          disabled={saving}
+        />
 
         {/* Phone */}
         <Input
