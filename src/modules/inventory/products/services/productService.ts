@@ -7,6 +7,7 @@ import {
 } from '../types';
 import { KHMER_PRODUCT_MESSAGES, DEFAULT_MIN_STOCK_ALERT } from '../constants';
 import { productValidator } from '../validators/productValidator';
+import { notifyInventoryUpdated } from '../../events/inventoryEvents';
 
 const getLocalStorageKey = (userId: string) => `wyn_products_${userId}`;
 
@@ -280,6 +281,7 @@ export const productService = {
       console.warn('Supabase create product offline fallback:', e);
     }
 
+    notifyInventoryUpdated({ productId: newProduct.id, source: 'product_create' });
     return newProduct;
   },
 
@@ -358,6 +360,7 @@ export const productService = {
       console.warn('Supabase update product fallback:', e);
     }
 
+    notifyInventoryUpdated({ productId: target.id, source: 'product_update' });
     return target;
   },
 

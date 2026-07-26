@@ -43,6 +43,9 @@ export const KHMER_MOVEMENT_ERRORS = {
   DUPLICATE_SUBMIT: 'ប្រតិបត្តិការកំពុងដំណើរការ សូមរង់ចាំមួយភ្លែត',
   UNEXPECTED_ERROR: 'មានកំហុសមិនរំពឹងទុកបានកើតឡើង',
   MAX_QUANTITY_EXCEEDED: 'បរិមាណស្តុកបញ្ចូលលើសពីកម្រិតកំណត់អតិបរមា (១,០០០,០០០)',
+  CONCURRENT_UPDATE: 'ទិន្នន័យស្តុកត្រូវបានផ្លាស់ប្តូរដោយប្រតិបត្តិការផ្សេង សូមព្យាយាមម្ដងទៀត។',
+  DUPLICATE_REQUEST: 'ប្រតិបត្តិការនេះត្រូវបានដំណើរការរួចរាល់ហើយ',
+  NEGATIVE_STOCK: 'ស្តុកក្រោយប្រតិបត្តិការមិនអាចអវិជ្ជមានបានឡើយ',
 };
 
 export const KHMER_MOVEMENT_SUCCESS = {

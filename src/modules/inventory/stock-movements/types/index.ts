@@ -30,6 +30,7 @@ export interface StockMovement {
   reference_code?: string | null;
   movement_source: MovementSource;
   status?: MovementStatus;
+  idempotency_key?: string | null;
   created_by?: string | null;
   created_at: string;
   notes?: string | null;
@@ -61,6 +62,31 @@ export interface CreateStockMovementInput {
   reference_code?: string;
   movement_source?: MovementSource;
   notes?: string;
+  idempotency_key?: string;
+  request_id?: string;
+  expected_balance_before?: number;
+}
+
+export interface StockMovementResult {
+  movement_id: string;
+  product_id: string;
+  movement_type: StockMovementType;
+  balance_before: number;
+  delta: number;
+  balance_after: number;
+  created_by: string;
+  created_at: string;
+  status: MovementStatus;
+  movement: StockMovement;
+  is_duplicate?: boolean;
+  is_low_stock?: boolean;
+  isLowStock?: boolean;
+}
+
+export interface TransactionOptions {
+  allow_negative_stock?: boolean;
+  skip_concurrency_check?: boolean;
+  idempotency_key?: string;
 }
 
 export interface UpdateStockMovementInput {

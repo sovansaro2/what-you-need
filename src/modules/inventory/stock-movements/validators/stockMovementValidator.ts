@@ -97,6 +97,23 @@ export function validateMovementSource(source?: string | null): string | null {
   return null;
 }
 
+export function validateProjectedStock(balanceAfter: number): string | null {
+  if (balanceAfter < 0) {
+    return KHMER_MOVEMENT_ERRORS.NEGATIVE_STOCK;
+  }
+  return null;
+}
+
+export function validateConcurrency(
+  actualStock: number,
+  expectedStock?: number | null
+): string | null {
+  if (expectedStock !== undefined && expectedStock !== null && actualStock !== expectedStock) {
+    return KHMER_MOVEMENT_ERRORS.CONCURRENT_UPDATE;
+  }
+  return null;
+}
+
 export interface ValidationResult {
   isValid: boolean;
   errors: Record<string, string>;
@@ -135,7 +152,7 @@ export function validateMovementPayload(
   // 5. Availability check (only if quantity is valid)
   if (!qtyErr) {
     const stockErr = validateStockAvailability(
-      product.current_stock,
+      product.current_stock ?? 0,
       input.quantity,
       input.movement_type
     );
@@ -144,7 +161,18 @@ export function validateMovementPayload(
     }
   }
 
-  // 6. Source check
+  // 6. Concurrency check if expected_balance_before is provided
+  if (input.expected_balance_before !== undefined && input.expected_balance_before !== null) {
+    const concurrencyErr = validateConcurrency(
+      product.current_stock ?? 0,
+      input.expected_balance_before
+    );
+    if (concurrencyErr) {
+      errors.concurrency = concurrencyErr;
+    }
+  }
+
+  // 7. Source check
   const sourceErr = validateMovementSource(input.movement_source);
   if (sourceErr) {
     errors.movement_source = sourceErr;
@@ -163,5 +191,7 @@ export const stockMovementValidator = {
   validateArchivedProduct,
   validateStockAvailability,
   validateMovementSource,
+  validateProjectedStock,
+  validateConcurrency,
   validateMovementPayload,
 };

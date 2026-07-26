@@ -6,9 +6,12 @@ import {
   StockMovementFilter,
   StockMovementSummary,
   MovementStatistics,
+  StockMovementResult,
+  TransactionOptions,
 } from '../types';
 import { stockMovementService } from '../services/stockMovementService';
 import { InventoryProduct } from '../../products/types';
+import { INVENTORY_UPDATED_EVENT } from '../../events/inventoryEvents';
 
 export const useStockMovements = (
   initialFilter?: StockMovementFilter,
@@ -65,24 +68,25 @@ export const useStockMovements = (
     [userId]
   );
 
-  const createMovement = useCallback(
+  const processStockMovement = useCallback(
     async (
       input: CreateStockMovementInput,
-      product: InventoryProduct
-    ): Promise<StockMovement | null> => {
+      product?: InventoryProduct,
+      options?: TransactionOptions
+    ): Promise<StockMovementResult | null> => {
       setLoading(true);
       setError(null);
       try {
-        const result = await stockMovementService.createMovement(
+        const result = await stockMovementService.processStockMovement(
           userId,
           input,
-          product
+          product,
+          options
         );
-        // Refresh local list
         await fetchMovements();
         return result;
       } catch (err: any) {
-        console.error('Failed to create stock movement:', err);
+        console.error('Failed to process stock movement:', err);
         const errMsg = err?.message || 'មិនអាចរក្សាទុកប្រតិបត្តិការស្តុកបានឡើយ';
         setError(errMsg);
         return null;
@@ -91,6 +95,17 @@ export const useStockMovements = (
       }
     },
     [userId, fetchMovements]
+  );
+
+  const createMovement = useCallback(
+    async (
+      input: CreateStockMovementInput,
+      product: InventoryProduct
+    ): Promise<StockMovement | null> => {
+      const result = await processStockMovement(input, product);
+      return result ? result.movement : null;
+    },
+    [processStockMovement]
   );
 
   const clearError = useCallback(() => {
@@ -103,6 +118,17 @@ export const useStockMovements = (
     }
   }, [autoFetch, fetchMovements]);
 
+  useEffect(() => {
+    const handleInventoryUpdated = () => {
+      fetchMovements();
+    };
+
+    window.addEventListener(INVENTORY_UPDATED_EVENT, handleInventoryUpdated);
+    return () => {
+      window.removeEventListener(INVENTORY_UPDATED_EVENT, handleInventoryUpdated);
+    };
+  }, [fetchMovements]);
+
   return {
     loading,
     error,
@@ -110,6 +136,7 @@ export const useStockMovements = (
     history: movements, // Alias
     summary,
     statistics,
+    processStockMovement,
     createMovement,
     fetchMovements,
     fetchProductMovements,

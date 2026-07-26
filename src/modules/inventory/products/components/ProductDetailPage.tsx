@@ -23,6 +23,8 @@ import {
 import { InventoryProduct } from '../types';
 import { useInventoryProducts } from '../hooks/useProducts';
 import { DEFAULT_MIN_STOCK_ALERT, toKhmerNumeral } from '../constants';
+import { getProductStockStatus } from '../utils/productUtils';
+import { INVENTORY_UPDATED_EVENT, InventoryUpdatedDetail } from '../../events/inventoryEvents';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -68,38 +70,39 @@ export const ProductDetailPage: React.FC = () => {
     };
   }, [id, getProductById]);
 
+  // Event listener for real-time stock updates
+  useEffect(() => {
+    const handleUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent<InventoryUpdatedDetail>;
+      if (!id) return;
+      if (!customEvent.detail?.productId || customEvent.detail.productId === id) {
+        getProductById(id).then((fetched) => {
+          if (fetched) {
+            setProduct(fetched);
+          }
+        });
+      }
+    };
+
+    window.addEventListener(INVENTORY_UPDATED_EVENT, handleUpdate);
+    return () => {
+      window.removeEventListener(INVENTORY_UPDATED_EVENT, handleUpdate);
+    };
+  }, [id, getProductById]);
+
   // Helper function for stock badge calculation
   const getStockStatus = (prod: InventoryProduct) => {
-    if (prod.is_archived) {
-      return {
-        label: 'ប័ណ្ណសារ',
-        badgeClass: 'bg-slate-100 text-slate-700 border-slate-200',
-        icon: Archive,
-        dotColor: 'bg-slate-500',
-      };
-    }
-    const minAlert = prod.min_stock_alert ?? DEFAULT_MIN_STOCK_ALERT;
-    if (prod.current_stock <= 0) {
-      return {
-        label: 'អស់ពីស្តុក',
-        badgeClass: 'bg-red-50 text-red-700 border-red-200',
-        icon: XCircle,
-        dotColor: 'bg-red-500',
-      };
-    }
-    if (prod.current_stock <= minAlert) {
-      return {
-        label: 'ជិតអស់ស្តុក',
-        badgeClass: 'bg-amber-50 text-amber-700 border-amber-200',
-        icon: AlertTriangle,
-        dotColor: 'bg-amber-500',
-      };
-    }
+    const info = getProductStockStatus(prod);
+    let IconComponent = CheckCircle2;
+    if (info.status === 'archived') IconComponent = Archive;
+    else if (info.status === 'out_of_stock') IconComponent = XCircle;
+    else if (info.status === 'low_stock') IconComponent = AlertTriangle;
+
     return {
-      label: 'មានស្តុក',
-      badgeClass: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      icon: CheckCircle2,
-      dotColor: 'bg-emerald-500',
+      label: info.label,
+      badgeClass: info.badgeClass,
+      icon: IconComponent,
+      dotColor: info.dotColor,
     };
   };
 
@@ -133,8 +136,11 @@ export const ProductDetailPage: React.FC = () => {
   };
 
   const handleViewHistoryClick = () => {
-    setToastMessage('មុខងារប្រវត្តិស្តុកនឹងត្រូវភ្ជាប់ទៅកាន់ម៉ូឌុល Stock History');
-    setTimeout(() => setToastMessage(null), 3000);
+    if (product) {
+      navigate(`/inventory/stock-history?product_id=${product.id}`);
+    } else {
+      navigate('/inventory/stock-history');
+    }
   };
 
   // Loading Skeleton State

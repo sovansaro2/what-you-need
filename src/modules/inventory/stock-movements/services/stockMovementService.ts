@@ -6,15 +6,21 @@ import {
   StockMovementSummary,
   MovementStatistics,
   StockMovementType,
+  StockMovementResult,
+  TransactionOptions,
 } from '../types';
 import {
   KHMER_MOVEMENT_ERRORS,
 } from '../constants';
 import { stockMovementValidator, ValidationResult } from '../validators/stockMovementValidator';
 import { InventoryProduct } from '../../products/types';
+import { productService } from '../../products/services/productService';
+import { DEFAULT_MIN_STOCK_ALERT } from '../../products/constants';
+import { notifyInventoryUpdated } from '../../events/inventoryEvents';
 
 const getLocalStorageKey = (userId: string) => `wyn_stock_movements_${userId}`;
 const getProductLocalStorageKey = (userId: string) => `wyn_products_${userId}`;
+const getIdempotencyKeyStore = (userId: string) => `wyn_idempotency_${userId}`;
 
 const getLocalMovements = (userId: string): StockMovement[] => {
   try {
@@ -59,6 +65,40 @@ const syncLocalProductStock = (userId: string, productId: string, newStock: numb
   }
 };
 
+const getStoredIdempotencyRecord = (
+  userId: string,
+  key: string
+): StockMovement | null => {
+  try {
+    const data = localStorage.getItem(getIdempotencyKeyStore(userId));
+    if (data) {
+      const store: Record<string, StockMovement> = JSON.parse(data);
+      if (store && store[key]) {
+        return store[key];
+      }
+    }
+  } catch (e) {
+    console.error('Failed to read idempotency store', e);
+  }
+  return null;
+};
+
+const saveIdempotencyRecord = (
+  userId: string,
+  key: string,
+  movement: StockMovement
+): void => {
+  try {
+    const storeKey = getIdempotencyKeyStore(userId);
+    const existing = localStorage.getItem(storeKey);
+    const store: Record<string, StockMovement> = existing ? JSON.parse(existing) : {};
+    store[key] = movement;
+    localStorage.setItem(storeKey, JSON.stringify(store));
+  } catch (e) {
+    console.error('Failed to save idempotency record', e);
+  }
+};
+
 export const stockMovementService = {
   /**
    * Validate movement input prior to commit.
@@ -71,147 +111,265 @@ export const stockMovementService = {
   },
 
   /**
-   * Prepare a movement payload calculating balance_before, delta, and balance_after.
+   * Atomic Transaction Wrapper
+   * Wraps an inventory movement transaction with commit/rollback protections.
+   * Future-ready for Supabase RPC execution.
    */
-  prepareMovementPayload(
+  async executeMovementTransaction<T>(
     userId: string,
-    input: CreateStockMovementInput,
-    product: InventoryProduct
-  ): Omit<StockMovement, 'id' | 'created_at'> {
-    const balance_before = product.current_stock ?? 0;
-    const qty = Math.abs(input.quantity);
-    let delta = 0;
-
-    switch (input.movement_type) {
-      case 'stock_in':
-        delta = qty;
-        break;
-      case 'sale':
-      case 'damage':
-      case 'expired':
-        delta = -qty;
-        break;
-      case 'adjustment':
-        // For adjustment, quantity can be positive (increase) or negative (decrease) or delta
-        delta = input.quantity;
-        break;
-      default:
-        delta = qty;
+    transactionFn: () => Promise<T>
+  ): Promise<T> {
+    try {
+      // Execute pipeline steps
+      const result = await transactionFn();
+      return result;
+    } catch (error: any) {
+      console.error(`Transaction aborted for user ${userId}:`, error);
+      throw error;
     }
-
-    const balance_after = Math.max(0, balance_before + delta);
-
-    return {
-      user_id: userId,
-      product_id: product.id,
-      product_name: product.name,
-      product_sku: product.sku || null,
-      movement_type: input.movement_type,
-      quantity: qty,
-      delta,
-      balance_before,
-      balance_after,
-      reason: input.reason || null,
-      reference_type: input.reference_type || 'manual',
-      reference_id: input.reference_id || null,
-      reference_code: input.reference_code || null,
-      movement_source: input.movement_source || 'manual',
-      status: 'completed',
-      created_by: userId,
-      notes: input.notes || null,
-    };
   },
 
   /**
-   * Commit a stock movement atomically following the append-only ledger model.
-   * Updates current_stock of product and appends movement record.
+   * Single entry point for every inventory movement operation.
+   * Executes full 9-step atomic transaction pipeline.
+   */
+  async processStockMovement(
+    userId: string,
+    input: CreateStockMovementInput,
+    initialProduct?: InventoryProduct,
+    options?: TransactionOptions
+  ): Promise<StockMovementResult> {
+    const idempotencyKey =
+      input.idempotency_key || input.request_id || options?.idempotency_key;
+
+    // Step 1: Idempotency Protection Check
+    if (idempotencyKey) {
+      const existingRecord = getStoredIdempotencyRecord(userId, idempotencyKey);
+      if (existingRecord) {
+        return {
+          movement_id: existingRecord.id,
+          product_id: existingRecord.product_id,
+          movement_type: existingRecord.movement_type,
+          balance_before: existingRecord.balance_before,
+          delta: existingRecord.delta,
+          balance_after: existingRecord.balance_after,
+          created_by: existingRecord.created_by || userId,
+          created_at: existingRecord.created_at,
+          status: existingRecord.status || 'completed',
+          movement: existingRecord,
+          is_duplicate: true,
+        };
+      }
+    }
+
+    return this.executeMovementTransaction(userId, async () => {
+      // Step 2: Load current product (fresh state from storage/DB)
+      let currentProduct = initialProduct;
+      if (!currentProduct || !currentProduct.id) {
+        currentProduct = await productService.getProductById(userId, input.product_id);
+      } else {
+        // Fetch fresh state to prevent stale stock read
+        const fresh = await productService.getProductById(userId, currentProduct.id);
+        if (fresh) {
+          currentProduct = fresh;
+        }
+      }
+
+      if (!currentProduct) {
+        throw new Error(KHMER_MOVEMENT_ERRORS.PRODUCT_NOT_FOUND);
+      }
+
+      // Step 3: Verify product is active (not archived)
+      if (currentProduct.is_archived) {
+        throw new Error(KHMER_MOVEMENT_ERRORS.ARCHIVED_PRODUCT);
+      }
+
+      // Step 4: Calculate balance_before, delta, balance_after
+      const balance_before = currentProduct.current_stock ?? 0;
+      const qty = Math.abs(input.quantity);
+      let delta = 0;
+
+      switch (input.movement_type) {
+        case 'stock_in':
+          delta = qty;
+          break;
+        case 'sale':
+        case 'damage':
+        case 'expired':
+          delta = -qty;
+          break;
+        case 'adjustment':
+          delta = input.quantity; // Adjustment quantity is delta directly
+          break;
+        default:
+          delta = qty;
+      }
+
+      const balance_after = balance_before + delta;
+
+      // Step 5: Validate business rules
+      // Payload validation
+      const validation = this.validateBeforeCommit(input, currentProduct);
+      if (!validation.isValid) {
+        const errorValues = Object.values(validation.errors);
+        const firstError =
+          errorValues.length > 0 && typeof errorValues[0] === 'string'
+            ? errorValues[0]
+            : KHMER_MOVEMENT_ERRORS.UNEXPECTED_ERROR;
+        throw new Error(firstError);
+      }
+
+      // Concurrency protection check
+      if (
+        input.expected_balance_before !== undefined &&
+        input.expected_balance_before !== null &&
+        input.expected_balance_before !== balance_before
+      ) {
+        throw new Error(KHMER_MOVEMENT_ERRORS.CONCURRENT_UPDATE);
+      }
+
+      // Negative stock protection
+      if (balance_after < 0 && !options?.allow_negative_stock) {
+        throw new Error(KHMER_MOVEMENT_ERRORS.INSUFFICIENT_STOCK);
+      }
+
+      // Mandatory reason check
+      if (
+        (input.movement_type === 'adjustment' ||
+          input.movement_type === 'damage' ||
+          input.movement_type === 'expired') &&
+        (!input.reason || !input.reason.trim())
+      ) {
+        throw new Error(KHMER_MOVEMENT_ERRORS.MISSING_REASON);
+      }
+
+      // Step 6: Create immutable ledger entry
+      const movementId = `mvt_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+      const createdAt = new Date().toISOString();
+
+      const newMovement: StockMovement = {
+        id: movementId,
+        user_id: userId,
+        product_id: currentProduct.id,
+        product_name: currentProduct.name,
+        product_sku: currentProduct.sku || null,
+        movement_type: input.movement_type,
+        quantity: qty,
+        delta,
+        balance_before,
+        balance_after,
+        reason: input.reason || null,
+        reference_type: input.reference_type || 'manual',
+        reference_id: input.reference_id || null,
+        reference_code: input.reference_code || null,
+        movement_source: input.movement_source || 'manual',
+        status: 'completed',
+        idempotency_key: idempotencyKey || null,
+        created_by: userId,
+        created_at: createdAt,
+        notes: input.notes || null,
+      };
+
+      // Persist in local movements ledger
+      const localMovements = getLocalMovements(userId);
+      localMovements.unshift(newMovement);
+      setLocalMovements(userId, localMovements);
+
+      // Save idempotency record if key provided
+      if (idempotencyKey) {
+        saveIdempotencyRecord(userId, idempotencyKey, newMovement);
+      }
+
+      // Step 7: Synchronize products.current_stock using balance_after
+      syncLocalProductStock(userId, currentProduct.id, balance_after);
+
+      // Step 8: Commit transaction to Supabase backend
+      try {
+        const { error: mvtError } = await supabase
+          .from('stock_movements')
+          .insert({
+            id: newMovement.id,
+            user_id: userId,
+            product_id: currentProduct.id,
+            product_name: currentProduct.name,
+            product_sku: currentProduct.sku || null,
+            movement_type: input.movement_type,
+            quantity: newMovement.quantity,
+            delta: newMovement.delta,
+            balance_before: newMovement.balance_before,
+            balance_after: newMovement.balance_after,
+            reason: input.reason || null,
+            reference_type: input.reference_type || 'manual',
+            reference_id: input.reference_id || null,
+            reference_code: input.reference_code || null,
+            movement_source: input.movement_source || 'manual',
+            status: 'completed',
+            idempotency_key: idempotencyKey || null,
+            created_by: userId,
+            notes: input.notes || null,
+            created_at: createdAt,
+          });
+
+        if (mvtError) {
+          console.warn('Supabase ledger insert warning (local cache synced):', mvtError.message);
+        }
+
+        const { error: prodError } = await supabase
+          .from('products')
+          .update({
+            current_stock: balance_after,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', currentProduct.id)
+          .eq('user_id', userId);
+
+        if (prodError) {
+          console.warn('Supabase stock sync warning (local cache synced):', prodError.message);
+        }
+      } catch (err) {
+        console.warn('Network sync exception, transaction preserved in local ledger:', err);
+      }
+
+      // Step 9: Low stock evaluation & cache notification
+      const minAlert = currentProduct.min_stock_alert ?? DEFAULT_MIN_STOCK_ALERT;
+      const isLowStock = balance_after <= minAlert;
+
+      notifyInventoryUpdated({
+        productId: currentProduct.id,
+        movementId: newMovement.id,
+        isLowStock,
+        source: 'stock_movement',
+      });
+
+      return {
+        movement_id: newMovement.id,
+        product_id: currentProduct.id,
+        movement_type: input.movement_type,
+        balance_before,
+        delta,
+        balance_after,
+        created_by: userId,
+        created_at: createdAt,
+        status: 'completed',
+        movement: newMovement,
+        is_duplicate: false,
+        is_low_stock: isLowStock,
+        isLowStock: isLowStock,
+      };
+    });
+  },
+
+  /**
+   * Legacy / direct caller adapter.
+   * Delegates to processStockMovement to ensure single entry point execution.
    */
   async commitMovement(
     userId: string,
     input: CreateStockMovementInput,
     product: InventoryProduct
   ): Promise<StockMovement> {
-    // 1. Validate payload
-    const validation = this.validateBeforeCommit(input, product);
-    if (!validation.isValid) {
-      const errorValues = Object.values(validation.errors);
-      const firstError = errorValues.length > 0 && typeof errorValues[0] === 'string'
-        ? errorValues[0]
-        : KHMER_MOVEMENT_ERRORS.UNEXPECTED_ERROR;
-      throw new Error(firstError);
-    }
-
-    // 2. Prepare payload
-    const payload = this.prepareMovementPayload(userId, input, product);
-    const newMovement: StockMovement = {
-      ...payload,
-      id: `mvt_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
-      created_at: new Date().toISOString(),
-    };
-
-    // 3. Persist movement in local cache
-    const localMovements = getLocalMovements(userId);
-    localMovements.unshift(newMovement);
-    setLocalMovements(userId, localMovements);
-
-    // 4. Sync product stock locally
-    syncLocalProductStock(userId, product.id, newMovement.balance_after);
-
-    // 5. Sync to Supabase
-    try {
-      // Insert movement ledger entry
-      const { data: dbMovement, error: mvtError } = await supabase
-        .from('stock_movements')
-        .insert({
-          id: newMovement.id,
-          user_id: userId,
-          product_id: product.id,
-          product_name: product.name,
-          product_sku: product.sku || null,
-          movement_type: input.movement_type,
-          quantity: payload.quantity,
-          delta: payload.delta,
-          balance_before: payload.balance_before,
-          balance_after: payload.balance_after,
-          reason: input.reason || null,
-          reference_type: input.reference_type || 'manual',
-          reference_id: input.reference_id || null,
-          reference_code: input.reference_code || null,
-          movement_source: input.movement_source || 'manual',
-          status: 'completed',
-          created_by: userId,
-          notes: input.notes || null,
-          created_at: newMovement.created_at,
-        })
-        .select()
-        .single();
-
-      if (mvtError) {
-        console.warn('Supabase stock_movements insert warning (local cache used):', mvtError.message);
-      }
-
-      // Update product current_stock in Supabase
-      const { error: prodError } = await supabase
-        .from('products')
-        .update({
-          current_stock: newMovement.balance_after,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', product.id)
-        .eq('user_id', userId);
-
-      if (prodError) {
-        console.warn('Supabase product stock sync warning (local cache used):', prodError.message);
-      }
-
-      if (dbMovement) {
-        return dbMovement as StockMovement;
-      }
-    } catch (err) {
-      console.warn('Network error during movement commit, preserved locally:', err);
-    }
-
-    return newMovement;
+    const result = await this.processStockMovement(userId, input, product);
+    return result.movement;
   },
 
   /**

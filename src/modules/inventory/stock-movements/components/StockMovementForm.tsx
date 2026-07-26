@@ -111,6 +111,8 @@ export const StockMovementForm: React.FC<StockMovementFormProps> = ({
       notes,
       movement_source: 'manual',
       reference_type: 'manual',
+      expected_balance_before: product.current_stock ?? 0,
+      idempotency_key: `mvt_req_${product.id}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
     };
 
     // Client validation check

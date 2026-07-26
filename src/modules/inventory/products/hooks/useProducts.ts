@@ -7,7 +7,10 @@ import {
   ProductFilter,
 } from '../types';
 import { productService } from '../services/productService';
+import { stockMovementService } from '../../stock-movements/services/stockMovementService';
 import { DEFAULT_MIN_STOCK_ALERT } from '../constants';
+import { INVENTORY_UPDATED_EVENT } from '../../events/inventoryEvents';
+import { isLowStockProduct, getProductStockStatus } from '../utils/productUtils';
 
 export const useInventoryProducts = (initialFilter?: ProductFilter) => {
   const { user } = useAuth();
@@ -35,6 +38,18 @@ export const useInventoryProducts = (initialFilter?: ProductFilter) => {
 
   useEffect(() => {
     fetchProducts();
+  }, [fetchProducts]);
+
+  // Event driven auto-refresh on stock changes across application
+  useEffect(() => {
+    const handleInventoryUpdated = () => {
+      fetchProducts();
+    };
+
+    window.addEventListener(INVENTORY_UPDATED_EVENT, handleInventoryUpdated);
+    return () => {
+      window.removeEventListener(INVENTORY_UPDATED_EVENT, handleInventoryUpdated);
+    };
   }, [fetchProducts]);
 
   const createProduct = async (input: CreateInventoryProductInput): Promise<InventoryProduct> => {
@@ -76,6 +91,39 @@ export const useInventoryProducts = (initialFilter?: ProductFilter) => {
       return productService.getProductById(userId, id);
     },
     [userId]
+  );
+
+  // Requirement 4: Exposed Integration Methods
+  const refreshProductStock = useCallback(
+    async (productId?: string) => {
+      await fetchProducts();
+      if (productId) {
+        return productService.getProductById(userId, productId);
+      }
+      return null;
+    },
+    [fetchProducts, userId]
+  );
+
+  const refreshHistory = useCallback(
+    async (productId?: string) => {
+      return stockMovementService.getMovementHistory(
+        userId,
+        productId ? { product_id: productId } : undefined
+      );
+    },
+    [userId]
+  );
+
+  const refreshStatistics = useCallback(async () => {
+    return stockMovementService.getMovementStatistics(userId);
+  }, [userId]);
+
+  const isLowStock = useCallback(
+    (product: InventoryProduct) => {
+      return isLowStockProduct(product);
+    },
+    []
   );
 
   // Memoized stats & metrics
@@ -207,6 +255,10 @@ export const useInventoryProducts = (initialFilter?: ProductFilter) => {
     unarchiveProduct,
     checkSkuDuplicate,
     getProductById,
+    refreshProductStock,
+    refreshHistory,
+    refreshStatistics,
+    isLowStock,
     refresh: fetchProducts,
   };
 };

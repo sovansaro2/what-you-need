@@ -661,8 +661,19 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 <label className="block text-xs font-bold text-slate-500">
                   ចំនួនស្តុកបច្ចុប្បន្ន (Current Stock)
                 </label>
-                <div className="px-3.5 py-2.5 text-xs sm:text-sm bg-slate-100 border border-slate-200 rounded-xl font-bold text-slate-700 min-h-[44px] flex items-center">
-                  {initialData?.current_stock ?? 0} {initialData?.unit || unit}
+                <div className="px-3.5 py-2.5 text-xs sm:text-sm bg-slate-100 border border-slate-200 rounded-xl font-bold text-slate-700 min-h-[44px] flex items-center justify-between gap-2">
+                  <span>
+                    {initialData?.current_stock ?? 0} {initialData?.unit || unit}
+                  </span>
+                  {initialData?.id && (
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/products/${initialData.id}/stock-update`)}
+                      className="py-1 px-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-lg border border-indigo-200/80 transition-colors cursor-pointer shrink-0"
+                    >
+                      បច្ចុប្បន្នភាពស្តុក
+                    </button>
+                  )}
                 </div>
                 <p className="text-[11px] text-amber-600 font-medium">
                   * ចំនួនស្តុកអាចកែប្រែបានតែតាមរយៈប្រតិបត្តិការស្តុកប៉ុណ្ណោះ

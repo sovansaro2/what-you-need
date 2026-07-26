@@ -2,7 +2,8 @@ import React from 'react';
 import { Package, Tag, Layers, Barcode } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { InventoryProduct } from '../types';
-import { DEFAULT_MIN_STOCK_ALERT, toKhmerNumeral } from '../constants';
+import { toKhmerNumeral } from '../constants';
+import { getProductStockStatus } from '../utils/productUtils';
 
 interface ProductCardProps {
   product: InventoryProduct;
@@ -12,37 +13,7 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
   const navigate = useNavigate();
 
-  const getStockStatus = () => {
-    if (product.is_archived) {
-      return {
-        label: 'ប័ណ្ណសារ',
-        dotColor: 'bg-slate-500',
-        badgeClass: 'bg-slate-100 text-slate-700 border-slate-200/80',
-      };
-    }
-    const minAlert = product.min_stock_alert ?? DEFAULT_MIN_STOCK_ALERT;
-    if (product.current_stock <= 0) {
-      return {
-        label: 'អស់ពីស្តុក',
-        dotColor: 'bg-red-500',
-        badgeClass: 'bg-red-50 text-red-700 border-red-200/80',
-      };
-    }
-    if (product.current_stock <= minAlert) {
-      return {
-        label: 'ជិតអស់ស្តុក',
-        dotColor: 'bg-amber-500',
-        badgeClass: 'bg-amber-50 text-amber-700 border-amber-200/80',
-      };
-    }
-    return {
-      label: 'មានស្តុក',
-      dotColor: 'bg-emerald-500',
-      badgeClass: 'bg-emerald-50 text-emerald-700 border-emerald-200/80',
-    };
-  };
-
-  const statusInfo = getStockStatus();
+  const statusInfo = getProductStockStatus(product);
 
   const handleClick = () => {
     if (onClick) {
