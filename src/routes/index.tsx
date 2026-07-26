@@ -28,6 +28,9 @@ import { ModulePlaceholder } from '@/pages/ModulePlaceholder';
 import { Finance } from '@/modules/finance/Finance';
 import { Products } from '@/pages/Products';
 import { Onboarding } from '@/pages/Onboarding';
+import { ProductUnitsPage } from '@/modules/inventory/units';
+import { ProductCategoriesPage } from '@/modules/inventory/categories';
+import { ProductFormPage, ProductDetailPage } from '@/modules/inventory/products';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -71,7 +74,14 @@ export const AppRoutes: React.FC = () => {
               {/* Finance Module Route */}
               <Route path="/finance" element={<Finance />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/products/new" element={<ProductFormPage mode="add" />} />
+              <Route path="/products/:id" element={<ProductDetailPage />} />
+              <Route path="/products/:id/edit" element={<ProductFormPage mode="edit" />} />
               <Route path="/inventory" element={<Products />} />
+              <Route path="/inventory/units" element={<ProductUnitsPage />} />
+              <Route path="/products/units" element={<ProductUnitsPage />} />
+              <Route path="/inventory/categories" element={<ProductCategoriesPage />} />
+              <Route path="/products/categories" element={<ProductCategoriesPage />} />
               <Route
                 path="/sales"
                 element={
