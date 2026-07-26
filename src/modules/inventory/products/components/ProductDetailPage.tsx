@@ -127,8 +127,9 @@ export const ProductDetailPage: React.FC = () => {
   };
 
   const handleUpdateStockClick = () => {
-    setToastMessage('មុខងារបច្ចុប្បន្នភាពស្តុកនឹងត្រូវភ្ជាប់ទៅកាន់ម៉ូឌុល Stock Adjustment');
-    setTimeout(() => setToastMessage(null), 3000);
+    if (product) {
+      navigate(`/products/${product.id}/stock-update`);
+    }
   };
 
   const handleViewHistoryClick = () => {

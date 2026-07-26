@@ -31,6 +31,7 @@ import { Onboarding } from '@/pages/Onboarding';
 import { ProductUnitsPage } from '@/modules/inventory/units';
 import { ProductCategoriesPage } from '@/modules/inventory/categories';
 import { ProductFormPage, ProductDetailPage } from '@/modules/inventory/products';
+import { StockMovementPage } from '@/modules/inventory/stock-movements';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -77,6 +78,8 @@ export const AppRoutes: React.FC = () => {
               <Route path="/products/new" element={<ProductFormPage mode="add" />} />
               <Route path="/products/:id" element={<ProductDetailPage />} />
               <Route path="/products/:id/edit" element={<ProductFormPage mode="edit" />} />
+              <Route path="/products/:id/stock-update" element={<StockMovementPage />} />
+              <Route path="/inventory/stock-update/:id" element={<StockMovementPage />} />
               <Route path="/inventory" element={<Products />} />
               <Route path="/inventory/units" element={<ProductUnitsPage />} />
               <Route path="/products/units" element={<ProductUnitsPage />} />
