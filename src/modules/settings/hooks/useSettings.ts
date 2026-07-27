@@ -1,8 +1,12 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { settingsService } from '@/services/settingsService';
+import {
+  settingsRepository,
+  settingsEvents,
+} from '../foundation';
 import { authService } from '@/services/authService';
 import { BusinessSettings, UserPreferences } from '../types';
+import { formatUserErrorMessage } from '@/core/errors';
 
 interface UseSettingsOptions {
   fetchPreferences?: boolean;
@@ -12,59 +16,29 @@ export const useSettings = (options?: UseSettingsOptions) => {
   const fetchPreferences = options?.fetchPreferences ?? true;
   const { user, profile, signOut } = useAuth();
   const userId = user?.id || 'guest';
+  const businessId = profile?.business_id || userId;
 
   const [saving, setSaving] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Synchronously compute initial business settings from local cache or auth context
-  const initialBusinessSettings = useMemo<BusinessSettings>(() => {
-    const defaults: BusinessSettings = {
-      userId,
-      businessName: user?.user_metadata?.business_name || '',
-      logoUrl: user?.user_metadata?.avatar_url || '',
-      phone: profile?.phone || user?.user_metadata?.phone || '',
-      email: user?.email || '',
-      address: user?.user_metadata?.address || '',
-      primaryCurrency: 'KHR',
-      language: 'km',
-    };
-
-    if (!userId) return defaults;
-
-    try {
-      const local = localStorage.getItem(`wyn_business_settings_${userId}`);
-      if (local) {
-        const parsed = JSON.parse(local);
-        return {
-          ...defaults,
-          ...parsed,
-          businessName: parsed.businessName || defaults.businessName,
-          phone: parsed.phone || defaults.phone,
-          address: parsed.address || defaults.address,
-          email: parsed.email || defaults.email,
-        };
-      }
-    } catch {
-      // Ignore local storage error
-    }
-
-    return defaults;
-  }, [userId, user, profile]);
-
-  const [businessSettings, setBusinessSettings] = useState<BusinessSettings>(initialBusinessSettings);
-
-  // Keep state updated with context/cache changes
-  useEffect(() => {
-    setBusinessSettings((prev) => ({
-      ...initialBusinessSettings,
-      ...prev,
-      businessName: prev.businessName || initialBusinessSettings.businessName,
-      phone: prev.phone || initialBusinessSettings.phone,
-      address: prev.address || initialBusinessSettings.address,
-      email: prev.email || initialBusinessSettings.email,
-    }));
-  }, [initialBusinessSettings]);
+  const [businessSettings, setBusinessSettings] = useState<BusinessSettings>({
+    userId,
+    businessId,
+    businessName: profile?.full_name || user?.user_metadata?.business_name || '',
+    logoUrl: user?.user_metadata?.avatar_url || '',
+    phone: profile?.phone || user?.user_metadata?.phone || '',
+    email: user?.email || '',
+    address: user?.user_metadata?.address || '',
+    primaryCurrency: 'KHR',
+    timezone: 'Asia/Phnom_Penh',
+    language: 'km',
+    receiptPrefix: 'INV-',
+    taxRate: 0,
+    decimalPrecision: 2,
+    lowStockThreshold: 5,
+  });
 
   const [userPreferences, setUserPreferences] = useState<UserPreferences>({
     userId,
@@ -74,37 +48,29 @@ export const useSettings = (options?: UseSettingsOptions) => {
     reportNotifications: true,
   });
 
-  const hasInitialData = Boolean(
-    initialBusinessSettings.businessName ||
-      initialBusinessSettings.phone ||
-      profile?.full_name ||
-      user?.email
-  );
-
-  const [loading, setLoading] = useState<boolean>(!hasInitialData);
-
   const clearMessages = useCallback(() => {
     setSuccessMessage(null);
     setErrorMessage(null);
   }, []);
 
   const loadSettings = useCallback(async () => {
-    if (!userId) return;
+    if (!userId || userId === 'guest') {
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setErrorMessage(null);
+
     try {
       if (fetchPreferences) {
         const [bs, up] = await Promise.all([
-          settingsService.getBusinessSettings(userId),
-          settingsService.getUserPreferences(userId),
+          settingsRepository.getBusinessSettings(userId, businessId),
+          settingsRepository.getUserPreferences(userId),
         ]);
 
-        if (!bs.businessName && user?.user_metadata?.business_name) {
-          bs.businessName = user.user_metadata.business_name;
-        }
-        if (!bs.address && user?.user_metadata?.address) {
-          bs.address = user.user_metadata.address;
-        }
-        if (!bs.phone && (profile?.phone || user?.user_metadata?.phone)) {
-          bs.phone = profile?.phone || user?.user_metadata?.phone || '';
+        if (!bs.businessName && (profile?.full_name || user?.user_metadata?.business_name)) {
+          bs.businessName = profile?.full_name || user?.user_metadata?.business_name || '';
         }
         if (!bs.email && user?.email) {
           bs.email = user.email;
@@ -113,64 +79,68 @@ export const useSettings = (options?: UseSettingsOptions) => {
         setBusinessSettings(bs);
         setUserPreferences(up);
       } else {
-        // Load ONLY business settings required for Account page (skips userPreferences query)
-        const bs = await settingsService.getBusinessSettings(userId);
-
-        if (!bs.businessName && user?.user_metadata?.business_name) {
-          bs.businessName = user.user_metadata.business_name;
-        }
-        if (!bs.address && user?.user_metadata?.address) {
-          bs.address = user.user_metadata.address;
-        }
-        if (!bs.phone && (profile?.phone || user?.user_metadata?.phone)) {
-          bs.phone = profile?.phone || user?.user_metadata?.phone || '';
+        const bs = await settingsRepository.getBusinessSettings(userId, businessId);
+        if (!bs.businessName && (profile?.full_name || user?.user_metadata?.business_name)) {
+          bs.businessName = profile?.full_name || user?.user_metadata?.business_name || '';
         }
         if (!bs.email && user?.email) {
           bs.email = user.email;
         }
-
         setBusinessSettings(bs);
       }
     } catch (err: any) {
       console.warn('Failed to load settings:', err);
-      setErrorMessage('មិនអាចទាញយកការកំណត់បានទេ');
+      setErrorMessage(formatUserErrorMessage(err, 'មិនអាចទាញយកការកំណត់បានទេ'));
     } finally {
       setLoading(false);
     }
-  }, [userId, user, profile, fetchPreferences]);
+  }, [userId, businessId, profile, user, fetchPreferences]);
 
   useEffect(() => {
     loadSettings();
+
+    // Event bus auto-refresh subscription
+    const unsubscribe = settingsEvents.subscribeToSettingsChanges(() => {
+      loadSettings();
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, [loadSettings]);
 
-  const saveBusinessInfo = async (payload: Partial<BusinessSettings>) => {
+  const saveBusinessInfo = async (payload: Partial<BusinessSettings>): Promise<boolean> => {
     clearMessages();
     setSaving(true);
     try {
-      const updated = await settingsService.updateBusinessSettings(userId, payload);
+      const updated = await settingsRepository.updateBusinessSettings(
+        userId,
+        payload,
+        businessId
+      );
       setBusinessSettings(updated);
       setSuccessMessage('បានរក្សាទុកព័ត៌មានអាជីវកម្មដោយជោគជ័យ');
       return true;
     } catch (err: any) {
       console.error('Error saving business settings:', err);
-      setErrorMessage('រក្សាទុកមិនបានជោគជ័យ សូមព្យាយាមម្តងទៀត');
+      setErrorMessage(formatUserErrorMessage(err, 'រក្សាទុកមិនបានជោគជ័យ សូមព្យាយាមម្តងទៀត'));
       return false;
     } finally {
       setSaving(false);
     }
   };
 
-  const savePreferences = async (payload: Partial<UserPreferences>) => {
+  const savePreferences = async (payload: Partial<UserPreferences>): Promise<boolean> => {
     clearMessages();
     setSaving(true);
     try {
-      const updated = await settingsService.updateUserPreferences(userId, payload);
+      const updated = await settingsRepository.updateUserPreferences(userId, payload);
       setUserPreferences(updated);
       setSuccessMessage('បានរក្សាទុកការកំណត់ដោយជោគជ័យ');
       return true;
     } catch (err: any) {
       console.error('Error saving preferences:', err);
-      setErrorMessage('រក្សាទុកមិនបានជោគជ័យ');
+      setErrorMessage(formatUserErrorMessage(err, 'រក្សាទុកមិនបានជោគជ័យ'));
       return false;
     } finally {
       setSaving(false);

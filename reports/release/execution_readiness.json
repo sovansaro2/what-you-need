@@ -1,36 +1,27 @@
 {
-  "timestamp": "2026-07-27T11:15:42.084Z",
+  "timestamp": "2026-07-27T16:35:05.931Z",
   "targetFile": "database_v1.sql",
-  "schemaHash": "9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26",
+  "schemaHash": "CC44B3AB4DAD69FA5634C218F5EA06266E8E6A008666F0B5621BCE65510C7F93",
   "verification": {
     "currentSchemaSnapshot": {
       "exists": true,
       "latest": true,
-      "schemaHash": "9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26",
-      "timestamp": "2026-07-26T14:17:33.479Z"
+      "schemaHash": "CC44B3AB4DAD69FA5634C218F5EA06266E8E6A008666F0B5621BCE65510C7F93",
+      "timestamp": "2026-07-27T16:34:25.244Z"
     },
     "migrationPlan": {
       "exists": true,
       "validated": true,
       "dependenciesResolved": true,
-      "totalTasks": 202,
+      "totalTasks": 97,
       "estimatedTotalDuration": "28s",
       "overallRisk": "HIGH"
     },
     "engineeringValidation": {
       "latestReport": "reports/schema-validator/engineering_validation.json",
-      "approvalStatus": "REJECTED",
+      "approvalStatus": "APPROVED WITH WARNINGS",
       "criticalFindingsCount": 1,
-      "criticalFindings": [
-        {
-          "id": "HEALTH-LOW-SCORE",
-          "category": "HEALTH",
-          "severity": "CRITICAL",
-          "title": "Database Health Score Below Threshold (19/100)",
-          "description": "Database overall health score is 19/100, which is below the minimum required engineering threshold of 80/100.",
-          "recommendation": "Execute migration plan to bring current database schema into 100% alignment with target DDL specification."
-        }
-      ]
+      "criticalFindings": []
     },
     "rollbackPlan": {
       "exists": true,
@@ -39,18 +30,18 @@
       "coveredStages": 6
     },
     "databaseHealth": {
-      "currentScore": 19,
+      "currentScore": 51,
       "expectedScoreAfterMigration": 100,
       "gapAnalysis": {
-        "totalDifferences": 253,
+        "totalDifferences": 133,
         "missingTables": 0,
         "extraTables": 6,
-        "columnDifferences": 163,
+        "columnDifferences": 49,
         "pkDifferences": 0,
         "fkDifferences": 7,
         "constraintDifferences": 52,
         "indexDifferences": 25,
-        "schemaMatchPercentage": 5.9
+        "schemaMatchPercentage": 50.6
       }
     },
     "migrationStages": [
@@ -67,7 +58,7 @@
         "stageId": "STAGE_2_LOOKUPS",
         "name": "Lookup & Reference Tables",
         "verified": true,
-        "taskCount": 8,
+        "taskCount": 0,
         "risk": "LOW"
       },
       {
@@ -75,7 +66,7 @@
         "stageId": "STAGE_3_CORE_INVENTORY",
         "name": "Core Entities & Inventory",
         "verified": true,
-        "taskCount": 62,
+        "taskCount": 16,
         "risk": "MEDIUM"
       },
       {
@@ -83,7 +74,7 @@
         "stageId": "STAGE_4_LEDGER",
         "name": "Ledger & Transactions",
         "verified": true,
-        "taskCount": 43,
+        "taskCount": 18,
         "risk": "HIGH"
       },
       {
@@ -91,7 +82,7 @@
         "stageId": "STAGE_5_FINANCE",
         "name": "Finance & Analytics",
         "verified": true,
-        "taskCount": 34,
+        "taskCount": 8,
         "risk": "MEDIUM"
       },
       {

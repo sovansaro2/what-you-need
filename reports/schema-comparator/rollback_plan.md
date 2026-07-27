@@ -18,84 +18,29 @@ DROP EXTENSION IF EXISTS pgcrypto;
 *Reason:* All tasks in this stage are fully reversible without data loss.
 
 **Rollback Steps:**
-```sql
-ALTER TABLE product_units DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE product_units DROP COLUMN IF EXISTS created_by;
-ALTER TABLE product_units DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE product_units DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE product_units DROP COLUMN IF EXISTS is_active;
-ALTER TABLE product_units DROP COLUMN IF EXISTS symbol;
-ALTER TABLE product_units DROP COLUMN IF EXISTS code;
-ALTER TABLE product_units DROP COLUMN IF EXISTS business_id;
-```
+- No rollback steps required for this stage.
 
 ### Core Entities & Inventory [MANUAL]
 *Reason:* Stage contains column type conversions or table renames requiring manual backup restoration.
 
 **Rollback Steps:**
 ```sql
-ALTER TABLE purchase_items DROP COLUMN IF EXISTS subtotal;
-ALTER TABLE purchase_items DROP COLUMN IF EXISTS unit_cost;
-ALTER TABLE purchase_items DROP COLUMN IF EXISTS quantity_received;
-ALTER TABLE purchase_items DROP COLUMN IF EXISTS quantity_ordered;
-ALTER TABLE purchase_items DROP COLUMN IF EXISTS product_id;
-ALTER TABLE purchase_items DROP COLUMN IF EXISTS purchase_order_id;
-ALTER TABLE purchase_items DROP COLUMN IF EXISTS business_id;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS created_by;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS is_active;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS outstanding_balance;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS address;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS email;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS phone;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS contact_name;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS company_name;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS supplier_code;
-ALTER TABLE suppliers DROP COLUMN IF EXISTS business_id;
+-- Manual rollback step required for Modify Column Type 'subtotal' in 'purchase_items'
+-- Manual rollback step required for Modify Column Type 'unit_cost' in 'purchase_items'
+-- Manual rollback step required for Modify Column Type 'quantity_received' in 'purchase_items'
+-- Manual rollback step required for Modify Column Type 'quantity_ordered' in 'purchase_items'
+-- Manual rollback step required for Modify Column Type 'outstanding_balance' in 'suppliers'
 -- Manual rollback step required for Modify Column Type 'subtotal' in 'sale_items'
 -- Manual rollback step required for Modify Column Type 'discount_amount' in 'sale_items'
 -- Manual rollback step required for Modify Column Type 'unit_cost' in 'sale_items'
 -- Manual rollback step required for Modify Column Type 'unit_price' in 'sale_items'
 -- Manual rollback step required for Modify Column Type 'quantity' in 'sale_items'
-ALTER TABLE profiles DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE profiles DROP COLUMN IF EXISTS created_by;
-ALTER TABLE profiles DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE profiles DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE profiles DROP COLUMN IF EXISTS avatar_url;
-ALTER TABLE profiles DROP COLUMN IF EXISTS is_active;
-ALTER TABLE profiles DROP COLUMN IF EXISTS role;
-ALTER TABLE profiles DROP COLUMN IF EXISTS phone;
-ALTER TABLE profiles DROP COLUMN IF EXISTS full_name;
-ALTER TABLE profiles DROP COLUMN IF EXISTS business_id;
 -- Manual rollback step required for Modify Column Type 'min_stock_alert' in 'products'
 -- Manual rollback step required for Modify Column Type 'current_stock' in 'products'
 -- Manual rollback step required for Modify Column Type 'selling_price' in 'products'
 -- Manual rollback step required for Modify Column Type 'cost_price' in 'products'
-ALTER TABLE products DROP COLUMN IF EXISTS description;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS created_by;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS is_active;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS icon;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS color;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS description;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS code;
-ALTER TABLE product_categories DROP COLUMN IF EXISTS business_id;
-ALTER TABLE customers DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE customers DROP COLUMN IF EXISTS created_by;
-ALTER TABLE customers DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE customers DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE customers DROP COLUMN IF EXISTS is_active;
-ALTER TABLE customers DROP COLUMN IF EXISTS outstanding_balance;
-ALTER TABLE customers DROP COLUMN IF EXISTS credit_limit;
-ALTER TABLE customers DROP COLUMN IF EXISTS address;
-ALTER TABLE customers DROP COLUMN IF EXISTS email;
-ALTER TABLE customers DROP COLUMN IF EXISTS phone;
-ALTER TABLE customers DROP COLUMN IF EXISTS customer_code;
-ALTER TABLE customers DROP COLUMN IF EXISTS business_id;
+-- Manual rollback step required for Modify Column Type 'outstanding_balance' in 'customers'
+-- Manual rollback step required for Modify Column Type 'credit_limit' in 'customers'
 ```
 
 ### Ledger & Transactions [MANUAL]
@@ -103,21 +48,9 @@ ALTER TABLE customers DROP COLUMN IF EXISTS business_id;
 
 **Rollback Steps:**
 ```sql
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS created_by;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS notes;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS received_at;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS expected_delivery_date;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS due_amount;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS paid_amount;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS total_amount;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS payment_status;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS status;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS po_number;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS supplier_id;
-ALTER TABLE purchase_orders DROP COLUMN IF EXISTS business_id;
+-- Manual rollback step required for Modify Column Type 'due_amount' in 'purchase_orders'
+-- Manual rollback step required for Modify Column Type 'paid_amount' in 'purchase_orders'
+-- Manual rollback step required for Modify Column Type 'total_amount' in 'purchase_orders'
 ALTER TABLE stock_movements DROP COLUMN IF EXISTS created_by;
 ALTER TABLE stock_movements DROP COLUMN IF EXISTS notes;
 -- Manual rollback step required for Modify Column Type 'total_cost' in 'stock_movements'
@@ -125,68 +58,29 @@ ALTER TABLE stock_movements DROP COLUMN IF EXISTS notes;
 -- Manual rollback step required for Modify Column Type 'balance_after' in 'stock_movements'
 -- Manual rollback step required for Modify Column Type 'balance_before' in 'stock_movements'
 -- Manual rollback step required for Modify Column Type 'quantity' in 'stock_movements'
-ALTER TABLE payments DROP COLUMN IF EXISTS created_by;
-ALTER TABLE payments DROP COLUMN IF EXISTS paid_at;
-ALTER TABLE payments DROP COLUMN IF EXISTS notes;
-ALTER TABLE payments DROP COLUMN IF EXISTS status;
-ALTER TABLE payments DROP COLUMN IF EXISTS reference_number;
-ALTER TABLE payments DROP COLUMN IF EXISTS exchange_rate;
-ALTER TABLE payments DROP COLUMN IF EXISTS currency;
-ALTER TABLE payments DROP COLUMN IF EXISTS amount;
-ALTER TABLE payments DROP COLUMN IF EXISTS payment_method;
-ALTER TABLE payments DROP COLUMN IF EXISTS payment_number;
-ALTER TABLE payments DROP COLUMN IF EXISTS customer_id;
-ALTER TABLE payments DROP COLUMN IF EXISTS sale_id;
-ALTER TABLE payments DROP COLUMN IF EXISTS business_id;
-ALTER TABLE sales DROP COLUMN IF EXISTS notes;
+-- Manual rollback step required for Modify Column Type 'exchange_rate' in 'payments'
+-- Manual rollback step required for Modify Column Type 'amount' in 'payments'
 -- Manual rollback step required for Modify Column Type 'due_amount' in 'sales'
 -- Manual rollback step required for Modify Column Type 'paid_amount' in 'sales'
 -- Manual rollback step required for Modify Column Type 'total_amount' in 'sales'
-ALTER TABLE sales DROP COLUMN IF EXISTS tax_amount;
-ALTER TABLE sales DROP COLUMN IF EXISTS discount_amount;
+-- Manual rollback step required for Modify Column Type 'tax_amount' in 'sales'
+-- Manual rollback step required for Modify Column Type 'discount_amount' in 'sales'
 ALTER TABLE sales DROP COLUMN IF EXISTS subtotal_amount;
-ALTER TABLE sales DROP COLUMN IF EXISTS status;
 ```
 
-### Finance & Analytics [SAFE]
-*Reason:* All tasks in this stage are fully reversible without data loss.
+### Finance & Analytics [MANUAL]
+*Reason:* Stage contains column type conversions or table renames requiring manual backup restoration.
 
 **Rollback Steps:**
 ```sql
-ALTER TABLE expenses DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE expenses DROP COLUMN IF EXISTS created_by;
-ALTER TABLE expenses DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE expenses DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE expenses DROP COLUMN IF EXISTS incurred_at;
-ALTER TABLE expenses DROP COLUMN IF EXISTS notes;
-ALTER TABLE expenses DROP COLUMN IF EXISTS receipt_url;
-ALTER TABLE expenses DROP COLUMN IF EXISTS vendor_name;
-ALTER TABLE expenses DROP COLUMN IF EXISTS payment_method;
-ALTER TABLE expenses DROP COLUMN IF EXISTS currency;
-ALTER TABLE expenses DROP COLUMN IF EXISTS amount;
-ALTER TABLE expenses DROP COLUMN IF EXISTS title;
-ALTER TABLE expenses DROP COLUMN IF EXISTS expense_number;
-ALTER TABLE expenses DROP COLUMN IF EXISTS category_id;
-ALTER TABLE expenses DROP COLUMN IF EXISTS business_id;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS updated_by;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS created_by;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS deleted_at;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS is_active;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS description;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS code;
-ALTER TABLE expense_categories DROP COLUMN IF EXISTS business_id;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS updated_at;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_stock_out_qty;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_stock_in_qty;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_net_profit;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_expenses_amount;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_gross_profit;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_cost_amount;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_sales_count;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_sales_amount;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS summary_date;
-ALTER TABLE daily_summaries DROP COLUMN IF EXISTS business_id;
+-- Manual rollback step required for Modify Column Type 'amount' in 'expenses'
+-- Manual rollback step required for Modify Column Type 'total_stock_out_qty' in 'daily_summaries'
+-- Manual rollback step required for Modify Column Type 'total_stock_in_qty' in 'daily_summaries'
+-- Manual rollback step required for Modify Column Type 'total_net_profit' in 'daily_summaries'
+-- Manual rollback step required for Modify Column Type 'total_expenses_amount' in 'daily_summaries'
+-- Manual rollback step required for Modify Column Type 'total_gross_profit' in 'daily_summaries'
+-- Manual rollback step required for Modify Column Type 'total_cost_amount' in 'daily_summaries'
+-- Manual rollback step required for Modify Column Type 'total_sales_amount' in 'daily_summaries'
 ```
 
 ### Constraints & Indexes [SAFE]

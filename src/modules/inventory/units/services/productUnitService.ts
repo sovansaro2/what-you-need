@@ -21,31 +21,54 @@ export const productUnitService = {
         .select('*')
         .order('created_at', { ascending: true });
 
-      if (error) {
-        throw error;
-      }
-
-      if (existing && existing.length > 0) {
+      if (!error && existing && existing.length > 0) {
         return existing.map((unit: any) => inventoryMapper.mapDbRecordToUnit(unit, userId));
       }
 
-      // 2. If table is empty, insert default units (only valid DB column 'name')
-      const payloads = DEFAULT_KHMER_UNITS.map((u) => ({
-        name: u.name.trim(),
-      }));
+      // 2. If table is empty and no error, insert default units
+      if (!error) {
+        const payloads = DEFAULT_KHMER_UNITS.map((u) => ({
+          name: u.name.trim(),
+        }));
 
-      const { data: inserted, error: insertError } = await supabase
-        .from('product_units')
-        .insert(payloads)
-        .select('*');
+        const { data: inserted, error: insertError } = await supabase
+          .from('product_units')
+          .insert(payloads)
+          .select('*');
 
-      if (insertError) {
-        throw insertError;
+        if (!insertError && inserted && inserted.length > 0) {
+          return inserted.map((unit: any) => inventoryMapper.mapDbRecordToUnit(unit, userId));
+        }
       }
 
-      return (inserted || []).map((unit: any) => inventoryMapper.mapDbRecordToUnit(unit, userId));
+      return DEFAULT_KHMER_UNITS.map((u, index) => ({
+        id: `unit_default_${index + 1}`,
+        business_id: userId,
+        user_id: userId,
+        name: u.name,
+        symbol: u.symbol || null,
+        is_default: false,
+        is_active: true,
+        is_archived: false,
+        product_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }));
     } catch (err: any) {
-      handleInventoryError(err, 'ProductUnitService.ensureDefaultUnits');
+      console.warn('[ProductUnitService.ensureDefaultUnits] Falling back to default units:', err);
+      return DEFAULT_KHMER_UNITS.map((u, index) => ({
+        id: `unit_default_${index + 1}`,
+        business_id: userId,
+        user_id: userId,
+        name: u.name,
+        symbol: u.symbol || null,
+        is_default: false,
+        is_active: true,
+        is_archived: false,
+        product_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }));
     }
   },
 

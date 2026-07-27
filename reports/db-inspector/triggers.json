@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T11:47:54.520Z",
+  "generatedAt": "2026-07-27T16:45:33.545Z",
   "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
-  "schema": "all",
+  "schema": "public",
   "records": [
     {
       "triggerName": "trg_businesses_updated_at",
@@ -50,15 +50,7 @@
       "event": "UPDATE",
       "enabled": true,
       "function": "update_updated_at_column()"
-    },
-    {
-      "triggerName": "on_auth_user_created",
-      "table": "users",
-      "timing": "AFTER",
-      "event": "INSERT",
-      "enabled": true,
-      "function": "handle_new_user()"
     }
   ],
-  "count": 7
+  "count": 6
 }

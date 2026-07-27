@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T11:47:54.522Z",
+  "generatedAt": "2026-07-27T16:45:33.546Z",
   "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
-  "schema": "all",
+  "schema": "public",
   "records": [
     {
       "viewName": "mv_monthly_financial_report",

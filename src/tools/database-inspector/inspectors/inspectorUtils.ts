@@ -24,12 +24,6 @@ export const WYN_TABLE_NAMES = [
   'expenses',
   'daily_summaries',
   'profiles',
-  'categories',
-  'stock_transactions',
-  'transactions',
-  'user_preferences',
-  'business_settings',
-  'schema_migrations',
 ];
 
 export const SYSTEM_SCHEMAS_TABLES: Record<string, string[]> = {

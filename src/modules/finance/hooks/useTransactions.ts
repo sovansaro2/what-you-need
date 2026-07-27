@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { financeService } from '../services/financeService';
+import { formatUserErrorMessage } from '@/core/errors';
 import {
   Transaction,
   TransactionCategory,
@@ -11,19 +12,19 @@ import {
 } from '../types';
 
 export const useTransactions = () => {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categories, setCategories] = useState<TransactionCategory[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const userId = user?.id;
+  const businessId = profile?.business_id || user?.id;
 
   /**
-   * Fetch user's transactions from Supabase
+   * Fetch business transactions from Supabase
    */
   const fetchTransactions = useCallback(async () => {
-    if (!userId) {
+    if (!businessId) {
       setTransactions([]);
       setLoading(false);
       return;
@@ -32,35 +33,35 @@ export const useTransactions = () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await financeService.getTransactions(userId);
+      const data = await financeService.getTransactions(businessId);
       setTransactions(data);
     } catch (err: any) {
-      setError(err.message || 'Failed to fetch transactions.');
+      setError(formatUserErrorMessage(err, 'Failed to fetch transactions.'));
     } finally {
       setLoading(false);
     }
-  }, [userId]);
+  }, [businessId]);
 
   /**
-   * Fetch categories for user
+   * Fetch categories for business
    */
   const fetchCategories = useCallback(async (type?: TransactionType) => {
-    if (!userId) return;
+    if (!businessId) return;
     try {
-      const data = await financeService.getCategories(userId, type);
+      const data = await financeService.getCategories(businessId, type);
       setCategories(data);
     } catch (err: any) {
       console.error('Error fetching categories in hook:', err);
     }
-  }, [userId]);
+  }, [businessId]);
 
   /**
    * Add a new transaction
    */
   const addTransaction = async (
-    input: Omit<CreateTransactionInput, 'user_id'>
+    input: Omit<CreateTransactionInput, 'business_id'>
   ): Promise<Transaction | null> => {
-    if (!userId) {
+    if (!businessId) {
       setError('User is not authenticated.');
       return null;
     }
@@ -69,12 +70,12 @@ export const useTransactions = () => {
     try {
       const newTx = await financeService.createTransaction({
         ...input,
-        user_id: userId,
+        business_id: businessId,
       });
       setTransactions((prev) => [newTx, ...prev]);
       return newTx;
     } catch (err: any) {
-      setError(err.message || 'Failed to create transaction.');
+      setError(formatUserErrorMessage(err, 'Failed to create transaction.'));
       return null;
     }
   };
@@ -86,20 +87,20 @@ export const useTransactions = () => {
     id: string,
     input: UpdateTransactionInput
   ): Promise<Transaction | null> => {
-    if (!userId) {
+    if (!businessId) {
       setError('User is not authenticated.');
       return null;
     }
 
     setError(null);
     try {
-      const updatedTx = await financeService.updateTransaction(id, input);
+      const updatedTx = await financeService.updateTransaction(id, input, businessId);
       setTransactions((prev) =>
         prev.map((item) => (item.id === id ? updatedTx : item))
       );
       return updatedTx;
     } catch (err: any) {
-      setError(err.message || 'Failed to update transaction.');
+      setError(formatUserErrorMessage(err, 'Failed to update transaction.'));
       return null;
     }
   };
@@ -108,18 +109,18 @@ export const useTransactions = () => {
    * Delete a transaction
    */
   const removeTransaction = async (id: string): Promise<boolean> => {
-    if (!userId) {
+    if (!businessId) {
       setError('User is not authenticated.');
       return false;
     }
 
     setError(null);
     try {
-      await financeService.deleteTransaction(id);
+      await financeService.deleteTransaction(id, businessId);
       setTransactions((prev) => prev.filter((item) => item.id !== id));
       return true;
     } catch (err: any) {
-      setError(err.message || 'Failed to delete transaction.');
+      setError(formatUserErrorMessage(err, 'Failed to delete transaction.'));
       return false;
     }
   };
@@ -128,15 +129,15 @@ export const useTransactions = () => {
    * Add a custom category
    */
   const addCategory = async (
-    inputOrName: Omit<CreateCategoryInput, 'user_id'> | string,
+    inputOrName: Omit<CreateCategoryInput, 'business_id'> | string,
     categoryType?: TransactionType
   ): Promise<TransactionCategory | null> => {
-    if (!userId) {
+    if (!businessId) {
       setError('User is not authenticated.');
       return null;
     }
 
-    const payload: Omit<CreateCategoryInput, 'user_id'> =
+    const payload: Omit<CreateCategoryInput, 'business_id'> =
       typeof inputOrName === 'string'
         ? { name: inputOrName, type: categoryType || 'income' }
         : inputOrName;
@@ -144,18 +145,18 @@ export const useTransactions = () => {
     try {
       const newCat = await financeService.createCategory({
         ...payload,
-        user_id: userId,
+        business_id: businessId,
       });
       setCategories((prev) => [...prev, newCat]);
       return newCat;
     } catch (err: any) {
-      setError(err.message || 'Failed to create category.');
+      setError(formatUserErrorMessage(err, 'Failed to create category.'));
       return null;
     }
   };
 
   useEffect(() => {
-    if (userId) {
+    if (businessId) {
       fetchTransactions();
       fetchCategories();
     } else {
@@ -163,7 +164,7 @@ export const useTransactions = () => {
       setCategories([]);
       setLoading(false);
     }
-  }, [userId, fetchTransactions, fetchCategories]);
+  }, [businessId, fetchTransactions, fetchCategories]);
 
   return {
     transactions,

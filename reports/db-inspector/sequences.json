@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T11:47:54.524Z",
+  "generatedAt": "2026-07-27T16:45:33.548Z",
   "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
-  "schema": "all",
+  "schema": "public",
   "records": [
     {
       "sequenceName": "sales_invoice_number_seq",

@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { settingsRepository, settingsEvents } from '@/modules/settings/foundation';
 import { BusinessProfile, OnboardingStep } from '../types';
-
-const STORAGE_KEY_PREFIX = 'wyn_onboarding_';
 
 export const useOnboarding = () => {
   const { user, profile } = useAuth();
-  const storageKey = `${STORAGE_KEY_PREFIX}${user?.id || 'guest'}`;
+  const userId = user?.id || 'guest';
+  const businessId = profile?.business_id || userId;
 
   const [step, setStep] = useState<OnboardingStep>('welcome');
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -19,37 +19,62 @@ export const useOnboarding = () => {
     primaryCurrency: 'KHR',
   });
 
-  useEffect(() => {
+  const loadProfile = useCallback(async () => {
+    if (!userId || userId === 'guest') return;
     try {
-      const saved = localStorage.getItem(storageKey);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.profile) setBusinessProfile(parsed.profile);
-        if (parsed.isCompleted !== undefined) setIsCompleted(parsed.isCompleted);
+      const bs = await settingsRepository.getBusinessSettings(userId, businessId);
+      if (bs.businessName || bs.phone || bs.address) {
+        setBusinessProfile({
+          businessName: bs.businessName,
+          businessType: 'ហាងលក់ចាប់ហួយ',
+          ownerName: profile?.full_name || '',
+          phone: bs.phone || '',
+          address: bs.address || '',
+          primaryCurrency: bs.primaryCurrency || 'KHR',
+        });
+        if (bs.businessName) {
+          setIsCompleted(true);
+        }
       }
-    } catch (e) {
-      console.error('Failed to load onboarding state:', e);
+    } catch (err) {
+      console.warn('Failed to load onboarding business settings:', err);
     }
-  }, [storageKey]);
+  }, [userId, businessId, profile]);
 
-  const saveOnboardingData = (updatedProfile: Partial<BusinessProfile>, completed = false) => {
+  useEffect(() => {
+    loadProfile();
+
+    const unsubscribe = settingsEvents.subscribeToSettingsChanges(() => {
+      loadProfile();
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [loadProfile]);
+
+  const saveOnboardingData = async (updatedProfile: Partial<BusinessProfile>, completed = false) => {
     const newProfile = { ...businessProfile, ...updatedProfile };
     setBusinessProfile(newProfile);
     if (completed) {
       setIsCompleted(true);
     }
 
-    try {
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify({
-          profile: newProfile,
-          isCompleted: completed || isCompleted,
-          updatedAt: new Date().toISOString(),
-        })
-      );
-    } catch (e) {
-      console.error('Failed to save onboarding state:', e);
+    if (userId && userId !== 'guest') {
+      try {
+        await settingsRepository.updateBusinessSettings(
+          userId,
+          {
+            businessName: newProfile.businessName,
+            phone: newProfile.phone,
+            address: newProfile.address,
+            primaryCurrency: newProfile.primaryCurrency as 'KHR' | 'USD',
+          },
+          businessId
+        );
+      } catch (err) {
+        console.warn('Failed to persist onboarding data to DB:', err);
+      }
     }
   };
 
@@ -60,11 +85,6 @@ export const useOnboarding = () => {
   const resetOnboarding = () => {
     setIsCompleted(false);
     setStep('welcome');
-    try {
-      localStorage.removeItem(storageKey);
-    } catch (e) {
-      console.error('Failed to reset onboarding:', e);
-    }
   };
 
   return {

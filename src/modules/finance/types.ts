@@ -2,7 +2,7 @@ export type TransactionType = 'income' | 'expense';
 
 export interface TransactionCategory {
   id: string;
-  user_id: string;
+  business_id: string;
   name: string;
   type: TransactionType;
   created_at?: string;
@@ -11,7 +11,7 @@ export interface TransactionCategory {
 
 export interface Transaction {
   id: string;
-  user_id: string;
+  business_id: string;
   type: TransactionType;
   amount: number;
   category_id?: string | null;
@@ -23,7 +23,7 @@ export interface Transaction {
 }
 
 export interface CreateTransactionInput {
-  user_id: string;
+  business_id: string;
   type: TransactionType;
   amount: number;
   category_id?: string | null;
@@ -32,6 +32,7 @@ export interface CreateTransactionInput {
 }
 
 export interface UpdateTransactionInput {
+  business_id?: string;
   type?: TransactionType;
   amount?: number;
   category_id?: string | null;
@@ -40,7 +41,8 @@ export interface UpdateTransactionInput {
 }
 
 export interface CreateCategoryInput {
-  user_id: string;
+  business_id: string;
   name: string;
   type: TransactionType;
 }
+

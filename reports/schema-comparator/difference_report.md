@@ -1,5 +1,5 @@
 # WYN Database Schema Comparison Report
-**Target Schema:** `database_v1.sql` | **Schema Hash:** `9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26` | **Generated:** `2026-07-27T10:50:37.746Z`
+**Target Schema:** `database_v1.sql` | **Schema Hash:** `CC44B3AB4DAD69FA5634C218F5EA06266E8E6A008666F0B5621BCE65510C7F93` | **Generated:** `2026-07-27T16:37:17.745Z`
 
 ---
 
@@ -7,11 +7,11 @@
 
 | Metric | Value | Status |
 | :--- | :---: | :---: |
-| **Overall Database Health** | **19 / 100** | **🔴 CRITICAL** |
-| **Schema Match Rate** | **5.9%** | ⚠️ ATTENTION |
-| **Total Differences** | **253** | 🚨 DRIFT DETECTED |
+| **Overall Database Health** | **51 / 100** | **🔴 CRITICAL** |
+| **Schema Match Rate** | **50.6%** | ⚠️ ATTENTION |
+| **Total Differences** | **133** | 🚨 DRIFT DETECTED |
 | **Missing Tables** | 0 | ✅ |
-| **Column Differences** | 163 | 🟡 |
+| **Column Differences** | 49 | 🟡 |
 | **FK Differences** | 7 | 🟡 |
 | **Constraint Differences** | 52 | 🟡 |
 | **Index Differences** | 25 | 🟡 |
@@ -20,61 +20,21 @@
 
 | Dimension | Score | Status | Findings | Key Details |
 | :--- | :---: | :---: | :---: | :--- |
-| **Completeness** | 60/100 | WARNING | 130 | 130 target column(s) missing from existing tables. |
+| **Completeness** | 88/100 | GOOD | 3 | 3 target column(s) missing from existing tables. |
 | **Integrity** | 0/100 | CRITICAL | 52 | 7 foreign key constraint(s) missing. |
 | **Performance** | 0/100 | CRITICAL | 21 | 20 performance search or unique index(es) missing. |
-| **Security** | 0/100 | CRITICAL | 11 | 11 multi-tenant table(s) missing critical 'business_id' scoping column. |
-| **Maintainability** | 26/100 | CRITICAL | 13 | 6 extra table(s) found in database that are not in target DDL. |
+| **Security** | 100/100 | EXCELLENT | 0 | Multi-tenant scoping columns and tenant security structures are verified. |
+| **Maintainability** | 96/100 | EXCELLENT | 2 | 2 extra column(s) detected. |
 
 ## 3. Table Level Comparison
 
 - ✅ All target tables exist in the current database.
 
-### ℹ️ Extra Tables in Current Database (6)
-The following tables exist in current database but are not defined in target DDL:
-- `business_settings`
-- `categories`
-- `schema_migrations`
-- `stock_transactions`
-- `transactions`
-- `user_preferences`
-
 ## 4. Column Differences
 
 | Table | Column | Issue Type | Current | Target | Description |
 | :--- | :--- | :---: | :--- | :--- | :--- |
-| `profiles` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "profiles". |
-| `profiles` | `full_name` | `MISSING` | — | `character varying(255) NOT NULL` | Column "full_name" is missing in table "profiles". |
-| `profiles` | `phone` | `MISSING` | — | `character varying(50)` | Column "phone" is missing in table "profiles". |
-| `profiles` | `role` | `MISSING` | — | `character varying(50) NOT NULL DEFAULT staff` | Column "role" is missing in table "profiles". |
-| `profiles` | `is_active` | `MISSING` | — | `boolean NOT NULL DEFAULT true` | Column "is_active" is missing in table "profiles". |
-| `profiles` | `avatar_url` | `MISSING` | — | `text` | Column "avatar_url" is missing in table "profiles". |
-| `profiles` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "profiles". |
-| `profiles` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "profiles". |
-| `profiles` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "profiles". |
-| `profiles` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "profiles". |
-| `product_categories` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "product_categories". |
-| `product_categories` | `code` | `MISSING` | — | `character varying(50)` | Column "code" is missing in table "product_categories". |
-| `product_categories` | `name` | `NULLABILITY` | `NULL` | `NOT NULL` | Nullability mismatch for "product_categories.name": current is NULL, target expects NOT NULL. |
-| `product_categories` | `description` | `MISSING` | — | `text` | Column "description" is missing in table "product_categories". |
-| `product_categories` | `color` | `MISSING` | — | `character varying(30)` | Column "color" is missing in table "product_categories". |
-| `product_categories` | `icon` | `MISSING` | — | `character varying(50)` | Column "icon" is missing in table "product_categories". |
-| `product_categories` | `is_active` | `MISSING` | — | `boolean NOT NULL DEFAULT true` | Column "is_active" is missing in table "product_categories". |
-| `product_categories` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "product_categories". |
-| `product_categories` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "product_categories". |
-| `product_categories` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "product_categories". |
-| `product_categories` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "product_categories". |
-| `product_units` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "product_units". |
-| `product_units` | `code` | `MISSING` | — | `character varying(50)` | Column "code" is missing in table "product_units". |
-| `product_units` | `name` | `NULLABILITY` | `NULL` | `NOT NULL` | Nullability mismatch for "product_units.name": current is NULL, target expects NOT NULL. |
-| `product_units` | `symbol` | `MISSING` | — | `character varying(20)` | Column "symbol" is missing in table "product_units". |
-| `product_units` | `is_active` | `MISSING` | — | `boolean NOT NULL DEFAULT true` | Column "is_active" is missing in table "product_units". |
-| `product_units` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "product_units". |
-| `product_units` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "product_units". |
-| `product_units` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "product_units". |
-| `product_units` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "product_units". |
 | `products` | `business_id` | `NULLABILITY` | `NULL` | `NOT NULL` | Nullability mismatch for "products.business_id": current is NULL, target expects NOT NULL. |
-| `products` | `description` | `MISSING` | — | `text` | Column "description" is missing in table "products". |
 | `products` | `cost_price` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "products.cost_price": current "numeric(12,2)" vs target "numeric(12". |
 | `products` | `selling_price` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "products.selling_price": current "numeric(12,2)" vs target "numeric(12". |
 | `products` | `current_stock` | `DATA_TYPE` | `numeric(12,3)` | `numeric(12` | Data type mismatch for "products.current_stock": current "numeric(12,3)" vs target "numeric(12". |
@@ -87,125 +47,42 @@ The following tables exist in current database but are not defined in target DDL
 | `stock_movements` | `total_cost` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "stock_movements.total_cost": current "numeric(12,2)" vs target "numeric(12". |
 | `stock_movements` | `notes` | `MISSING` | — | `text` | Column "notes" is missing in table "stock_movements". |
 | `stock_movements` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "stock_movements". |
-| `customers` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "customers". |
-| `customers` | `customer_code` | `MISSING` | — | `character varying(50)` | Column "customer_code" is missing in table "customers". |
-| `customers` | `name` | `NULLABILITY` | `NULL` | `NOT NULL` | Nullability mismatch for "customers.name": current is NULL, target expects NOT NULL. |
-| `customers` | `phone` | `MISSING` | — | `character varying(50)` | Column "phone" is missing in table "customers". |
-| `customers` | `email` | `MISSING` | — | `character varying(255)` | Column "email" is missing in table "customers". |
-| `customers` | `address` | `MISSING` | — | `text` | Column "address" is missing in table "customers". |
-| `customers` | `credit_limit` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "credit_limit" is missing in table "customers". |
-| `customers` | `outstanding_balance` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "outstanding_balance" is missing in table "customers". |
-| `customers` | `is_active` | `MISSING` | — | `boolean NOT NULL DEFAULT true` | Column "is_active" is missing in table "customers". |
-| `customers` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "customers". |
-| `customers` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "customers". |
-| `customers` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "customers". |
-| `customers` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "customers". |
+| `customers` | `credit_limit` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "customers.credit_limit": current "numeric(12,2)" vs target "numeric(12". |
+| `customers` | `outstanding_balance` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "customers.outstanding_balance": current "numeric(12,2)" vs target "numeric(12". |
 | `sales` | `business_id` | `NULLABILITY` | `NULL` | `NOT NULL` | Nullability mismatch for "sales.business_id": current is NULL, target expects NOT NULL. |
-| `sales` | `status` | `MISSING` | — | `character varying(50) NOT NULL DEFAULT completed` | Column "status" is missing in table "sales". |
 | `sales` | `payment_status` | `DEFAULT_VALUE` | `'paid'` | `unpaid` | Default value mismatch for "sales.payment_status": current "'paid'" vs target "unpaid". |
 | `sales` | `subtotal_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "subtotal_amount" is missing in table "sales". |
-| `sales` | `discount_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "discount_amount" is missing in table "sales". |
-| `sales` | `tax_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "tax_amount" is missing in table "sales". |
+| `sales` | `discount_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sales.discount_amount": current "numeric(12,2)" vs target "numeric(12". |
+| `sales` | `tax_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sales.tax_amount": current "numeric(12,2)" vs target "numeric(12". |
 | `sales` | `total_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sales.total_amount": current "numeric(12,2)" vs target "numeric(12". |
 | `sales` | `paid_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sales.paid_amount": current "numeric(12,2)" vs target "numeric(12". |
 | `sales` | `due_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sales.due_amount": current "numeric(12,2)" vs target "numeric(12". |
-| `sales` | `notes` | `MISSING` | — | `text` | Column "notes" is missing in table "sales". |
 | `sale_items` | `business_id` | `NULLABILITY` | `NULL` | `NOT NULL` | Nullability mismatch for "sale_items.business_id": current is NULL, target expects NOT NULL. |
 | `sale_items` | `quantity` | `DATA_TYPE` | `numeric(12,3)` | `numeric(12` | Data type mismatch for "sale_items.quantity": current "numeric(12,3)" vs target "numeric(12". |
 | `sale_items` | `unit_price` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sale_items.unit_price": current "numeric(12,2)" vs target "numeric(12". |
 | `sale_items` | `unit_cost` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sale_items.unit_cost": current "numeric(12,2)" vs target "numeric(12". |
 | `sale_items` | `discount_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sale_items.discount_amount": current "numeric(12,2)" vs target "numeric(12". |
 | `sale_items` | `subtotal` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "sale_items.subtotal": current "numeric(12,2)" vs target "numeric(12". |
-| `payments` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "payments". |
-| `payments` | `sale_id` | `MISSING` | — | `uuid` | Column "sale_id" is missing in table "payments". |
-| `payments` | `customer_id` | `MISSING` | — | `uuid` | Column "customer_id" is missing in table "payments". |
-| `payments` | `payment_number` | `MISSING` | — | `character varying(100) NOT NULL` | Column "payment_number" is missing in table "payments". |
-| `payments` | `payment_method` | `MISSING` | — | `character varying(50) NOT NULL` | Column "payment_method" is missing in table "payments". |
-| `payments` | `amount` | `MISSING` | — | `numeric(12 NOT NULL` | Column "amount" is missing in table "payments". |
-| `payments` | `currency` | `MISSING` | — | `character varying(10) NOT NULL DEFAULT KHR` | Column "currency" is missing in table "payments". |
-| `payments` | `exchange_rate` | `MISSING` | — | `numeric(10 NOT NULL DEFAULT 1.0000` | Column "exchange_rate" is missing in table "payments". |
-| `payments` | `reference_number` | `MISSING` | — | `character varying(100)` | Column "reference_number" is missing in table "payments". |
-| `payments` | `status` | `MISSING` | — | `character varying(50) NOT NULL DEFAULT completed` | Column "status" is missing in table "payments". |
-| `payments` | `notes` | `MISSING` | — | `text` | Column "notes" is missing in table "payments". |
-| `payments` | `paid_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "paid_at" is missing in table "payments". |
-| `payments` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "payments". |
-| `suppliers` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "suppliers". |
-| `suppliers` | `supplier_code` | `MISSING` | — | `character varying(50)` | Column "supplier_code" is missing in table "suppliers". |
-| `suppliers` | `company_name` | `MISSING` | — | `character varying(255) NOT NULL` | Column "company_name" is missing in table "suppliers". |
-| `suppliers` | `contact_name` | `MISSING` | — | `character varying(255)` | Column "contact_name" is missing in table "suppliers". |
-| `suppliers` | `phone` | `MISSING` | — | `character varying(50)` | Column "phone" is missing in table "suppliers". |
-| `suppliers` | `email` | `MISSING` | — | `character varying(255)` | Column "email" is missing in table "suppliers". |
-| `suppliers` | `address` | `MISSING` | — | `text` | Column "address" is missing in table "suppliers". |
-| `suppliers` | `outstanding_balance` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "outstanding_balance" is missing in table "suppliers". |
-| `suppliers` | `is_active` | `MISSING` | — | `boolean NOT NULL DEFAULT true` | Column "is_active" is missing in table "suppliers". |
-| `suppliers` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "suppliers". |
-| `suppliers` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "suppliers". |
-| `suppliers` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "suppliers". |
-| `suppliers` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "suppliers". |
-| `purchase_orders` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "purchase_orders". |
-| `purchase_orders` | `supplier_id` | `MISSING` | — | `uuid NOT NULL` | Column "supplier_id" is missing in table "purchase_orders". |
-| `purchase_orders` | `po_number` | `MISSING` | — | `character varying(100) NOT NULL` | Column "po_number" is missing in table "purchase_orders". |
-| `purchase_orders` | `status` | `MISSING` | — | `character varying(50) NOT NULL DEFAULT draft` | Column "status" is missing in table "purchase_orders". |
-| `purchase_orders` | `payment_status` | `MISSING` | — | `character varying(50) NOT NULL DEFAULT unpaid` | Column "payment_status" is missing in table "purchase_orders". |
-| `purchase_orders` | `total_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "total_amount" is missing in table "purchase_orders". |
-| `purchase_orders` | `paid_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "paid_amount" is missing in table "purchase_orders". |
-| `purchase_orders` | `due_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "due_amount" is missing in table "purchase_orders". |
-| `purchase_orders` | `expected_delivery_date` | `MISSING` | — | `date` | Column "expected_delivery_date" is missing in table "purchase_orders". |
-| `purchase_orders` | `received_at` | `MISSING` | — | `timestamp with time zone` | Column "received_at" is missing in table "purchase_orders". |
-| `purchase_orders` | `notes` | `MISSING` | — | `text` | Column "notes" is missing in table "purchase_orders". |
-| `purchase_orders` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "purchase_orders". |
-| `purchase_orders` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "purchase_orders". |
-| `purchase_orders` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "purchase_orders". |
-| `purchase_orders` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "purchase_orders". |
-| `purchase_items` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "purchase_items". |
-| `purchase_items` | `purchase_order_id` | `MISSING` | — | `uuid NOT NULL` | Column "purchase_order_id" is missing in table "purchase_items". |
-| `purchase_items` | `product_id` | `MISSING` | — | `uuid NOT NULL` | Column "product_id" is missing in table "purchase_items". |
-| `purchase_items` | `quantity_ordered` | `MISSING` | — | `numeric(12 NOT NULL` | Column "quantity_ordered" is missing in table "purchase_items". |
-| `purchase_items` | `quantity_received` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.000` | Column "quantity_received" is missing in table "purchase_items". |
-| `purchase_items` | `unit_cost` | `MISSING` | — | `numeric(12 NOT NULL` | Column "unit_cost" is missing in table "purchase_items". |
-| `purchase_items` | `subtotal` | `MISSING` | — | `numeric(12 NOT NULL` | Column "subtotal" is missing in table "purchase_items". |
-| `expense_categories` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "expense_categories". |
-| `expense_categories` | `code` | `MISSING` | — | `character varying(50)` | Column "code" is missing in table "expense_categories". |
-| `expense_categories` | `name` | `NULLABILITY` | `NULL` | `NOT NULL` | Nullability mismatch for "expense_categories.name": current is NULL, target expects NOT NULL. |
-| `expense_categories` | `description` | `MISSING` | — | `text` | Column "description" is missing in table "expense_categories". |
-| `expense_categories` | `is_active` | `MISSING` | — | `boolean NOT NULL DEFAULT true` | Column "is_active" is missing in table "expense_categories". |
-| `expense_categories` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "expense_categories". |
-| `expense_categories` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "expense_categories". |
-| `expense_categories` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "expense_categories". |
-| `expense_categories` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "expense_categories". |
-| `expenses` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "expenses". |
-| `expenses` | `category_id` | `MISSING` | — | `uuid NOT NULL` | Column "category_id" is missing in table "expenses". |
-| `expenses` | `expense_number` | `MISSING` | — | `character varying(100) NOT NULL` | Column "expense_number" is missing in table "expenses". |
-| `expenses` | `title` | `MISSING` | — | `character varying(255) NOT NULL` | Column "title" is missing in table "expenses". |
-| `expenses` | `amount` | `MISSING` | — | `numeric(12 NOT NULL` | Column "amount" is missing in table "expenses". |
-| `expenses` | `currency` | `MISSING` | — | `character varying(10) NOT NULL DEFAULT KHR` | Column "currency" is missing in table "expenses". |
-| `expenses` | `payment_method` | `MISSING` | — | `character varying(50) NOT NULL` | Column "payment_method" is missing in table "expenses". |
-| `expenses` | `vendor_name` | `MISSING` | — | `character varying(255)` | Column "vendor_name" is missing in table "expenses". |
-| `expenses` | `receipt_url` | `MISSING` | — | `text` | Column "receipt_url" is missing in table "expenses". |
-| `expenses` | `notes` | `MISSING` | — | `text` | Column "notes" is missing in table "expenses". |
-| `expenses` | `incurred_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "incurred_at" is missing in table "expenses". |
-| `expenses` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "expenses". |
-| `expenses` | `deleted_at` | `MISSING` | — | `timestamp with time zone` | Column "deleted_at" is missing in table "expenses". |
-| `expenses` | `created_by` | `MISSING` | — | `uuid` | Column "created_by" is missing in table "expenses". |
-| `expenses` | `updated_by` | `MISSING` | — | `uuid` | Column "updated_by" is missing in table "expenses". |
-| `daily_summaries` | `business_id` | `MISSING` | — | `uuid NOT NULL` | Column "business_id" is missing in table "daily_summaries". |
-| `daily_summaries` | `summary_date` | `MISSING` | — | `date NOT NULL` | Column "summary_date" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_sales_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "total_sales_amount" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_sales_count` | `MISSING` | — | `integer NOT NULL DEFAULT 0` | Column "total_sales_count" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_cost_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "total_cost_amount" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_gross_profit` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "total_gross_profit" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_expenses_amount` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "total_expenses_amount" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_net_profit` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.00` | Column "total_net_profit" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_stock_in_qty` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.000` | Column "total_stock_in_qty" is missing in table "daily_summaries". |
-| `daily_summaries` | `total_stock_out_qty` | `MISSING` | — | `numeric(12 NOT NULL DEFAULT 0.000` | Column "total_stock_out_qty" is missing in table "daily_summaries". |
-| `daily_summaries` | `updated_at` | `MISSING` | — | `timestamp with time zone NOT NULL DEFAULT now()` | Column "updated_at" is missing in table "daily_summaries". |
-| `profiles` | `name` | `EXTRA` | `character varying(255)` | — | Extra column "name" found in current table "profiles" that is not defined in target SQL schema. |
-| `payments` | `name` | `EXTRA` | `character varying(255)` | — | Extra column "name" found in current table "payments" that is not defined in target SQL schema. |
-| `suppliers` | `name` | `EXTRA` | `character varying(255)` | — | Extra column "name" found in current table "suppliers" that is not defined in target SQL schema. |
-| `purchase_orders` | `name` | `EXTRA` | `character varying(255)` | — | Extra column "name" found in current table "purchase_orders" that is not defined in target SQL schema. |
-| `purchase_items` | `name` | `EXTRA` | `character varying(255)` | — | Extra column "name" found in current table "purchase_items" that is not defined in target SQL schema. |
-| `expenses` | `name` | `EXTRA` | `character varying(255)` | — | Extra column "name" found in current table "expenses" that is not defined in target SQL schema. |
-| `daily_summaries` | `name` | `EXTRA` | `character varying(255)` | — | Extra column "name" found in current table "daily_summaries" that is not defined in target SQL schema. |
+| `payments` | `amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "payments.amount": current "numeric(12,2)" vs target "numeric(12". |
+| `payments` | `exchange_rate` | `DATA_TYPE` | `numeric(10,4)` | `numeric(10` | Data type mismatch for "payments.exchange_rate": current "numeric(10,4)" vs target "numeric(10". |
+| `suppliers` | `outstanding_balance` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "suppliers.outstanding_balance": current "numeric(12,2)" vs target "numeric(12". |
+| `purchase_orders` | `total_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "purchase_orders.total_amount": current "numeric(12,2)" vs target "numeric(12". |
+| `purchase_orders` | `paid_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "purchase_orders.paid_amount": current "numeric(12,2)" vs target "numeric(12". |
+| `purchase_orders` | `due_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "purchase_orders.due_amount": current "numeric(12,2)" vs target "numeric(12". |
+| `purchase_items` | `quantity_ordered` | `DATA_TYPE` | `numeric(12,3)` | `numeric(12` | Data type mismatch for "purchase_items.quantity_ordered": current "numeric(12,3)" vs target "numeric(12". |
+| `purchase_items` | `quantity_received` | `DATA_TYPE` | `numeric(12,3)` | `numeric(12` | Data type mismatch for "purchase_items.quantity_received": current "numeric(12,3)" vs target "numeric(12". |
+| `purchase_items` | `unit_cost` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "purchase_items.unit_cost": current "numeric(12,2)" vs target "numeric(12". |
+| `purchase_items` | `subtotal` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "purchase_items.subtotal": current "numeric(12,2)" vs target "numeric(12". |
+| `expenses` | `amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "expenses.amount": current "numeric(12,2)" vs target "numeric(12". |
+| `daily_summaries` | `total_sales_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "daily_summaries.total_sales_amount": current "numeric(12,2)" vs target "numeric(12". |
+| `daily_summaries` | `total_cost_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "daily_summaries.total_cost_amount": current "numeric(12,2)" vs target "numeric(12". |
+| `daily_summaries` | `total_gross_profit` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "daily_summaries.total_gross_profit": current "numeric(12,2)" vs target "numeric(12". |
+| `daily_summaries` | `total_expenses_amount` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "daily_summaries.total_expenses_amount": current "numeric(12,2)" vs target "numeric(12". |
+| `daily_summaries` | `total_net_profit` | `DATA_TYPE` | `numeric(12,2)` | `numeric(12` | Data type mismatch for "daily_summaries.total_net_profit": current "numeric(12,2)" vs target "numeric(12". |
+| `daily_summaries` | `total_stock_in_qty` | `DATA_TYPE` | `numeric(12,3)` | `numeric(12` | Data type mismatch for "daily_summaries.total_stock_in_qty": current "numeric(12,3)" vs target "numeric(12". |
+| `daily_summaries` | `total_stock_out_qty` | `DATA_TYPE` | `numeric(12,3)` | `numeric(12` | Data type mismatch for "daily_summaries.total_stock_out_qty": current "numeric(12,3)" vs target "numeric(12". |
+| `products` | `is_active` | `EXTRA` | `boolean NOT NULL` | — | Extra column "is_active" found in current table "products" that is not defined in target SQL schema. |
+| `sales` | `subtotal` | `EXTRA` | `numeric(12,2) NOT NULL` | — | Extra column "subtotal" found in current table "sales" that is not defined in target SQL schema. |
 
 ## 5. Primary & Foreign Key Differences
 
@@ -303,7 +180,6 @@ The following tables exist in current database but are not defined in target DDL
 
 ## 7. Engineering Recommendations
 
-1. **[HIGH] Add Missing Columns:** Add 130 missing columns across existing tables to support full application capabilities.
+1. **[HIGH] Add Missing Columns:** Add 3 missing columns across existing tables to support full application capabilities.
 2. **[MEDIUM] Restore Missing Foreign Keys:** Ensure referential integrity constraints are properly declared across tenant models.
 3. **[MEDIUM] Build Search & Foreign Key Indexes:** Create missing search and btree indexes to ensure query performance and prevent full-table scans.
-4. **[LOW] Audit Unreferenced Tables:** Review 6 extra database tables not part of the standard v1 specification.

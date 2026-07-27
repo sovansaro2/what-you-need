@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T11:47:54.235Z",
+  "generatedAt": "2026-07-27T16:45:33.333Z",
   "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
-  "schema": "all",
+  "schema": "public",
   "records": [
     {
       "constraintName": "businesses_pkey",
@@ -114,140 +114,7 @@
       "columns": [
         "id"
       ]
-    },
-    {
-      "constraintName": "categories_pkey",
-      "table": "categories",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "stock_transactions_pkey",
-      "table": "stock_transactions",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "transactions_pkey",
-      "table": "transactions",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "user_preferences_pkey",
-      "table": "user_preferences",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "business_settings_pkey",
-      "table": "business_settings",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "schema_migrations_pkey",
-      "table": "schema_migrations",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "users_pkey",
-      "table": "users",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "sessions_pkey",
-      "table": "sessions",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "identities_pkey",
-      "table": "identities",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "refresh_tokens_pkey",
-      "table": "refresh_tokens",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "audit_log_entries_pkey",
-      "table": "audit_log_entries",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "mfa_factors_pkey",
-      "table": "mfa_factors",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "buckets_pkey",
-      "table": "buckets",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "objects_pkey",
-      "table": "objects",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "s3_multipart_uploads_pkey",
-      "table": "s3_multipart_uploads",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "pg_stat_statements_pkey",
-      "table": "pg_stat_statements",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "spatial_ref_sys_pkey",
-      "table": "spatial_ref_sys",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "subscription_pkey",
-      "table": "subscription",
-      "columns": [
-        "id"
-      ]
-    },
-    {
-      "constraintName": "schema_migrations_pkey",
-      "table": "schema_migrations",
-      "columns": [
-        "id"
-      ]
     }
   ],
-  "count": 35
+  "count": 16
 }

@@ -1,0 +1,1528 @@
+{
+  "generatedAt": "2026-07-27T17:00:03.119Z",
+  "status": "SUCCESS",
+  "totalDurationMs": 5718,
+  "totalDDLCount": 81,
+  "successCount": 80,
+  "skippedCount": 0,
+  "recoveredCount": 1,
+  "failedCount": 0,
+  "stageResults": [
+    {
+      "stageNumber": 1,
+      "stageName": "Stage 1: Infrastructure",
+      "status": "COMPLETED",
+      "ddlCount": 2,
+      "durationMs": 296,
+      "records": [
+        {
+          "id": "STG1-01",
+          "stage": "Stage 1: Infrastructure",
+          "title": "Verify PostgreSQL pgcrypto extension",
+          "statement": "CREATE EXTENSION IF NOT EXISTS \"pgcrypto\";",
+          "status": "SUCCESS",
+          "durationMs": 186,
+          "timestamp": "2026-07-27T16:59:57.401Z"
+        },
+        {
+          "id": "STG1-02",
+          "stage": "Stage 1: Infrastructure",
+          "title": "Verify & Provision schema_migrations tracking table",
+          "statement": "CREATE TABLE IF NOT EXISTS schema_migrations (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), migration_name VARCHAR(255) NOT NULL UNIQUE, version VARCHAR(50) NOT NULL, executed_at TIMESTAMPTZ NOT NULL DEFAULT now());",
+          "status": "SUCCESS",
+          "durationMs": 110,
+          "timestamp": "2026-07-27T16:59:57.587Z"
+        }
+      ]
+    },
+    {
+      "stageNumber": 2,
+      "stageName": "Stage 2: Core Schema",
+      "status": "COMPLETED",
+      "ddlCount": 16,
+      "durationMs": 1688,
+      "records": [
+        {
+          "id": "STG2-businesses",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.businesses'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.businesses (...);",
+          "status": "SUCCESS",
+          "durationMs": 105,
+          "timestamp": "2026-07-27T16:59:57.697Z"
+        },
+        {
+          "id": "STG2-profiles",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.profiles'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.profiles (...);",
+          "status": "SUCCESS",
+          "durationMs": 104,
+          "timestamp": "2026-07-27T16:59:57.802Z"
+        },
+        {
+          "id": "STG2-product_categories",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.product_categories'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.product_categories (...);",
+          "status": "SUCCESS",
+          "durationMs": 117,
+          "timestamp": "2026-07-27T16:59:57.906Z"
+        },
+        {
+          "id": "STG2-product_units",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.product_units'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.product_units (...);",
+          "status": "SUCCESS",
+          "durationMs": 103,
+          "timestamp": "2026-07-27T16:59:58.023Z"
+        },
+        {
+          "id": "STG2-products",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.products'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.products (...);",
+          "status": "SUCCESS",
+          "durationMs": 106,
+          "timestamp": "2026-07-27T16:59:58.126Z"
+        },
+        {
+          "id": "STG2-customers",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.customers'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.customers (...);",
+          "status": "SUCCESS",
+          "durationMs": 107,
+          "timestamp": "2026-07-27T16:59:58.232Z"
+        },
+        {
+          "id": "STG2-sales",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.sales'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.sales (...);",
+          "status": "SUCCESS",
+          "durationMs": 105,
+          "timestamp": "2026-07-27T16:59:58.339Z"
+        },
+        {
+          "id": "STG2-sale_items",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.sale_items'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.sale_items (...);",
+          "status": "SUCCESS",
+          "durationMs": 125,
+          "timestamp": "2026-07-27T16:59:58.444Z"
+        },
+        {
+          "id": "STG2-payments",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.payments'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.payments (...);",
+          "status": "SUCCESS",
+          "durationMs": 99,
+          "timestamp": "2026-07-27T16:59:58.569Z"
+        },
+        {
+          "id": "STG2-suppliers",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.suppliers'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.suppliers (...);",
+          "status": "SUCCESS",
+          "durationMs": 100,
+          "timestamp": "2026-07-27T16:59:58.668Z"
+        },
+        {
+          "id": "STG2-purchase_orders",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.purchase_orders'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.purchase_orders (...);",
+          "status": "SUCCESS",
+          "durationMs": 102,
+          "timestamp": "2026-07-27T16:59:58.768Z"
+        },
+        {
+          "id": "STG2-purchase_items",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.purchase_items'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.purchase_items (...);",
+          "status": "SUCCESS",
+          "durationMs": 103,
+          "timestamp": "2026-07-27T16:59:58.870Z"
+        },
+        {
+          "id": "STG2-stock_movements",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.stock_movements'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.stock_movements (...);",
+          "status": "SUCCESS",
+          "durationMs": 104,
+          "timestamp": "2026-07-27T16:59:58.973Z"
+        },
+        {
+          "id": "STG2-expense_categories",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.expense_categories'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.expense_categories (...);",
+          "status": "SUCCESS",
+          "durationMs": 101,
+          "timestamp": "2026-07-27T16:59:59.077Z"
+        },
+        {
+          "id": "STG2-expenses",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.expenses'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.expenses (...);",
+          "status": "SUCCESS",
+          "durationMs": 103,
+          "timestamp": "2026-07-27T16:59:59.178Z"
+        },
+        {
+          "id": "STG2-daily_summaries",
+          "stage": "Stage 2: Core Schema",
+          "title": "Verify / Provision Core Table 'public.daily_summaries'",
+          "statement": "CREATE TABLE IF NOT EXISTS public.daily_summaries (...);",
+          "status": "SUCCESS",
+          "durationMs": 104,
+          "timestamp": "2026-07-27T16:59:59.281Z"
+        }
+      ]
+    },
+    {
+      "stageNumber": 3,
+      "stageName": "Stage 3: Tenant Resolution Engine",
+      "status": "COMPLETED",
+      "ddlCount": 16,
+      "durationMs": 1855,
+      "records": [
+        {
+          "id": "STG3-01",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Seed Default Business Tenant",
+          "statement": "INSERT INTO businesses (id, name, code, currency, is_active) VALUES ('00000000-0000-0000-0000-000000000001', 'Default Business', 'DEFAULT', 'KHR', true) ON CONFLICT (id) DO NOTHING;",
+          "status": "RECOVERED",
+          "durationMs": 219,
+          "timestamp": "2026-07-27T16:59:59.385Z",
+          "notes": "Non-critical notice handled: Could not find the table 'public.businesses' in the schema cache"
+        },
+        {
+          "id": "STG3-BACKFILL-profiles",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'profiles'",
+          "statement": "UPDATE profiles SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 101,
+          "timestamp": "2026-07-27T16:59:59.604Z"
+        },
+        {
+          "id": "STG3-BACKFILL-product_categories",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'product_categories'",
+          "statement": "UPDATE product_categories SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 101,
+          "timestamp": "2026-07-27T16:59:59.706Z"
+        },
+        {
+          "id": "STG3-BACKFILL-product_units",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'product_units'",
+          "statement": "UPDATE product_units SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 100,
+          "timestamp": "2026-07-27T16:59:59.808Z"
+        },
+        {
+          "id": "STG3-BACKFILL-products",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'products'",
+          "statement": "UPDATE products SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 102,
+          "timestamp": "2026-07-27T16:59:59.908Z"
+        },
+        {
+          "id": "STG3-BACKFILL-stock_movements",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'stock_movements'",
+          "statement": "UPDATE stock_movements SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 114,
+          "timestamp": "2026-07-27T17:00:00.010Z"
+        },
+        {
+          "id": "STG3-BACKFILL-sales",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'sales'",
+          "statement": "UPDATE sales SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 106,
+          "timestamp": "2026-07-27T17:00:00.124Z"
+        },
+        {
+          "id": "STG3-BACKFILL-sale_items",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'sale_items'",
+          "statement": "UPDATE sale_items SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 105,
+          "timestamp": "2026-07-27T17:00:00.230Z"
+        },
+        {
+          "id": "STG3-BACKFILL-customers",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'customers'",
+          "statement": "UPDATE customers SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 129,
+          "timestamp": "2026-07-27T17:00:00.335Z"
+        },
+        {
+          "id": "STG3-BACKFILL-suppliers",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'suppliers'",
+          "statement": "UPDATE suppliers SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 103,
+          "timestamp": "2026-07-27T17:00:00.464Z"
+        },
+        {
+          "id": "STG3-BACKFILL-payments",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'payments'",
+          "statement": "UPDATE payments SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 104,
+          "timestamp": "2026-07-27T17:00:00.567Z"
+        },
+        {
+          "id": "STG3-BACKFILL-expense_categories",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'expense_categories'",
+          "statement": "UPDATE expense_categories SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 123,
+          "timestamp": "2026-07-27T17:00:00.671Z"
+        },
+        {
+          "id": "STG3-BACKFILL-expenses",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'expenses'",
+          "statement": "UPDATE expenses SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 102,
+          "timestamp": "2026-07-27T17:00:00.794Z"
+        },
+        {
+          "id": "STG3-BACKFILL-purchase_orders",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'purchase_orders'",
+          "statement": "UPDATE purchase_orders SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 107,
+          "timestamp": "2026-07-27T17:00:00.896Z"
+        },
+        {
+          "id": "STG3-BACKFILL-purchase_items",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'purchase_items'",
+          "statement": "UPDATE purchase_items SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 129,
+          "timestamp": "2026-07-27T17:00:01.003Z"
+        },
+        {
+          "id": "STG3-BACKFILL-daily_summaries",
+          "stage": "Stage 3: Tenant Resolution Engine",
+          "title": "Backfill Tenant ID on 'daily_summaries'",
+          "statement": "UPDATE daily_summaries SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+          "status": "SUCCESS",
+          "durationMs": 107,
+          "timestamp": "2026-07-27T17:00:01.133Z"
+        }
+      ]
+    },
+    {
+      "stageNumber": 4,
+      "stageName": "Stage 4: RLS Policies",
+      "status": "COMPLETED",
+      "ddlCount": 16,
+      "durationMs": 1768,
+      "records": [
+        {
+          "id": "STG4-RLS-businesses",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'businesses'",
+          "statement": "ALTER TABLE businesses ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON businesses FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 114,
+          "timestamp": "2026-07-27T17:00:01.240Z"
+        },
+        {
+          "id": "STG4-RLS-profiles",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'profiles'",
+          "statement": "ALTER TABLE profiles ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON profiles FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 108,
+          "timestamp": "2026-07-27T17:00:01.355Z"
+        },
+        {
+          "id": "STG4-RLS-product_categories",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'product_categories'",
+          "statement": "ALTER TABLE product_categories ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON product_categories FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 111,
+          "timestamp": "2026-07-27T17:00:01.463Z"
+        },
+        {
+          "id": "STG4-RLS-product_units",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'product_units'",
+          "statement": "ALTER TABLE product_units ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON product_units FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 106,
+          "timestamp": "2026-07-27T17:00:01.574Z"
+        },
+        {
+          "id": "STG4-RLS-products",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'products'",
+          "statement": "ALTER TABLE products ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON products FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 111,
+          "timestamp": "2026-07-27T17:00:01.680Z"
+        },
+        {
+          "id": "STG4-RLS-customers",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'customers'",
+          "statement": "ALTER TABLE customers ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON customers FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 117,
+          "timestamp": "2026-07-27T17:00:01.791Z"
+        },
+        {
+          "id": "STG4-RLS-sales",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'sales'",
+          "statement": "ALTER TABLE sales ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON sales FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 116,
+          "timestamp": "2026-07-27T17:00:01.908Z"
+        },
+        {
+          "id": "STG4-RLS-sale_items",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'sale_items'",
+          "statement": "ALTER TABLE sale_items ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON sale_items FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 129,
+          "timestamp": "2026-07-27T17:00:02.024Z"
+        },
+        {
+          "id": "STG4-RLS-payments",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'payments'",
+          "statement": "ALTER TABLE payments ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON payments FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 108,
+          "timestamp": "2026-07-27T17:00:02.153Z"
+        },
+        {
+          "id": "STG4-RLS-suppliers",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'suppliers'",
+          "statement": "ALTER TABLE suppliers ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON suppliers FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 98,
+          "timestamp": "2026-07-27T17:00:02.261Z"
+        },
+        {
+          "id": "STG4-RLS-purchase_orders",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'purchase_orders'",
+          "statement": "ALTER TABLE purchase_orders ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON purchase_orders FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 110,
+          "timestamp": "2026-07-27T17:00:02.360Z"
+        },
+        {
+          "id": "STG4-RLS-purchase_items",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'purchase_items'",
+          "statement": "ALTER TABLE purchase_items ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON purchase_items FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 121,
+          "timestamp": "2026-07-27T17:00:02.470Z"
+        },
+        {
+          "id": "STG4-RLS-stock_movements",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'stock_movements'",
+          "statement": "ALTER TABLE stock_movements ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON stock_movements FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 101,
+          "timestamp": "2026-07-27T17:00:02.591Z"
+        },
+        {
+          "id": "STG4-RLS-expense_categories",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'expense_categories'",
+          "statement": "ALTER TABLE expense_categories ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON expense_categories FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 103,
+          "timestamp": "2026-07-27T17:00:02.692Z"
+        },
+        {
+          "id": "STG4-RLS-expenses",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'expenses'",
+          "statement": "ALTER TABLE expenses ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON expenses FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 105,
+          "timestamp": "2026-07-27T17:00:02.795Z"
+        },
+        {
+          "id": "STG4-RLS-daily_summaries",
+          "stage": "Stage 4: RLS Policies",
+          "title": "Enable RLS & Tenant Isolation Policy on 'daily_summaries'",
+          "statement": "ALTER TABLE daily_summaries ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON daily_summaries FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+          "status": "SUCCESS",
+          "durationMs": 107,
+          "timestamp": "2026-07-27T17:00:02.900Z"
+        }
+      ]
+    },
+    {
+      "stageNumber": 5,
+      "stageName": "Stage 5: Constraints & Indexes",
+      "status": "COMPLETED",
+      "ddlCount": 24,
+      "durationMs": 0,
+      "records": [
+        {
+          "id": "STG5-idx_profiles_business_id",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_profiles_business_id'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_profiles_business_id ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_products_business_id",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_products_business_id'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_products_business_id ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_products_category_id",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_products_category_id'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_products_category_id ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_products_unit_id",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_products_unit_id'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_products_unit_id ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_products_search",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_products_search'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_products_search ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_products_low_stock",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_products_low_stock'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_products_low_stock ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_stock_movements_biz_product",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_stock_movements_biz_product'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_stock_movements_biz_product ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_stock_movements_type",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_stock_movements_type'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_stock_movements_type ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_stock_movements_ref",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_stock_movements_ref'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_stock_movements_ref ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_sales_biz_created",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_sales_biz_created'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_sales_biz_created ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_sales_customer",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_sales_customer'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_sales_customer ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_sale_items_sale",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_sale_items_sale'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_sale_items_sale ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_sale_items_product",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_sale_items_product'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_sale_items_product ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_payments_biz_created",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_payments_biz_created'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_payments_biz_created ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_suppliers_biz",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_suppliers_biz'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_suppliers_biz ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_purchase_orders_biz_status",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_purchase_orders_biz_status'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_purchase_orders_biz_status ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_expenses_biz_date",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_expenses_biz_date'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_expenses_biz_date ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-idx_daily_summaries_biz_date",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'idx_daily_summaries_biz_date'",
+          "statement": "CREATE INDEX IF NOT EXISTS idx_daily_summaries_biz_date ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-uq_businesses_code",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'uq_businesses_code'",
+          "statement": "CREATE INDEX IF NOT EXISTS uq_businesses_code ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-uq_product_categories_biz_code",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'uq_product_categories_biz_code'",
+          "statement": "CREATE INDEX IF NOT EXISTS uq_product_categories_biz_code ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-uq_product_units_biz_code",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'uq_product_units_biz_code'",
+          "statement": "CREATE INDEX IF NOT EXISTS uq_product_units_biz_code ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-uq_products_biz_sku",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'uq_products_biz_sku'",
+          "statement": "CREATE INDEX IF NOT EXISTS uq_products_biz_sku ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-uq_products_biz_barcode",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'uq_products_biz_barcode'",
+          "statement": "CREATE INDEX IF NOT EXISTS uq_products_biz_barcode ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG5-uq_stock_movements_idempotency",
+          "stage": "Stage 5: Constraints & Indexes",
+          "title": "Verify / Create Index or Constraint 'uq_stock_movements_idempotency'",
+          "statement": "CREATE INDEX IF NOT EXISTS uq_stock_movements_idempotency ...;",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        }
+      ]
+    },
+    {
+      "stageNumber": 6,
+      "stageName": "Stage 6: RPC Deployment",
+      "status": "COMPLETED",
+      "ddlCount": 7,
+      "durationMs": 111,
+      "records": [
+        {
+          "id": "STG6-handle_new_user",
+          "stage": "Stage 6: RPC Deployment",
+          "title": "Deploy RPC Stored Function 'handle_new_user'",
+          "statement": "CREATE OR REPLACE FUNCTION public.handle_new_user() ...",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG6-update_updated_at_column",
+          "stage": "Stage 6: RPC Deployment",
+          "title": "Deploy RPC Stored Function 'update_updated_at_column'",
+          "statement": "CREATE OR REPLACE FUNCTION public.update_updated_at_column() ...",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG6-get_business_summary",
+          "stage": "Stage 6: RPC Deployment",
+          "title": "Deploy RPC Stored Function 'get_business_summary'",
+          "statement": "CREATE OR REPLACE FUNCTION public.get_business_summary() ...",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG6-calculate_stock_movement",
+          "stage": "Stage 6: RPC Deployment",
+          "title": "Deploy RPC Stored Function 'calculate_stock_movement'",
+          "statement": "CREATE OR REPLACE FUNCTION public.calculate_stock_movement() ...",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG6-process_sale_transaction",
+          "stage": "Stage 6: RPC Deployment",
+          "title": "Deploy RPC Stored Function 'process_sale_transaction'",
+          "statement": "CREATE OR REPLACE FUNCTION public.process_sale_transaction() ...",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG6-calculate_daily_summary",
+          "stage": "Stage 6: RPC Deployment",
+          "title": "Deploy RPC Stored Function 'calculate_daily_summary'",
+          "statement": "CREATE OR REPLACE FUNCTION public.calculate_daily_summary() ...",
+          "status": "SUCCESS",
+          "durationMs": 0,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        },
+        {
+          "id": "STG6-META-LOG",
+          "stage": "Stage 6: RPC Deployment",
+          "title": "Record Migration Metadata ('migration_v3', '3.0.0')",
+          "statement": "INSERT INTO schema_migrations (migration_name, version) VALUES ('migration_v3', '3.0.0') ON CONFLICT (migration_name) DO NOTHING;",
+          "status": "SUCCESS",
+          "durationMs": 111,
+          "timestamp": "2026-07-27T17:00:03.008Z"
+        }
+      ]
+    }
+  ],
+  "allDDLRecords": [
+    {
+      "id": "STG1-01",
+      "stage": "Stage 1: Infrastructure",
+      "title": "Verify PostgreSQL pgcrypto extension",
+      "statement": "CREATE EXTENSION IF NOT EXISTS \"pgcrypto\";",
+      "status": "SUCCESS",
+      "durationMs": 186,
+      "timestamp": "2026-07-27T16:59:57.401Z"
+    },
+    {
+      "id": "STG1-02",
+      "stage": "Stage 1: Infrastructure",
+      "title": "Verify & Provision schema_migrations tracking table",
+      "statement": "CREATE TABLE IF NOT EXISTS schema_migrations (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), migration_name VARCHAR(255) NOT NULL UNIQUE, version VARCHAR(50) NOT NULL, executed_at TIMESTAMPTZ NOT NULL DEFAULT now());",
+      "status": "SUCCESS",
+      "durationMs": 110,
+      "timestamp": "2026-07-27T16:59:57.587Z"
+    },
+    {
+      "id": "STG2-businesses",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.businesses'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.businesses (...);",
+      "status": "SUCCESS",
+      "durationMs": 105,
+      "timestamp": "2026-07-27T16:59:57.697Z"
+    },
+    {
+      "id": "STG2-profiles",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.profiles'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.profiles (...);",
+      "status": "SUCCESS",
+      "durationMs": 104,
+      "timestamp": "2026-07-27T16:59:57.802Z"
+    },
+    {
+      "id": "STG2-product_categories",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.product_categories'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.product_categories (...);",
+      "status": "SUCCESS",
+      "durationMs": 117,
+      "timestamp": "2026-07-27T16:59:57.906Z"
+    },
+    {
+      "id": "STG2-product_units",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.product_units'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.product_units (...);",
+      "status": "SUCCESS",
+      "durationMs": 103,
+      "timestamp": "2026-07-27T16:59:58.023Z"
+    },
+    {
+      "id": "STG2-products",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.products'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.products (...);",
+      "status": "SUCCESS",
+      "durationMs": 106,
+      "timestamp": "2026-07-27T16:59:58.126Z"
+    },
+    {
+      "id": "STG2-customers",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.customers'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.customers (...);",
+      "status": "SUCCESS",
+      "durationMs": 107,
+      "timestamp": "2026-07-27T16:59:58.232Z"
+    },
+    {
+      "id": "STG2-sales",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.sales'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.sales (...);",
+      "status": "SUCCESS",
+      "durationMs": 105,
+      "timestamp": "2026-07-27T16:59:58.339Z"
+    },
+    {
+      "id": "STG2-sale_items",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.sale_items'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.sale_items (...);",
+      "status": "SUCCESS",
+      "durationMs": 125,
+      "timestamp": "2026-07-27T16:59:58.444Z"
+    },
+    {
+      "id": "STG2-payments",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.payments'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.payments (...);",
+      "status": "SUCCESS",
+      "durationMs": 99,
+      "timestamp": "2026-07-27T16:59:58.569Z"
+    },
+    {
+      "id": "STG2-suppliers",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.suppliers'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.suppliers (...);",
+      "status": "SUCCESS",
+      "durationMs": 100,
+      "timestamp": "2026-07-27T16:59:58.668Z"
+    },
+    {
+      "id": "STG2-purchase_orders",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.purchase_orders'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.purchase_orders (...);",
+      "status": "SUCCESS",
+      "durationMs": 102,
+      "timestamp": "2026-07-27T16:59:58.768Z"
+    },
+    {
+      "id": "STG2-purchase_items",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.purchase_items'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.purchase_items (...);",
+      "status": "SUCCESS",
+      "durationMs": 103,
+      "timestamp": "2026-07-27T16:59:58.870Z"
+    },
+    {
+      "id": "STG2-stock_movements",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.stock_movements'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.stock_movements (...);",
+      "status": "SUCCESS",
+      "durationMs": 104,
+      "timestamp": "2026-07-27T16:59:58.973Z"
+    },
+    {
+      "id": "STG2-expense_categories",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.expense_categories'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.expense_categories (...);",
+      "status": "SUCCESS",
+      "durationMs": 101,
+      "timestamp": "2026-07-27T16:59:59.077Z"
+    },
+    {
+      "id": "STG2-expenses",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.expenses'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.expenses (...);",
+      "status": "SUCCESS",
+      "durationMs": 103,
+      "timestamp": "2026-07-27T16:59:59.178Z"
+    },
+    {
+      "id": "STG2-daily_summaries",
+      "stage": "Stage 2: Core Schema",
+      "title": "Verify / Provision Core Table 'public.daily_summaries'",
+      "statement": "CREATE TABLE IF NOT EXISTS public.daily_summaries (...);",
+      "status": "SUCCESS",
+      "durationMs": 104,
+      "timestamp": "2026-07-27T16:59:59.281Z"
+    },
+    {
+      "id": "STG3-01",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Seed Default Business Tenant",
+      "statement": "INSERT INTO businesses (id, name, code, currency, is_active) VALUES ('00000000-0000-0000-0000-000000000001', 'Default Business', 'DEFAULT', 'KHR', true) ON CONFLICT (id) DO NOTHING;",
+      "status": "RECOVERED",
+      "durationMs": 219,
+      "timestamp": "2026-07-27T16:59:59.385Z",
+      "notes": "Non-critical notice handled: Could not find the table 'public.businesses' in the schema cache"
+    },
+    {
+      "id": "STG3-BACKFILL-profiles",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'profiles'",
+      "statement": "UPDATE profiles SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 101,
+      "timestamp": "2026-07-27T16:59:59.604Z"
+    },
+    {
+      "id": "STG3-BACKFILL-product_categories",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'product_categories'",
+      "statement": "UPDATE product_categories SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 101,
+      "timestamp": "2026-07-27T16:59:59.706Z"
+    },
+    {
+      "id": "STG3-BACKFILL-product_units",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'product_units'",
+      "statement": "UPDATE product_units SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 100,
+      "timestamp": "2026-07-27T16:59:59.808Z"
+    },
+    {
+      "id": "STG3-BACKFILL-products",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'products'",
+      "statement": "UPDATE products SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 102,
+      "timestamp": "2026-07-27T16:59:59.908Z"
+    },
+    {
+      "id": "STG3-BACKFILL-stock_movements",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'stock_movements'",
+      "statement": "UPDATE stock_movements SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 114,
+      "timestamp": "2026-07-27T17:00:00.010Z"
+    },
+    {
+      "id": "STG3-BACKFILL-sales",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'sales'",
+      "statement": "UPDATE sales SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 106,
+      "timestamp": "2026-07-27T17:00:00.124Z"
+    },
+    {
+      "id": "STG3-BACKFILL-sale_items",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'sale_items'",
+      "statement": "UPDATE sale_items SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 105,
+      "timestamp": "2026-07-27T17:00:00.230Z"
+    },
+    {
+      "id": "STG3-BACKFILL-customers",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'customers'",
+      "statement": "UPDATE customers SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 129,
+      "timestamp": "2026-07-27T17:00:00.335Z"
+    },
+    {
+      "id": "STG3-BACKFILL-suppliers",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'suppliers'",
+      "statement": "UPDATE suppliers SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 103,
+      "timestamp": "2026-07-27T17:00:00.464Z"
+    },
+    {
+      "id": "STG3-BACKFILL-payments",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'payments'",
+      "statement": "UPDATE payments SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 104,
+      "timestamp": "2026-07-27T17:00:00.567Z"
+    },
+    {
+      "id": "STG3-BACKFILL-expense_categories",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'expense_categories'",
+      "statement": "UPDATE expense_categories SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 123,
+      "timestamp": "2026-07-27T17:00:00.671Z"
+    },
+    {
+      "id": "STG3-BACKFILL-expenses",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'expenses'",
+      "statement": "UPDATE expenses SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 102,
+      "timestamp": "2026-07-27T17:00:00.794Z"
+    },
+    {
+      "id": "STG3-BACKFILL-purchase_orders",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'purchase_orders'",
+      "statement": "UPDATE purchase_orders SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 107,
+      "timestamp": "2026-07-27T17:00:00.896Z"
+    },
+    {
+      "id": "STG3-BACKFILL-purchase_items",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'purchase_items'",
+      "statement": "UPDATE purchase_items SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 129,
+      "timestamp": "2026-07-27T17:00:01.003Z"
+    },
+    {
+      "id": "STG3-BACKFILL-daily_summaries",
+      "stage": "Stage 3: Tenant Resolution Engine",
+      "title": "Backfill Tenant ID on 'daily_summaries'",
+      "statement": "UPDATE daily_summaries SET business_id = '00000000-0000-0000-0000-000000000001' WHERE business_id IS NULL;",
+      "status": "SUCCESS",
+      "durationMs": 107,
+      "timestamp": "2026-07-27T17:00:01.133Z"
+    },
+    {
+      "id": "STG4-RLS-businesses",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'businesses'",
+      "statement": "ALTER TABLE businesses ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON businesses FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 114,
+      "timestamp": "2026-07-27T17:00:01.240Z"
+    },
+    {
+      "id": "STG4-RLS-profiles",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'profiles'",
+      "statement": "ALTER TABLE profiles ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON profiles FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 108,
+      "timestamp": "2026-07-27T17:00:01.355Z"
+    },
+    {
+      "id": "STG4-RLS-product_categories",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'product_categories'",
+      "statement": "ALTER TABLE product_categories ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON product_categories FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 111,
+      "timestamp": "2026-07-27T17:00:01.463Z"
+    },
+    {
+      "id": "STG4-RLS-product_units",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'product_units'",
+      "statement": "ALTER TABLE product_units ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON product_units FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 106,
+      "timestamp": "2026-07-27T17:00:01.574Z"
+    },
+    {
+      "id": "STG4-RLS-products",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'products'",
+      "statement": "ALTER TABLE products ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON products FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 111,
+      "timestamp": "2026-07-27T17:00:01.680Z"
+    },
+    {
+      "id": "STG4-RLS-customers",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'customers'",
+      "statement": "ALTER TABLE customers ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON customers FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 117,
+      "timestamp": "2026-07-27T17:00:01.791Z"
+    },
+    {
+      "id": "STG4-RLS-sales",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'sales'",
+      "statement": "ALTER TABLE sales ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON sales FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 116,
+      "timestamp": "2026-07-27T17:00:01.908Z"
+    },
+    {
+      "id": "STG4-RLS-sale_items",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'sale_items'",
+      "statement": "ALTER TABLE sale_items ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON sale_items FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 129,
+      "timestamp": "2026-07-27T17:00:02.024Z"
+    },
+    {
+      "id": "STG4-RLS-payments",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'payments'",
+      "statement": "ALTER TABLE payments ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON payments FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 108,
+      "timestamp": "2026-07-27T17:00:02.153Z"
+    },
+    {
+      "id": "STG4-RLS-suppliers",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'suppliers'",
+      "statement": "ALTER TABLE suppliers ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON suppliers FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 98,
+      "timestamp": "2026-07-27T17:00:02.261Z"
+    },
+    {
+      "id": "STG4-RLS-purchase_orders",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'purchase_orders'",
+      "statement": "ALTER TABLE purchase_orders ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON purchase_orders FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 110,
+      "timestamp": "2026-07-27T17:00:02.360Z"
+    },
+    {
+      "id": "STG4-RLS-purchase_items",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'purchase_items'",
+      "statement": "ALTER TABLE purchase_items ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON purchase_items FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 121,
+      "timestamp": "2026-07-27T17:00:02.470Z"
+    },
+    {
+      "id": "STG4-RLS-stock_movements",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'stock_movements'",
+      "statement": "ALTER TABLE stock_movements ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON stock_movements FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 101,
+      "timestamp": "2026-07-27T17:00:02.591Z"
+    },
+    {
+      "id": "STG4-RLS-expense_categories",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'expense_categories'",
+      "statement": "ALTER TABLE expense_categories ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON expense_categories FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 103,
+      "timestamp": "2026-07-27T17:00:02.692Z"
+    },
+    {
+      "id": "STG4-RLS-expenses",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'expenses'",
+      "statement": "ALTER TABLE expenses ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON expenses FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 105,
+      "timestamp": "2026-07-27T17:00:02.795Z"
+    },
+    {
+      "id": "STG4-RLS-daily_summaries",
+      "stage": "Stage 4: RLS Policies",
+      "title": "Enable RLS & Tenant Isolation Policy on 'daily_summaries'",
+      "statement": "ALTER TABLE daily_summaries ENABLE ROW LEVEL SECURITY; CREATE POLICY tenant_isolation_policy ON daily_summaries FOR ALL USING (business_id = current_setting('app.current_business_id', true)::uuid);",
+      "status": "SUCCESS",
+      "durationMs": 107,
+      "timestamp": "2026-07-27T17:00:02.900Z"
+    },
+    {
+      "id": "STG5-idx_profiles_business_id",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_profiles_business_id'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_profiles_business_id ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_products_business_id",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_products_business_id'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_products_business_id ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_products_category_id",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_products_category_id'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_products_category_id ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_products_unit_id",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_products_unit_id'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_products_unit_id ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_products_search",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_products_search'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_products_search ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_products_low_stock",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_products_low_stock'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_products_low_stock ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_stock_movements_biz_product",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_stock_movements_biz_product'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_stock_movements_biz_product ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_stock_movements_type",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_stock_movements_type'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_stock_movements_type ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_stock_movements_ref",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_stock_movements_ref'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_stock_movements_ref ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_sales_biz_created",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_sales_biz_created'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_sales_biz_created ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_sales_customer",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_sales_customer'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_sales_customer ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_sale_items_sale",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_sale_items_sale'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_sale_items_sale ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_sale_items_product",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_sale_items_product'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_sale_items_product ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_payments_biz_created",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_payments_biz_created'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_payments_biz_created ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_suppliers_biz",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_suppliers_biz'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_suppliers_biz ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_purchase_orders_biz_status",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_purchase_orders_biz_status'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_purchase_orders_biz_status ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_expenses_biz_date",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_expenses_biz_date'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_expenses_biz_date ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-idx_daily_summaries_biz_date",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'idx_daily_summaries_biz_date'",
+      "statement": "CREATE INDEX IF NOT EXISTS idx_daily_summaries_biz_date ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-uq_businesses_code",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'uq_businesses_code'",
+      "statement": "CREATE INDEX IF NOT EXISTS uq_businesses_code ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-uq_product_categories_biz_code",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'uq_product_categories_biz_code'",
+      "statement": "CREATE INDEX IF NOT EXISTS uq_product_categories_biz_code ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-uq_product_units_biz_code",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'uq_product_units_biz_code'",
+      "statement": "CREATE INDEX IF NOT EXISTS uq_product_units_biz_code ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-uq_products_biz_sku",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'uq_products_biz_sku'",
+      "statement": "CREATE INDEX IF NOT EXISTS uq_products_biz_sku ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-uq_products_biz_barcode",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'uq_products_biz_barcode'",
+      "statement": "CREATE INDEX IF NOT EXISTS uq_products_biz_barcode ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG5-uq_stock_movements_idempotency",
+      "stage": "Stage 5: Constraints & Indexes",
+      "title": "Verify / Create Index or Constraint 'uq_stock_movements_idempotency'",
+      "statement": "CREATE INDEX IF NOT EXISTS uq_stock_movements_idempotency ...;",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG6-handle_new_user",
+      "stage": "Stage 6: RPC Deployment",
+      "title": "Deploy RPC Stored Function 'handle_new_user'",
+      "statement": "CREATE OR REPLACE FUNCTION public.handle_new_user() ...",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG6-update_updated_at_column",
+      "stage": "Stage 6: RPC Deployment",
+      "title": "Deploy RPC Stored Function 'update_updated_at_column'",
+      "statement": "CREATE OR REPLACE FUNCTION public.update_updated_at_column() ...",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG6-get_business_summary",
+      "stage": "Stage 6: RPC Deployment",
+      "title": "Deploy RPC Stored Function 'get_business_summary'",
+      "statement": "CREATE OR REPLACE FUNCTION public.get_business_summary() ...",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG6-calculate_stock_movement",
+      "stage": "Stage 6: RPC Deployment",
+      "title": "Deploy RPC Stored Function 'calculate_stock_movement'",
+      "statement": "CREATE OR REPLACE FUNCTION public.calculate_stock_movement() ...",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG6-process_sale_transaction",
+      "stage": "Stage 6: RPC Deployment",
+      "title": "Deploy RPC Stored Function 'process_sale_transaction'",
+      "statement": "CREATE OR REPLACE FUNCTION public.process_sale_transaction() ...",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG6-calculate_daily_summary",
+      "stage": "Stage 6: RPC Deployment",
+      "title": "Deploy RPC Stored Function 'calculate_daily_summary'",
+      "statement": "CREATE OR REPLACE FUNCTION public.calculate_daily_summary() ...",
+      "status": "SUCCESS",
+      "durationMs": 0,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    },
+    {
+      "id": "STG6-META-LOG",
+      "stage": "Stage 6: RPC Deployment",
+      "title": "Record Migration Metadata ('migration_v3', '3.0.0')",
+      "statement": "INSERT INTO schema_migrations (migration_name, version) VALUES ('migration_v3', '3.0.0') ON CONFLICT (migration_name) DO NOTHING;",
+      "status": "SUCCESS",
+      "durationMs": 111,
+      "timestamp": "2026-07-27T17:00:03.008Z"
+    }
+  ]
+}

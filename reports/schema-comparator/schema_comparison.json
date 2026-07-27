@@ -1,28 +1,21 @@
 {
-  "timestamp": "2026-07-27T10:50:37.746Z",
+  "timestamp": "2026-07-27T16:37:17.745Z",
   "targetFile": "database_v1.sql",
-  "schemaHash": "9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26",
+  "schemaHash": "CC44B3AB4DAD69FA5634C218F5EA06266E8E6A008666F0B5621BCE65510C7F93",
   "summary": {
-    "totalDifferences": 253,
+    "totalDifferences": 133,
     "missingTablesCount": 0,
-    "extraTablesCount": 6,
-    "columnDifferencesCount": 163,
+    "extraTablesCount": 0,
+    "columnDifferencesCount": 49,
     "pkDifferencesCount": 0,
     "fkDifferencesCount": 7,
     "constraintDifferencesCount": 52,
     "indexDifferencesCount": 25,
-    "schemaMatchPercentage": 5.9
+    "schemaMatchPercentage": 50.6
   },
   "tableComparison": {
     "missingTables": [],
-    "extraTables": [
-      "business_settings",
-      "categories",
-      "schema_migrations",
-      "stock_transactions",
-      "transactions",
-      "user_preferences"
-    ],
+    "extraTables": [],
     "matchingTables": [
       "businesses",
       "customers",
@@ -45,231 +38,12 @@
   },
   "columnDifferences": [
     {
-      "table": "profiles",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "full_name",
-      "diffType": "MISSING",
-      "target": "character varying(255) NOT NULL",
-      "description": "Column \"full_name\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "phone",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"phone\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "role",
-      "diffType": "MISSING",
-      "target": "character varying(50) NOT NULL DEFAULT staff",
-      "description": "Column \"role\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "is_active",
-      "diffType": "MISSING",
-      "target": "boolean NOT NULL DEFAULT true",
-      "description": "Column \"is_active\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "avatar_url",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"avatar_url\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "profiles",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"profiles\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "code",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"code\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "name",
-      "diffType": "NULLABILITY",
-      "current": "NULL",
-      "target": "NOT NULL",
-      "description": "Nullability mismatch for \"product_categories.name\": current is NULL, target expects NOT NULL."
-    },
-    {
-      "table": "product_categories",
-      "column": "description",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"description\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "color",
-      "diffType": "MISSING",
-      "target": "character varying(30)",
-      "description": "Column \"color\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "icon",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"icon\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "is_active",
-      "diffType": "MISSING",
-      "target": "boolean NOT NULL DEFAULT true",
-      "description": "Column \"is_active\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_categories",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"product_categories\"."
-    },
-    {
-      "table": "product_units",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"product_units\"."
-    },
-    {
-      "table": "product_units",
-      "column": "code",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"code\" is missing in table \"product_units\"."
-    },
-    {
-      "table": "product_units",
-      "column": "name",
-      "diffType": "NULLABILITY",
-      "current": "NULL",
-      "target": "NOT NULL",
-      "description": "Nullability mismatch for \"product_units.name\": current is NULL, target expects NOT NULL."
-    },
-    {
-      "table": "product_units",
-      "column": "symbol",
-      "diffType": "MISSING",
-      "target": "character varying(20)",
-      "description": "Column \"symbol\" is missing in table \"product_units\"."
-    },
-    {
-      "table": "product_units",
-      "column": "is_active",
-      "diffType": "MISSING",
-      "target": "boolean NOT NULL DEFAULT true",
-      "description": "Column \"is_active\" is missing in table \"product_units\"."
-    },
-    {
-      "table": "product_units",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"product_units\"."
-    },
-    {
-      "table": "product_units",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"product_units\"."
-    },
-    {
-      "table": "product_units",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"product_units\"."
-    },
-    {
-      "table": "product_units",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"product_units\"."
-    },
-    {
       "table": "products",
       "column": "business_id",
       "diffType": "NULLABILITY",
       "current": "NULL",
       "target": "NOT NULL",
       "description": "Nullability mismatch for \"products.business_id\": current is NULL, target expects NOT NULL."
-    },
-    {
-      "table": "products",
-      "column": "description",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"description\" is missing in table \"products\"."
     },
     {
       "table": "products",
@@ -367,95 +141,19 @@
     },
     {
       "table": "customers",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "customer_code",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"customer_code\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "name",
-      "diffType": "NULLABILITY",
-      "current": "NULL",
-      "target": "NOT NULL",
-      "description": "Nullability mismatch for \"customers.name\": current is NULL, target expects NOT NULL."
-    },
-    {
-      "table": "customers",
-      "column": "phone",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"phone\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "email",
-      "diffType": "MISSING",
-      "target": "character varying(255)",
-      "description": "Column \"email\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "address",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"address\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
       "column": "credit_limit",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"credit_limit\" is missing in table \"customers\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"customers.credit_limit\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "customers",
       "column": "outstanding_balance",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"outstanding_balance\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "is_active",
-      "diffType": "MISSING",
-      "target": "boolean NOT NULL DEFAULT true",
-      "description": "Column \"is_active\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"customers\"."
-    },
-    {
-      "table": "customers",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"customers\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"customers.outstanding_balance\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "sales",
@@ -464,13 +162,6 @@
       "current": "NULL",
       "target": "NOT NULL",
       "description": "Nullability mismatch for \"sales.business_id\": current is NULL, target expects NOT NULL."
-    },
-    {
-      "table": "sales",
-      "column": "status",
-      "diffType": "MISSING",
-      "target": "character varying(50) NOT NULL DEFAULT completed",
-      "description": "Column \"status\" is missing in table \"sales\"."
     },
     {
       "table": "sales",
@@ -490,16 +181,18 @@
     {
       "table": "sales",
       "column": "discount_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"discount_amount\" is missing in table \"sales\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sales.discount_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "sales",
       "column": "tax_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"tax_amount\" is missing in table \"sales\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sales.tax_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "sales",
@@ -524,13 +217,6 @@
       "current": "numeric(12,2)",
       "target": "numeric(12",
       "description": "Data type mismatch for \"sales.due_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
-    },
-    {
-      "table": "sales",
-      "column": "notes",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"notes\" is missing in table \"sales\"."
     },
     {
       "table": "sale_items",
@@ -582,634 +268,161 @@
     },
     {
       "table": "payments",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "sale_id",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"sale_id\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "customer_id",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"customer_id\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "payment_number",
-      "diffType": "MISSING",
-      "target": "character varying(100) NOT NULL",
-      "description": "Column \"payment_number\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "payment_method",
-      "diffType": "MISSING",
-      "target": "character varying(50) NOT NULL",
-      "description": "Column \"payment_method\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
       "column": "amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL",
-      "description": "Column \"amount\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "currency",
-      "diffType": "MISSING",
-      "target": "character varying(10) NOT NULL DEFAULT KHR",
-      "description": "Column \"currency\" is missing in table \"payments\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"payments.amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "payments",
       "column": "exchange_rate",
-      "diffType": "MISSING",
-      "target": "numeric(10 NOT NULL DEFAULT 1.0000",
-      "description": "Column \"exchange_rate\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "reference_number",
-      "diffType": "MISSING",
-      "target": "character varying(100)",
-      "description": "Column \"reference_number\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "status",
-      "diffType": "MISSING",
-      "target": "character varying(50) NOT NULL DEFAULT completed",
-      "description": "Column \"status\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "notes",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"notes\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "paid_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"paid_at\" is missing in table \"payments\"."
-    },
-    {
-      "table": "payments",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"payments\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "supplier_code",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"supplier_code\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "company_name",
-      "diffType": "MISSING",
-      "target": "character varying(255) NOT NULL",
-      "description": "Column \"company_name\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "contact_name",
-      "diffType": "MISSING",
-      "target": "character varying(255)",
-      "description": "Column \"contact_name\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "phone",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"phone\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "email",
-      "diffType": "MISSING",
-      "target": "character varying(255)",
-      "description": "Column \"email\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "address",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"address\" is missing in table \"suppliers\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(10,4)",
+      "target": "numeric(10",
+      "description": "Data type mismatch for \"payments.exchange_rate\": current \"numeric(10,4)\" vs target \"numeric(10\"."
     },
     {
       "table": "suppliers",
       "column": "outstanding_balance",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"outstanding_balance\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "is_active",
-      "diffType": "MISSING",
-      "target": "boolean NOT NULL DEFAULT true",
-      "description": "Column \"is_active\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "suppliers",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"suppliers\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "supplier_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"supplier_id\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "po_number",
-      "diffType": "MISSING",
-      "target": "character varying(100) NOT NULL",
-      "description": "Column \"po_number\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "status",
-      "diffType": "MISSING",
-      "target": "character varying(50) NOT NULL DEFAULT draft",
-      "description": "Column \"status\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "payment_status",
-      "diffType": "MISSING",
-      "target": "character varying(50) NOT NULL DEFAULT unpaid",
-      "description": "Column \"payment_status\" is missing in table \"purchase_orders\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"suppliers.outstanding_balance\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "purchase_orders",
       "column": "total_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"total_amount\" is missing in table \"purchase_orders\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"purchase_orders.total_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "purchase_orders",
       "column": "paid_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"paid_amount\" is missing in table \"purchase_orders\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"purchase_orders.paid_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "purchase_orders",
       "column": "due_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"due_amount\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "expected_delivery_date",
-      "diffType": "MISSING",
-      "target": "date",
-      "description": "Column \"expected_delivery_date\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "received_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"received_at\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "notes",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"notes\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"purchase_orders\"."
-    },
-    {
-      "table": "purchase_items",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"purchase_items\"."
-    },
-    {
-      "table": "purchase_items",
-      "column": "purchase_order_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"purchase_order_id\" is missing in table \"purchase_items\"."
-    },
-    {
-      "table": "purchase_items",
-      "column": "product_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"product_id\" is missing in table \"purchase_items\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"purchase_orders.due_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "purchase_items",
       "column": "quantity_ordered",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL",
-      "description": "Column \"quantity_ordered\" is missing in table \"purchase_items\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"purchase_items.quantity_ordered\": current \"numeric(12,3)\" vs target \"numeric(12\"."
     },
     {
       "table": "purchase_items",
       "column": "quantity_received",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.000",
-      "description": "Column \"quantity_received\" is missing in table \"purchase_items\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"purchase_items.quantity_received\": current \"numeric(12,3)\" vs target \"numeric(12\"."
     },
     {
       "table": "purchase_items",
       "column": "unit_cost",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL",
-      "description": "Column \"unit_cost\" is missing in table \"purchase_items\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"purchase_items.unit_cost\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "purchase_items",
       "column": "subtotal",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL",
-      "description": "Column \"subtotal\" is missing in table \"purchase_items\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "code",
-      "diffType": "MISSING",
-      "target": "character varying(50)",
-      "description": "Column \"code\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "name",
-      "diffType": "NULLABILITY",
-      "current": "NULL",
-      "target": "NOT NULL",
-      "description": "Nullability mismatch for \"expense_categories.name\": current is NULL, target expects NOT NULL."
-    },
-    {
-      "table": "expense_categories",
-      "column": "description",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"description\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "is_active",
-      "diffType": "MISSING",
-      "target": "boolean NOT NULL DEFAULT true",
-      "description": "Column \"is_active\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expense_categories",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"expense_categories\"."
-    },
-    {
-      "table": "expenses",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "category_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"category_id\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "expense_number",
-      "diffType": "MISSING",
-      "target": "character varying(100) NOT NULL",
-      "description": "Column \"expense_number\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "title",
-      "diffType": "MISSING",
-      "target": "character varying(255) NOT NULL",
-      "description": "Column \"title\" is missing in table \"expenses\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"purchase_items.subtotal\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "expenses",
       "column": "amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL",
-      "description": "Column \"amount\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "currency",
-      "diffType": "MISSING",
-      "target": "character varying(10) NOT NULL DEFAULT KHR",
-      "description": "Column \"currency\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "payment_method",
-      "diffType": "MISSING",
-      "target": "character varying(50) NOT NULL",
-      "description": "Column \"payment_method\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "vendor_name",
-      "diffType": "MISSING",
-      "target": "character varying(255)",
-      "description": "Column \"vendor_name\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "receipt_url",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"receipt_url\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "notes",
-      "diffType": "MISSING",
-      "target": "text",
-      "description": "Column \"notes\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "incurred_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"incurred_at\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "deleted_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone",
-      "description": "Column \"deleted_at\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "created_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"created_by\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "expenses",
-      "column": "updated_by",
-      "diffType": "MISSING",
-      "target": "uuid",
-      "description": "Column \"updated_by\" is missing in table \"expenses\"."
-    },
-    {
-      "table": "daily_summaries",
-      "column": "business_id",
-      "diffType": "MISSING",
-      "target": "uuid NOT NULL",
-      "description": "Column \"business_id\" is missing in table \"daily_summaries\"."
-    },
-    {
-      "table": "daily_summaries",
-      "column": "summary_date",
-      "diffType": "MISSING",
-      "target": "date NOT NULL",
-      "description": "Column \"summary_date\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"expenses.amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "daily_summaries",
       "column": "total_sales_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"total_sales_amount\" is missing in table \"daily_summaries\"."
-    },
-    {
-      "table": "daily_summaries",
-      "column": "total_sales_count",
-      "diffType": "MISSING",
-      "target": "integer NOT NULL DEFAULT 0",
-      "description": "Column \"total_sales_count\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"daily_summaries.total_sales_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "daily_summaries",
       "column": "total_cost_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"total_cost_amount\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"daily_summaries.total_cost_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "daily_summaries",
       "column": "total_gross_profit",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"total_gross_profit\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"daily_summaries.total_gross_profit\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "daily_summaries",
       "column": "total_expenses_amount",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"total_expenses_amount\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"daily_summaries.total_expenses_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "daily_summaries",
       "column": "total_net_profit",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.00",
-      "description": "Column \"total_net_profit\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"daily_summaries.total_net_profit\": current \"numeric(12,2)\" vs target \"numeric(12\"."
     },
     {
       "table": "daily_summaries",
       "column": "total_stock_in_qty",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.000",
-      "description": "Column \"total_stock_in_qty\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"daily_summaries.total_stock_in_qty\": current \"numeric(12,3)\" vs target \"numeric(12\"."
     },
     {
       "table": "daily_summaries",
       "column": "total_stock_out_qty",
-      "diffType": "MISSING",
-      "target": "numeric(12 NOT NULL DEFAULT 0.000",
-      "description": "Column \"total_stock_out_qty\" is missing in table \"daily_summaries\"."
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"daily_summaries.total_stock_out_qty\": current \"numeric(12,3)\" vs target \"numeric(12\"."
     },
     {
-      "table": "daily_summaries",
-      "column": "updated_at",
-      "diffType": "MISSING",
-      "target": "timestamp with time zone NOT NULL DEFAULT now()",
-      "description": "Column \"updated_at\" is missing in table \"daily_summaries\"."
-    },
-    {
-      "table": "profiles",
-      "column": "name",
+      "table": "products",
+      "column": "is_active",
       "diffType": "EXTRA",
-      "current": "character varying(255)",
-      "description": "Extra column \"name\" found in current table \"profiles\" that is not defined in target SQL schema."
+      "current": "boolean NOT NULL",
+      "description": "Extra column \"is_active\" found in current table \"products\" that is not defined in target SQL schema."
     },
     {
-      "table": "payments",
-      "column": "name",
+      "table": "sales",
+      "column": "subtotal",
       "diffType": "EXTRA",
-      "current": "character varying(255)",
-      "description": "Extra column \"name\" found in current table \"payments\" that is not defined in target SQL schema."
-    },
-    {
-      "table": "suppliers",
-      "column": "name",
-      "diffType": "EXTRA",
-      "current": "character varying(255)",
-      "description": "Extra column \"name\" found in current table \"suppliers\" that is not defined in target SQL schema."
-    },
-    {
-      "table": "purchase_orders",
-      "column": "name",
-      "diffType": "EXTRA",
-      "current": "character varying(255)",
-      "description": "Extra column \"name\" found in current table \"purchase_orders\" that is not defined in target SQL schema."
-    },
-    {
-      "table": "purchase_items",
-      "column": "name",
-      "diffType": "EXTRA",
-      "current": "character varying(255)",
-      "description": "Extra column \"name\" found in current table \"purchase_items\" that is not defined in target SQL schema."
-    },
-    {
-      "table": "expenses",
-      "column": "name",
-      "diffType": "EXTRA",
-      "current": "character varying(255)",
-      "description": "Extra column \"name\" found in current table \"expenses\" that is not defined in target SQL schema."
-    },
-    {
-      "table": "daily_summaries",
-      "column": "name",
-      "diffType": "EXTRA",
-      "current": "character varying(255)",
-      "description": "Extra column \"name\" found in current table \"daily_summaries\" that is not defined in target SQL schema."
+      "current": "numeric(12,2) NOT NULL",
+      "description": "Extra column \"subtotal\" found in current table \"sales\" that is not defined in target SQL schema."
     }
   ],
   "pkDifferences": [],
@@ -2233,14 +1446,14 @@
     }
   ],
   "health": {
-    "overallScore": 19,
+    "overallScore": 51,
     "completeness": {
-      "score": 60,
-      "status": "WARNING",
+      "score": 88,
+      "status": "GOOD",
       "details": [
-        "130 target column(s) missing from existing tables."
+        "3 target column(s) missing from existing tables."
       ],
-      "findingsCount": 130
+      "findingsCount": 3
     },
     "integrity": {
       "score": 0,
@@ -2261,22 +1474,21 @@
       "findingsCount": 21
     },
     "security": {
-      "score": 0,
-      "status": "CRITICAL",
+      "score": 100,
+      "status": "EXCELLENT",
       "details": [
-        "11 multi-tenant table(s) missing critical 'business_id' scoping column."
+        "Multi-tenant scoping columns and tenant security structures are verified."
       ],
-      "findingsCount": 11
+      "findingsCount": 0
     },
     "maintainability": {
-      "score": 26,
-      "status": "CRITICAL",
+      "score": 96,
+      "status": "EXCELLENT",
       "details": [
-        "6 extra table(s) found in database that are not in target DDL.",
-        "7 extra column(s) detected."
+        "2 extra column(s) detected."
       ],
-      "findingsCount": 13
+      "findingsCount": 2
     },
-    "timestamp": "2026-07-27T10:50:37.746Z"
+    "timestamp": "2026-07-27T16:37:17.745Z"
   }
 }

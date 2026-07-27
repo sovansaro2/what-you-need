@@ -1,31 +1,58 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { financeService } from '@/modules/finance/services/financeService';
-import { Transaction } from '@/modules/finance/types';
+import {
+  dashboardSummaryService,
+  dashboardMapper,
+  dashboardEvents,
+} from '../foundation';
+import { DashboardSummary, SummaryMetric, RecentActivityItem } from '../types';
+import { formatUserErrorMessage } from '@/core/errors';
 
 export interface DashboardSummaryData {
+  summary: DashboardSummary;
   totalIncome: number;
   totalExpense: number;
   balance: number;
+  netProfit: number;
+  totalRevenue: number;
+  totalSalesCount: number;
+  totalProductsCount: number;
+  inventoryValue: number;
+  lowStockCount: number;
   transactionCount: number;
-  recentTransactions: Transaction[];
+  recentTransactions: any[];
+  recentActivities: RecentActivityItem[];
+  summaryMetrics: SummaryMetric[];
   loading: boolean;
   error: string | null;
   fetchSummary: () => Promise<void>;
 }
 
+const initialSummary: DashboardSummary = {
+  totalIncome: 0,
+  totalExpense: 0,
+  netProfit: 0,
+  totalRevenue: 0,
+  totalSalesCount: 0,
+  totalProductsCount: 0,
+  inventoryValue: 0,
+  lowStockCount: 0,
+  transactionCount: 0,
+  recentSales: [],
+  recentTransactions: [],
+  recentActivities: [],
+};
+
 export const useDashboardSummary = (): DashboardSummaryData => {
-  const { user } = useAuth();
-  const [totalIncome, setTotalIncome] = useState<number>(0);
-  const [totalExpense, setTotalExpense] = useState<number>(0);
-  const [balance, setBalance] = useState<number>(0);
-  const [transactionCount, setTransactionCount] = useState<number>(0);
-  const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
+  const { user, profile } = useAuth();
+  const [summary, setSummary] = useState<DashboardSummary>(initialSummary);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const businessId = profile?.business_id || user?.id;
+
   const fetchSummary = useCallback(async () => {
-    if (!user?.id) {
+    if (!businessId) {
       setLoading(false);
       return;
     }
@@ -34,43 +61,46 @@ export const useDashboardSummary = (): DashboardSummaryData => {
     setError(null);
 
     try {
-      const transactions = await financeService.getTransactions(user.id);
-
-      let incomeSum = 0;
-      let expenseSum = 0;
-
-      transactions.forEach((tx) => {
-        const amt = Number(tx.amount) || 0;
-        if (tx.type === 'income') {
-          incomeSum += amt;
-        } else if (tx.type === 'expense') {
-          expenseSum += amt;
-        }
-      });
-
-      setTotalIncome(incomeSum);
-      setTotalExpense(expenseSum);
-      setBalance(incomeSum - expenseSum);
-      setTransactionCount(transactions.length);
-      setRecentTransactions(transactions.slice(0, 5));
+      const data = await dashboardSummaryService.getSummary(businessId);
+      setSummary(data);
     } catch (err: any) {
       console.error('Failed to fetch dashboard summary:', err);
-      setError(err.message || 'Error loading dashboard summary');
+      setError(formatUserErrorMessage(err, 'Failed to load dashboard summary.'));
     } finally {
       setLoading(false);
     }
-  }, [user?.id]);
+  }, [businessId]);
 
   useEffect(() => {
     fetchSummary();
+
+    // Subscribe to event bus updates (sale:created, finance:*, stock:*, product:*)
+    const unsubscribe = dashboardEvents.subscribeToDashboardEvents(() => {
+      fetchSummary();
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, [fetchSummary]);
 
+  const summaryMetrics = dashboardMapper.mapToSummaryMetrics(summary, loading);
+
   return {
-    totalIncome,
-    totalExpense,
-    balance,
-    transactionCount,
-    recentTransactions,
+    summary,
+    totalIncome: summary.totalIncome,
+    totalExpense: summary.totalExpense,
+    balance: summary.netProfit,
+    netProfit: summary.netProfit,
+    totalRevenue: summary.totalRevenue,
+    totalSalesCount: summary.totalSalesCount,
+    totalProductsCount: summary.totalProductsCount,
+    inventoryValue: summary.inventoryValue,
+    lowStockCount: summary.lowStockCount,
+    transactionCount: summary.transactionCount,
+    recentTransactions: summary.recentTransactions,
+    recentActivities: summary.recentActivities,
+    summaryMetrics,
     loading,
     error,
     fetchSummary,

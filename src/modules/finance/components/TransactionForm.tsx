@@ -5,7 +5,7 @@ import { CategorySelector } from './CategorySelector';
 
 interface TransactionFormProps {
   categories: TransactionCategory[];
-  onAddTransaction: (input: Omit<CreateTransactionInput, 'user_id'>) => Promise<any>;
+  onAddTransaction: (input: Omit<CreateTransactionInput, 'business_id'>) => Promise<any>;
   onAddCategory?: (name: string, type: TransactionType) => Promise<TransactionCategory | null>;
   activeType?: TransactionType;
 }

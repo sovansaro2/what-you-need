@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { X, Package, DollarSign, Tag, Hash, Barcode, AlertTriangle, Layers } from 'lucide-react';
-import { Product, CreateProductInput } from '../types';
+import { InventoryProduct, CreateInventoryProductInput } from '../../inventory/products/types';
 
 interface ProductFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: Omit<CreateProductInput, 'user_id'>) => Promise<boolean>;
-  initialData?: Product | null;
+  onSubmit: (data: CreateInventoryProductInput) => Promise<boolean>;
+  initialData?: InventoryProduct | null;
 }
 
 export const ProductFormModal: React.FC<ProductFormModalProps> = ({
@@ -28,7 +28,6 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Generate random SKU helper
   const generateRandomSku = () => {
     const randomNum = Math.floor(100000 + Math.random() * 900000);
     return `SKU-${randomNum}`;
@@ -105,7 +104,6 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
       <div className="bg-white rounded-3xl max-w-lg w-full p-5 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
-        {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
             <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
@@ -134,7 +132,6 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
         )}
 
         <form onSubmit={handleSubmit} className="space-y-3.5">
-          {/* Product Name */}
           <div>
             <label className="block text-xs font-semibold text-slate-700 mb-1">
               ឈ្មោះទំនិញ <span className="text-rose-500">*</span>
@@ -152,7 +149,6 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             </div>
           </div>
 
-          {/* SKU & Barcode */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1 flex items-center justify-between">
@@ -194,7 +190,6 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             </div>
           </div>
 
-          {/* Category & Unit */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
@@ -232,7 +227,6 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             </div>
           </div>
 
-          {/* Current Stock & Min Stock Alert */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
@@ -269,21 +263,20 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             </div>
           </div>
 
-          {/* Cost Price & Selling Price */}
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                តម្លៃដើម (៛)
+                តម្លៃដើម ($)
               </label>
               <div className="relative">
                 <DollarSign className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="number"
                   min="0"
-                  step="100"
+                  step="0.01"
                   value={costPrice}
                   onChange={(e) => setCostPrice(e.target.value)}
-                  placeholder="0"
+                  placeholder="0.00"
                   className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all min-h-[44px]"
                 />
               </div>
@@ -291,24 +284,23 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
 
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1">
-                តម្លៃលក់ (៛)
+                តម្លៃលក់ ($)
               </label>
               <div className="relative">
                 <DollarSign className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="number"
                   min="0"
-                  step="100"
+                  step="0.01"
                   value={sellingPrice}
                   onChange={(e) => setSellingPrice(e.target.value)}
-                  placeholder="0"
+                  placeholder="0.00"
                   className="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all min-h-[44px]"
                 />
               </div>
             </div>
           </div>
 
-          {/* Description */}
           <div>
             <label className="block text-xs font-semibold text-slate-700 mb-1">
               ពិពណ៌នាបន្ថែម (ជម្រើស)
@@ -322,7 +314,6 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             />
           </div>
 
-          {/* Action Buttons */}
           <div className="flex items-center gap-3 pt-2">
             <button
               type="button"
@@ -344,4 +335,3 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
     </div>
   );
 };
-

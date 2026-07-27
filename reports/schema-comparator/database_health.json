@@ -1,12 +1,12 @@
 {
-  "overallScore": 19,
+  "overallScore": 51,
   "completeness": {
-    "score": 60,
-    "status": "WARNING",
+    "score": 88,
+    "status": "GOOD",
     "details": [
-      "130 target column(s) missing from existing tables."
+      "3 target column(s) missing from existing tables."
     ],
-    "findingsCount": 130
+    "findingsCount": 3
   },
   "integrity": {
     "score": 0,
@@ -27,21 +27,20 @@
     "findingsCount": 21
   },
   "security": {
-    "score": 0,
-    "status": "CRITICAL",
+    "score": 100,
+    "status": "EXCELLENT",
     "details": [
-      "11 multi-tenant table(s) missing critical 'business_id' scoping column."
+      "Multi-tenant scoping columns and tenant security structures are verified."
     ],
-    "findingsCount": 11
+    "findingsCount": 0
   },
   "maintainability": {
-    "score": 26,
-    "status": "CRITICAL",
+    "score": 96,
+    "status": "EXCELLENT",
     "details": [
-      "6 extra table(s) found in database that are not in target DDL.",
-      "7 extra column(s) detected."
+      "2 extra column(s) detected."
     ],
-    "findingsCount": 13
+    "findingsCount": 2
   },
-  "timestamp": "2026-07-27T10:50:37.746Z"
+  "timestamp": "2026-07-27T16:37:17.745Z"
 }

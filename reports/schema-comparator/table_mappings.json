@@ -142,59 +142,5 @@
     "confidenceLevel": "VERY_HIGH",
     "risk": "LOW",
     "reason": "Exact table name match between current database and target DDL."
-  },
-  {
-    "currentTable": "business_settings",
-    "targetTable": "business_settings",
-    "matchType": "DEPRECATED_TABLE",
-    "confidenceScore": 90,
-    "confidenceLevel": "HIGH",
-    "risk": "HIGH",
-    "reason": "Table exists in current database but is not defined in target DDL."
-  },
-  {
-    "currentTable": "categories",
-    "targetTable": "categories",
-    "matchType": "DEPRECATED_TABLE",
-    "confidenceScore": 90,
-    "confidenceLevel": "HIGH",
-    "risk": "HIGH",
-    "reason": "Table exists in current database but is not defined in target DDL."
-  },
-  {
-    "currentTable": "schema_migrations",
-    "targetTable": "schema_migrations",
-    "matchType": "DEPRECATED_TABLE",
-    "confidenceScore": 90,
-    "confidenceLevel": "HIGH",
-    "risk": "HIGH",
-    "reason": "Table exists in current database but is not defined in target DDL."
-  },
-  {
-    "currentTable": "stock_transactions",
-    "targetTable": "stock_transactions",
-    "matchType": "DEPRECATED_TABLE",
-    "confidenceScore": 90,
-    "confidenceLevel": "HIGH",
-    "risk": "HIGH",
-    "reason": "Table exists in current database but is not defined in target DDL."
-  },
-  {
-    "currentTable": "transactions",
-    "targetTable": "transactions",
-    "matchType": "DEPRECATED_TABLE",
-    "confidenceScore": 90,
-    "confidenceLevel": "HIGH",
-    "risk": "HIGH",
-    "reason": "Table exists in current database but is not defined in target DDL."
-  },
-  {
-    "currentTable": "user_preferences",
-    "targetTable": "user_preferences",
-    "matchType": "DEPRECATED_TABLE",
-    "confidenceScore": 90,
-    "confidenceLevel": "HIGH",
-    "risk": "HIGH",
-    "reason": "Table exists in current database but is not defined in target DDL."
   }
 ]

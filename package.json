@@ -10,6 +10,7 @@
     "db:inspect": "tsx src/tools/database-inspector/index.ts",
     "db:compare": "tsx src/tools/schema-comparator/index.ts",
     "db:validate": "tsx src/tools/schema-validator/index.ts",
+    "db:migrate": "tsx src/tools/migration-runner/index.ts",
     "db:readiness": "tsx src/tools/release-readiness/index.ts",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"

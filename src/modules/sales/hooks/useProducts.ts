@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { salesService } from '../services/salesService';
-import { Product, CreateProductInput, UpdateProductInput } from '../types';
+import { productService } from '@/modules/inventory/products/services/productService';
+import { InventoryProduct, CreateInventoryProductInput, UpdateInventoryProductInput } from '@/modules/inventory/products/types';
 
 export const useProducts = () => {
   const { user } = useAuth();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<InventoryProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,7 +19,7 @@ export const useProducts = () => {
     setError(null);
 
     try {
-      const data = await salesService.getProducts(user.id);
+      const data = await productService.getProducts(user.id);
       setProducts(data);
     } catch (err: any) {
       console.error('Failed to fetch products:', err);
@@ -34,14 +34,11 @@ export const useProducts = () => {
   }, [fetchProducts]);
 
   const addProduct = async (
-    input: Omit<CreateProductInput, 'user_id'>
-  ): Promise<Product | null> => {
+    input: CreateInventoryProductInput
+  ): Promise<InventoryProduct | null> => {
     if (!user?.id) return null;
     try {
-      const newProd = await salesService.createProduct({
-        ...input,
-        user_id: user.id,
-      });
+      const newProd = await productService.createProduct(user.id, input);
       setProducts((prev) => [newProd, ...prev]);
       return newProd;
     } catch (err: any) {
@@ -53,10 +50,11 @@ export const useProducts = () => {
 
   const editProduct = async (
     id: string,
-    input: UpdateProductInput
-  ): Promise<Product | null> => {
+    input: UpdateInventoryProductInput
+  ): Promise<InventoryProduct | null> => {
+    if (!user?.id) return null;
     try {
-      const updated = await salesService.updateProduct(id, input);
+      const updated = await productService.updateProduct(user.id, id, input);
       setProducts((prev) => prev.map((p) => (p.id === id ? updated : p)));
       return updated;
     } catch (err: any) {
@@ -67,8 +65,9 @@ export const useProducts = () => {
   };
 
   const removeProduct = async (id: string): Promise<boolean> => {
+    if (!user?.id) return false;
     try {
-      await salesService.deleteProduct(id);
+      await productService.deleteProduct(user.id, id);
       setProducts((prev) => prev.filter((p) => p.id !== id));
       return true;
     } catch (err: any) {

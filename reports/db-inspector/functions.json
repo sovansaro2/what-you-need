@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-27T11:47:54.519Z",
+  "generatedAt": "2026-07-27T16:45:33.544Z",
   "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
-  "schema": "all",
+  "schema": "public",
   "records": [
     {
       "schema": "public",
@@ -56,25 +56,7 @@
       "language": "plpgsql",
       "securityDefiner": false,
       "volatility": "VOLATILE"
-    },
-    {
-      "schema": "auth",
-      "functionName": "uid",
-      "arguments": "",
-      "returnType": "uuid",
-      "language": "sql",
-      "securityDefiner": false,
-      "volatility": "STABLE"
-    },
-    {
-      "schema": "storage",
-      "functionName": "foldername",
-      "arguments": "name text",
-      "returnType": "text[]",
-      "language": "plpgsql",
-      "securityDefiner": false,
-      "volatility": "IMMUTABLE"
     }
   ],
-  "count": 8
+  "count": 6
 }

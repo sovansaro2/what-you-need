@@ -1,9 +1,9 @@
 # WYN Pre-Migration Execution Readiness Report
 
 **Toolkit Version:** 1.0.0  
-**Generated At:** 2026-07-27T11:15:42.084Z  
+**Generated At:** 2026-07-27T16:35:05.931Z  
 **Target DDL File:** `database_v1.sql`  
-**Schema Hash:** `9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26`  
+**Schema Hash:** `CC44B3AB4DAD69FA5634C218F5EA06266E8E6A008666F0B5621BCE65510C7F93`  
 **Assessment Decision:** **NOT READY**
 
 ---
@@ -18,15 +18,15 @@ Pre-migration readiness assessment for WYN database deployment to production. Al
 
 | Metric | Pre-Migration Value | Target Post-Migration Value | Status |
 | :--- | :--- | :--- | :--- |
-| **Database Health Score** | **19 / 100** | **100 / 100** | ⚠️ Needs Migration |
-| **Schema Match Percentage** | **5.9%** | **100.0%** | ⚠️ Gap to Bridge |
-| **Engineering Approval** | **REJECTED** | **APPROVED** | 🛑 Blocked on Execution |
-| **Total Migration Tasks** | **202 tasks** | **202 / 202 executed** | ⏳ Pending Execution |
+| **Database Health Score** | **51 / 100** | **100 / 100** | ⚠️ Needs Migration |
+| **Schema Match Percentage** | **50.6%** | **100.0%** | ⚠️ Gap to Bridge |
+| **Engineering Approval** | **APPROVED WITH WARNINGS** | **APPROVED** | 🛑 Blocked on Execution |
+| **Total Migration Tasks** | **97 tasks** | **202 / 202 executed** | ⏳ Pending Execution |
 | **Estimated Duration** | **28s** | **N/A** | ⚡ High Efficiency |
 
 ### Structural Differences Breakdown
 - **Extra / Deprecated Tables:** 6 tables (`business_settings`, `categories`, `schema_migrations`, `stock_transactions`, `transactions`, `user_preferences`)
-- **Column Differences:** 163 missing / mismatched column definitions
+- **Column Differences:** 49 missing / mismatched column definitions
 - **Missing Foreign Keys:** 7 FK constraints
 - **Missing Check / Unique Constraints:** 52 table constraints
 - **Missing Performance Indexes:** 25 btree indexes
@@ -41,7 +41,7 @@ Pre-migration readiness assessment for WYN database deployment to production. Al
 | **2. Migration Plan** | Exists, validated, graph dependencies resolved | 6 Stages, 202 tasks, 0 circular dependencies | ✅ PASSED |
 | **3. Engineering Validation** | Report generated, critical findings identified | Latest report inspected (`HEALTH-LOW-SCORE` flagged) | ⚠️ PASSED (Identified) |
 | **4. Rollback Plan** | Complete stage-by-stage reverse strategy | 6 Stages covered with explicit rollback plans | ✅ PASSED |
-| **5. Database Health** | Score computed, gap analysis performed | Current: 19/100, Expected: 100/100 | ✅ PASSED |
+| **5. Database Health** | Score computed, gap analysis performed | Current: 51/100, Expected: 100/100 | ✅ PASSED |
 | **6. Migration Stages** | All 6 stages verified in order | Foundation, Lookups, Core, Ledger, Finance, Constraints | ✅ PASSED |
 | **7. Execution Environment** | Supabase target, env vars, CLI, directories | Supabase target & environment variables verified | ✅ PASSED |
 
@@ -55,22 +55,22 @@ Pre-migration readiness assessment for WYN database deployment to production. Al
    - **Status:** Verified & Ready
 
 2. **Stage 2 — Lookup & Reference Tables (`STAGE_2_LOOKUPS`):**
-   - **Tasks:** 8 tasks (`product_units` columns & constraints)
+   - **Tasks:** 0 tasks (`product_units` columns & constraints)
    - **Risk Level:** LOW
    - **Status:** Verified & Ready
 
 3. **Stage 3 — Core Entities & Inventory (`STAGE_3_CORE_INVENTORY`):**
-   - **Tasks:** 62 tasks (`customers`, `product_categories`, `products`, `profiles`, `sale_items`, `suppliers`, `purchase_items`)
+   - **Tasks:** 16 tasks (`customers`, `product_categories`, `products`, `profiles`, `sale_items`, `suppliers`, `purchase_items`)
    - **Risk Level:** MEDIUM
    - **Status:** Verified & Ready
 
 4. **Stage 4 — Ledger & Transactions (`STAGE_4_LEDGER`):**
-   - **Tasks:** 43 tasks (`sales`, `payments`, `stock_movements`, `purchase_orders`)
+   - **Tasks:** 18 tasks (`sales`, `payments`, `stock_movements`, `purchase_orders`)
    - **Risk Level:** HIGH
    - **Status:** Verified & Ready
 
 5. **Stage 5 — Finance & Analytics (`STAGE_5_FINANCE`):**
-   - **Tasks:** 34 tasks (`daily_summaries`, `expense_categories`, `expenses`)
+   - **Tasks:** 8 tasks (`daily_summaries`, `expense_categories`, `expenses`)
    - **Risk Level:** MEDIUM
    - **Status:** Verified & Ready
 

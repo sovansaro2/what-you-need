@@ -1,13 +1,19 @@
 export interface BusinessSettings {
   id?: string;
   userId: string;
+  businessId?: string;
   businessName: string;
   logoUrl?: string;
   phone?: string;
   email?: string;
   address?: string;
   primaryCurrency: 'KHR' | 'USD';
-  language: 'km';
+  timezone: string;
+  language: 'km' | 'en';
+  receiptPrefix: string;
+  taxRate: number;
+  decimalPrecision: number;
+  lowStockThreshold: number;
   updatedAt?: string;
 }
 

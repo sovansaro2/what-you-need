@@ -32,6 +32,7 @@ import { ProductUnitsPage } from '@/modules/inventory/units';
 import { ProductCategoriesPage } from '@/modules/inventory/categories';
 import { ProductFormPage, ProductDetailPage } from '@/modules/inventory/products';
 import { StockMovementPage, StockMovementHistoryPage } from '@/modules/inventory/stock-movements';
+import { SalesPOS } from '@/pages/SalesPOS';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -88,15 +89,9 @@ export const AppRoutes: React.FC = () => {
               <Route path="/products/units" element={<ProductUnitsPage />} />
               <Route path="/inventory/categories" element={<ProductCategoriesPage />} />
               <Route path="/products/categories" element={<ProductCategoriesPage />} />
-              <Route
-                path="/sales"
-                element={
-                  <ModulePlaceholder
-                    title="Sales Management Module"
-                    description="Point-of-sale receipt recording and order tracking interface prepared for database linkage."
-                  />
-                }
-              />
+              <Route path="/sales" element={<SalesPOS />} />
+              <Route path="/sales/pos" element={<SalesPOS />} />
+              <Route path="/sales/history" element={<SalesPOS />} />
               <Route
                 path="/reports"
                 element={

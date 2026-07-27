@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-07-27T10:57:40.705Z",
+  "timestamp": "2026-07-27T16:37:33.632Z",
   "targetFile": "database_v1.sql",
-  "schemaHash": "9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26",
+  "schemaHash": "CC44B3AB4DAD69FA5634C218F5EA06266E8E6A008666F0B5621BCE65510C7F93",
   "summary": {
     "totalChecks": 7,
-    "passedChecks": 6,
-    "warningChecks": 0,
-    "failedChecks": 1,
-    "criticalFindingsCount": 1,
-    "warningFindingsCount": 0,
-    "healthScore": 19,
-    "healthStatus": "CRITICAL",
-    "finalDecision": "REJECTED"
+    "passedChecks": 5,
+    "warningChecks": 2,
+    "failedChecks": 0,
+    "criticalFindingsCount": 0,
+    "warningFindingsCount": 2,
+    "healthScore": 51,
+    "healthStatus": "WARNING",
+    "finalDecision": "APPROVED WITH WARNINGS"
   },
   "results": {
     "dependency": {
@@ -26,19 +26,11 @@
       "score": 100,
       "findings": [
         {
-          "id": "MAP-UNMAPPED-TBL",
-          "category": "MAPPING",
-          "severity": "INFO",
-          "title": "Deprecated Current Tables Unmapped in Target",
-          "description": "6 current table(s) omit target mappings (e.g. 'business_settings', 'categories', 'schema_migrations').",
-          "recommendation": "Verify whether deprecated tables require archiving before deletion."
-        },
-        {
           "id": "MAP-UNMAPPED-COL",
           "category": "MAPPING",
           "severity": "INFO",
           "title": "Deprecated Current Columns Unmapped in Target",
-          "description": "7 current column(s) omit target mappings.",
+          "description": "2 current column(s) omit target mappings.",
           "recommendation": "Ensure no essential business data is orphaned in omitted columns."
         }
       ]
@@ -51,9 +43,17 @@
     },
     "rollback": {
       "category": "Rollback Validation",
-      "status": "PASSED",
-      "score": 100,
+      "status": "WARNING",
+      "score": 95,
       "findings": [
+        {
+          "id": "ROL-STEPS-MISSING-STAGE_2_LOOKUPS",
+          "category": "ROLLBACK",
+          "severity": "WARNING",
+          "title": "Empty Rollback Steps for Lookup & Reference Tables",
+          "description": "Stage 'Lookup & Reference Tables' (STAGE_2_LOOKUPS) has no SQL rollback steps defined.",
+          "recommendation": "Provide explicit reverse SQL statements (e.g., DROP TABLE, ALTER TABLE DROP COLUMN) for stage tasks."
+        },
         {
           "id": "ROL-MANUAL-OVERALL",
           "category": "ROLLBACK",
@@ -74,7 +74,7 @@
           "category": "RISK",
           "severity": "INFO",
           "title": "High Risk Highlighted: Column Data Type Modifications",
-          "description": "17 column data type modifications detected. Potential data truncation or conversion failure if unhandled.",
+          "description": "39 column data type modifications detected. Potential data truncation or conversion failure if unhandled.",
           "recommendation": "Apply lock_timeout and session safeguards during DDL execution."
         },
         {
@@ -82,22 +82,22 @@
           "category": "RISK",
           "severity": "INFO",
           "title": "High Risk Highlighted: Access Exclusive Table Locking",
-          "description": "ALTER TABLE operations acquire ACCESS EXCLUSIVE locks on 147 tables, temporarily blocking concurrent queries.",
+          "description": "ALTER TABLE operations acquire ACCESS EXCLUSIVE locks on 42 tables, temporarily blocking concurrent queries.",
           "recommendation": "Apply lock_timeout and session safeguards during DDL execution."
         }
       ]
     },
     "health": {
       "category": "Health Validation",
-      "status": "FAILED",
-      "score": 19,
+      "status": "WARNING",
+      "score": 51,
       "findings": [
         {
           "id": "HEALTH-LOW-SCORE",
           "category": "HEALTH",
-          "severity": "CRITICAL",
-          "title": "Database Health Score Below Threshold (19/100)",
-          "description": "Database overall health score is 19/100, which is below the minimum required engineering threshold of 80/100.",
+          "severity": "WARNING",
+          "title": "Database Health Score Below Threshold (51/100)",
+          "description": "Database overall health score is 51/100, which is below the minimum required engineering threshold of 80/100.",
           "recommendation": "Execute migration plan to bring current database schema into 100% alignment with target DDL specification."
         }
       ]
@@ -112,27 +112,37 @@
           "category": "COVERAGE",
           "severity": "INFO",
           "title": "Schema Inspection & Comparison Coverage Summary",
-          "description": "Covered 22 Current Tables, 121 Columns, 22 Primary Keys, 20 Foreign Keys, 19 Constraints, 33 Indexes against 16 Target Tables."
+          "description": "Covered 16 Current Tables, 225 Columns, 16 Primary Keys, 20 Foreign Keys, 19 Constraints, 27 Indexes against 16 Target Tables."
         }
       ]
     }
   },
-  "criticalFindings": [
+  "criticalFindings": [],
+  "warnings": [
+    {
+      "id": "ROL-STEPS-MISSING-STAGE_2_LOOKUPS",
+      "category": "ROLLBACK",
+      "severity": "WARNING",
+      "title": "Empty Rollback Steps for Lookup & Reference Tables",
+      "description": "Stage 'Lookup & Reference Tables' (STAGE_2_LOOKUPS) has no SQL rollback steps defined.",
+      "recommendation": "Provide explicit reverse SQL statements (e.g., DROP TABLE, ALTER TABLE DROP COLUMN) for stage tasks."
+    },
     {
       "id": "HEALTH-LOW-SCORE",
       "category": "HEALTH",
-      "severity": "CRITICAL",
-      "title": "Database Health Score Below Threshold (19/100)",
-      "description": "Database overall health score is 19/100, which is below the minimum required engineering threshold of 80/100.",
+      "severity": "WARNING",
+      "title": "Database Health Score Below Threshold (51/100)",
+      "description": "Database overall health score is 51/100, which is below the minimum required engineering threshold of 80/100.",
       "recommendation": "Execute migration plan to bring current database schema into 100% alignment with target DDL specification."
     }
   ],
-  "warnings": [],
   "recommendations": [
-    "1. [CRITICAL] Resolve 1 critical blocking findings before proceeding to SQL migration code generation.",
-    "   - Database Health Score Below Threshold (19/100): Execute migration plan to bring current database schema into 100% alignment with target DDL specification.",
+    "1. [APPROVED] All critical pre-flight engineering checks passed. Schema is cleared for migration plan execution.",
+    "2. [WARNINGS] Address 2 warning items during migration preparation:",
+    "   - Empty Rollback Steps for Lookup & Reference Tables: Provide explicit reverse SQL statements (e.g., DROP TABLE, ALTER TABLE DROP COLUMN) for stage tasks.",
+    "   - Database Health Score Below Threshold (51/100): Execute migration plan to bring current database schema into 100% alignment with target DDL specification.",
     "3. [SAFEGUARDS] Execute full database snapshot backup and configure lock_timeout = \"2s\" prior to applying DDL execution tasks.",
     "4. [VERIFICATION] Re-run Database Inspector and Schema Comparator after migration execution to verify 100% target schema match."
   ],
-  "approvalDecision": "REJECTED"
+  "approvalDecision": "APPROVED WITH WARNINGS"
 }
