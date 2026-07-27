@@ -1,6 +1,7 @@
 export interface ProductUnit {
   id: string;
   user_id: string;
+  business_id?: string;
   name: string;
   symbol?: string | null;
   description?: string | null;

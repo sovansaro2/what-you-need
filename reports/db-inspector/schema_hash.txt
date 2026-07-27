@@ -1,0 +1,5 @@
+Schema Hash: D9EE5C5C2FA0F9D6506A3B6B456CEB36529B2F4B2AE7BCBBE571B5B2745EC1D8
+Generated At: 2026-07-27T11:47:54.525Z
+Inspection Scope: all (public, auth, storage, extensions, realtime)
+Counting Strategy: Exact
+Database Version: PostgreSQL 15+ (Supabase Cloud)

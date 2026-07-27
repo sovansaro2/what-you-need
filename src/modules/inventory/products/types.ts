@@ -1,6 +1,7 @@
 export interface InventoryProduct {
   id: string;
-  user_id: string;
+  business_id?: string | null;
+  user_id?: string;
   name: string;
   unit: string;
   unit_id?: string | null;

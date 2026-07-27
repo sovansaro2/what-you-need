@@ -1,0 +1,47 @@
+{
+  "overallScore": 19,
+  "completeness": {
+    "score": 60,
+    "status": "WARNING",
+    "details": [
+      "130 target column(s) missing from existing tables."
+    ],
+    "findingsCount": 130
+  },
+  "integrity": {
+    "score": 0,
+    "status": "CRITICAL",
+    "details": [
+      "7 foreign key constraint(s) missing.",
+      "45 CHECK/UNIQUE constraint(s) missing."
+    ],
+    "findingsCount": 52
+  },
+  "performance": {
+    "score": 0,
+    "status": "CRITICAL",
+    "details": [
+      "20 performance search or unique index(es) missing.",
+      "1 index definition mismatch(es)."
+    ],
+    "findingsCount": 21
+  },
+  "security": {
+    "score": 0,
+    "status": "CRITICAL",
+    "details": [
+      "11 multi-tenant table(s) missing critical 'business_id' scoping column."
+    ],
+    "findingsCount": 11
+  },
+  "maintainability": {
+    "score": 26,
+    "status": "CRITICAL",
+    "details": [
+      "6 extra table(s) found in database that are not in target DDL.",
+      "7 extra column(s) detected."
+    ],
+    "findingsCount": 13
+  },
+  "timestamp": "2026-07-27T10:50:37.746Z"
+}

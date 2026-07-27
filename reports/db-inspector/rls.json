@@ -1,0 +1,253 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.517Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "schema": "public",
+      "table": "businesses",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "product_categories",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "product_units",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "products",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "stock_movements",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "customers",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "sales",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "sale_items",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "payments",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "suppliers",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "purchase_orders",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "purchase_items",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "expense_categories",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "expenses",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "daily_summaries",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "profiles",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "categories",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "stock_transactions",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "transactions",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "user_preferences",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "business_settings",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "public",
+      "table": "schema_migrations",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "auth",
+      "table": "users",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "auth",
+      "table": "sessions",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "auth",
+      "table": "identities",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "auth",
+      "table": "refresh_tokens",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "auth",
+      "table": "audit_log_entries",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "auth",
+      "table": "mfa_factors",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "storage",
+      "table": "buckets",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "storage",
+      "table": "objects",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "storage",
+      "table": "s3_multipart_uploads",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "extensions",
+      "table": "pg_stat_statements",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "extensions",
+      "table": "spatial_ref_sys",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "realtime",
+      "table": "subscription",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    },
+    {
+      "schema": "realtime",
+      "table": "schema_migrations",
+      "rlsEnabled": true,
+      "rlsForced": false,
+      "owner": "postgres"
+    }
+  ],
+  "count": 35
+}

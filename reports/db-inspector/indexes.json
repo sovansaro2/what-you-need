@@ -1,0 +1,569 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.237Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "indexName": "businesses_pkey",
+      "table": "businesses",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX businesses_pkey ON public.businesses USING btree (id)"
+    },
+    {
+      "indexName": "product_categories_pkey",
+      "table": "product_categories",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX product_categories_pkey ON public.product_categories USING btree (id)"
+    },
+    {
+      "indexName": "product_units_pkey",
+      "table": "product_units",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX product_units_pkey ON public.product_units USING btree (id)"
+    },
+    {
+      "indexName": "products_pkey",
+      "table": "products",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX products_pkey ON public.products USING btree (id)"
+    },
+    {
+      "indexName": "stock_movements_pkey",
+      "table": "stock_movements",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX stock_movements_pkey ON public.stock_movements USING btree (id)"
+    },
+    {
+      "indexName": "customers_pkey",
+      "table": "customers",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX customers_pkey ON public.customers USING btree (id)"
+    },
+    {
+      "indexName": "sales_pkey",
+      "table": "sales",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX sales_pkey ON public.sales USING btree (id)"
+    },
+    {
+      "indexName": "sale_items_pkey",
+      "table": "sale_items",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX sale_items_pkey ON public.sale_items USING btree (id)"
+    },
+    {
+      "indexName": "payments_pkey",
+      "table": "payments",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX payments_pkey ON public.payments USING btree (id)"
+    },
+    {
+      "indexName": "suppliers_pkey",
+      "table": "suppliers",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX suppliers_pkey ON public.suppliers USING btree (id)"
+    },
+    {
+      "indexName": "purchase_orders_pkey",
+      "table": "purchase_orders",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX purchase_orders_pkey ON public.purchase_orders USING btree (id)"
+    },
+    {
+      "indexName": "purchase_items_pkey",
+      "table": "purchase_items",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX purchase_items_pkey ON public.purchase_items USING btree (id)"
+    },
+    {
+      "indexName": "expense_categories_pkey",
+      "table": "expense_categories",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX expense_categories_pkey ON public.expense_categories USING btree (id)"
+    },
+    {
+      "indexName": "expenses_pkey",
+      "table": "expenses",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX expenses_pkey ON public.expenses USING btree (id)"
+    },
+    {
+      "indexName": "daily_summaries_pkey",
+      "table": "daily_summaries",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX daily_summaries_pkey ON public.daily_summaries USING btree (id)"
+    },
+    {
+      "indexName": "profiles_pkey",
+      "table": "profiles",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX profiles_pkey ON public.profiles USING btree (id)"
+    },
+    {
+      "indexName": "categories_pkey",
+      "table": "categories",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX categories_pkey ON public.categories USING btree (id)"
+    },
+    {
+      "indexName": "stock_transactions_pkey",
+      "table": "stock_transactions",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX stock_transactions_pkey ON public.stock_transactions USING btree (id)"
+    },
+    {
+      "indexName": "transactions_pkey",
+      "table": "transactions",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX transactions_pkey ON public.transactions USING btree (id)"
+    },
+    {
+      "indexName": "user_preferences_pkey",
+      "table": "user_preferences",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX user_preferences_pkey ON public.user_preferences USING btree (id)"
+    },
+    {
+      "indexName": "business_settings_pkey",
+      "table": "business_settings",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX business_settings_pkey ON public.business_settings USING btree (id)"
+    },
+    {
+      "indexName": "schema_migrations_pkey",
+      "table": "schema_migrations",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX schema_migrations_pkey ON public.schema_migrations USING btree (id)"
+    },
+    {
+      "indexName": "users_pkey",
+      "table": "users",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX users_pkey ON auth.users USING btree (id)"
+    },
+    {
+      "indexName": "sessions_pkey",
+      "table": "sessions",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX sessions_pkey ON auth.sessions USING btree (id)"
+    },
+    {
+      "indexName": "identities_pkey",
+      "table": "identities",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX identities_pkey ON auth.identities USING btree (id)"
+    },
+    {
+      "indexName": "refresh_tokens_pkey",
+      "table": "refresh_tokens",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX refresh_tokens_pkey ON auth.refresh_tokens USING btree (id)"
+    },
+    {
+      "indexName": "audit_log_entries_pkey",
+      "table": "audit_log_entries",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX audit_log_entries_pkey ON auth.audit_log_entries USING btree (id)"
+    },
+    {
+      "indexName": "mfa_factors_pkey",
+      "table": "mfa_factors",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX mfa_factors_pkey ON auth.mfa_factors USING btree (id)"
+    },
+    {
+      "indexName": "buckets_pkey",
+      "table": "buckets",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX buckets_pkey ON storage.buckets USING btree (id)"
+    },
+    {
+      "indexName": "objects_pkey",
+      "table": "objects",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX objects_pkey ON storage.objects USING btree (id)"
+    },
+    {
+      "indexName": "s3_multipart_uploads_pkey",
+      "table": "s3_multipart_uploads",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX s3_multipart_uploads_pkey ON storage.s3_multipart_uploads USING btree (id)"
+    },
+    {
+      "indexName": "pg_stat_statements_pkey",
+      "table": "pg_stat_statements",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX pg_stat_statements_pkey ON extensions.pg_stat_statements USING btree (id)"
+    },
+    {
+      "indexName": "spatial_ref_sys_pkey",
+      "table": "spatial_ref_sys",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX spatial_ref_sys_pkey ON extensions.spatial_ref_sys USING btree (id)"
+    },
+    {
+      "indexName": "subscription_pkey",
+      "table": "subscription",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX subscription_pkey ON realtime.subscription USING btree (id)"
+    },
+    {
+      "indexName": "schema_migrations_pkey",
+      "table": "schema_migrations",
+      "columns": [
+        "id"
+      ],
+      "isUnique": true,
+      "isPrimary": true,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX schema_migrations_pkey ON realtime.schema_migrations USING btree (id)"
+    },
+    {
+      "indexName": "idx_products_biz_category",
+      "table": "products",
+      "columns": [
+        "business_id",
+        "category_id"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_products_biz_category ON public.products USING btree (business_id, category_id)"
+    },
+    {
+      "indexName": "idx_products_biz_sku",
+      "table": "products",
+      "columns": [
+        "business_id",
+        "sku"
+      ],
+      "isUnique": true,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE UNIQUE INDEX idx_products_biz_sku ON public.products USING btree (business_id, sku)"
+    },
+    {
+      "indexName": "idx_products_barcode",
+      "table": "products",
+      "columns": [
+        "business_id",
+        "barcode"
+      ],
+      "isUnique": true,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": true,
+      "definition": "CREATE UNIQUE INDEX idx_products_barcode ON public.products USING btree (business_id, barcode) WHERE barcode IS NOT NULL"
+    },
+    {
+      "indexName": "idx_products_stock_alert",
+      "table": "products",
+      "columns": [
+        "business_id",
+        "current_stock",
+        "min_stock_alert"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_products_stock_alert ON public.products USING btree (business_id, current_stock, min_stock_alert)"
+    },
+    {
+      "indexName": "idx_stock_movements_biz_product",
+      "table": "stock_movements",
+      "columns": [
+        "business_id",
+        "product_id",
+        "created_at"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_stock_movements_biz_product ON public.stock_movements USING btree (business_id, product_id, created_at DESC)"
+    },
+    {
+      "indexName": "idx_stock_movements_idempotency",
+      "table": "stock_movements",
+      "columns": [
+        "idempotency_key"
+      ],
+      "isUnique": true,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": true,
+      "definition": "CREATE UNIQUE INDEX idx_stock_movements_idempotency ON public.stock_movements USING btree (idempotency_key) WHERE idempotency_key IS NOT NULL"
+    },
+    {
+      "indexName": "idx_sales_biz_sold_at",
+      "table": "sales",
+      "columns": [
+        "business_id",
+        "sold_at"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_sales_biz_sold_at ON public.sales USING btree (business_id, sold_at DESC)"
+    },
+    {
+      "indexName": "idx_sales_customer",
+      "table": "sales",
+      "columns": [
+        "customer_id"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_sales_customer ON public.sales USING btree (customer_id)"
+    },
+    {
+      "indexName": "idx_sale_items_sale_id",
+      "table": "sale_items",
+      "columns": [
+        "sale_id"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_sale_items_sale_id ON public.sale_items USING btree (sale_id)"
+    },
+    {
+      "indexName": "idx_sale_items_product_id",
+      "table": "sale_items",
+      "columns": [
+        "product_id"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_sale_items_product_id ON public.sale_items USING btree (product_id)"
+    },
+    {
+      "indexName": "idx_customers_biz_phone",
+      "table": "customers",
+      "columns": [
+        "business_id",
+        "phone"
+      ],
+      "isUnique": false,
+      "isPrimary": false,
+      "method": "btree",
+      "isPartial": false,
+      "definition": "CREATE INDEX idx_customers_biz_phone ON public.customers USING btree (business_id, phone)"
+    }
+  ],
+  "count": 46
+}

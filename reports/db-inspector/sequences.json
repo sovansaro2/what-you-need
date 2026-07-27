@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.524Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "sequenceName": "sales_invoice_number_seq",
+      "schema": "public",
+      "currentValue": 10001,
+      "increment": 1,
+      "minimum": 1,
+      "maximum": "9223372036854775807",
+      "cycle": false
+    },
+    {
+      "sequenceName": "purchase_orders_number_seq",
+      "schema": "public",
+      "currentValue": 5001,
+      "increment": 1,
+      "minimum": 1,
+      "maximum": "9223372036854775807",
+      "cycle": false
+    },
+    {
+      "sequenceName": "stock_movements_id_seq",
+      "schema": "public",
+      "currentValue": 1,
+      "increment": 1,
+      "minimum": 1,
+      "maximum": "9223372036854775807",
+      "cycle": false
+    },
+    {
+      "sequenceName": "categories_id_seq",
+      "schema": "public",
+      "currentValue": 1,
+      "increment": 1,
+      "minimum": 1,
+      "maximum": "9223372036854775807",
+      "cycle": false
+    }
+  ],
+  "count": 4
+}

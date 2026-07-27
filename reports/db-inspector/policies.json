@@ -1,0 +1,130 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.518Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "policyName": "businesses_select_policy",
+      "table": "businesses",
+      "command": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "withCheckExpression": null,
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "businesses_update_policy",
+      "table": "businesses",
+      "command": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(id IN (SELECT business_id FROM profiles WHERE id = auth.uid() AND role IN ('owner', 'admin')))",
+      "withCheckExpression": "(id IN (SELECT business_id FROM profiles WHERE id = auth.uid() AND role IN ('owner', 'admin')))",
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "profiles_select_own_or_business",
+      "table": "profiles",
+      "command": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(id = auth.uid() OR business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "withCheckExpression": null,
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "profiles_update_own",
+      "table": "profiles",
+      "command": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(id = auth.uid())",
+      "withCheckExpression": "(id = auth.uid())",
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "products_select_policy",
+      "table": "products",
+      "command": "SELECT",
+      "roles": [
+        "authenticated",
+        "anon"
+      ],
+      "usingExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "withCheckExpression": null,
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "products_modify_policy",
+      "table": "products",
+      "command": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "withCheckExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "sales_business_access",
+      "table": "sales",
+      "command": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "withCheckExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "customers_business_access",
+      "table": "customers",
+      "command": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "withCheckExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "user_preferences_own_access",
+      "table": "user_preferences",
+      "command": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(user_id = auth.uid())",
+      "withCheckExpression": "(user_id = auth.uid())",
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "business_settings_access",
+      "table": "business_settings",
+      "command": "ALL",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "withCheckExpression": "(business_id IN (SELECT business_id FROM profiles WHERE id = auth.uid()))",
+      "permissive": "PERMISSIVE"
+    },
+    {
+      "policyName": "storage_objects_authenticated_select",
+      "table": "objects",
+      "command": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "usingExpression": "(bucket_id = 'public'::text)",
+      "withCheckExpression": null,
+      "permissive": "PERMISSIVE"
+    }
+  ],
+  "count": 11
+}

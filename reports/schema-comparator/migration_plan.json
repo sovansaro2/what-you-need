@@ -1,0 +1,4176 @@
+{
+  "timestamp": "2026-07-27T10:50:37.772Z",
+  "targetFile": "database_v1.sql",
+  "schemaHash": "9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26",
+  "summary": {
+    "totalStages": 6,
+    "totalTasks": 202,
+    "estimatedTotalDuration": "28s",
+    "overallRisk": "HIGH",
+    "overallRollbackStrategy": "MANUAL"
+  },
+  "dependencies": {
+    "creationOrder": [
+      "businesses",
+      "customers",
+      "daily_summaries",
+      "expense_categories",
+      "expenses",
+      "product_categories",
+      "product_units",
+      "products",
+      "profiles",
+      "sales",
+      "payments",
+      "sale_items",
+      "stock_movements",
+      "suppliers",
+      "purchase_orders",
+      "purchase_items"
+    ],
+    "updateOrder": [
+      "businesses",
+      "customers",
+      "daily_summaries",
+      "expense_categories",
+      "expenses",
+      "product_categories",
+      "product_units",
+      "products",
+      "profiles",
+      "sales",
+      "payments",
+      "sale_items",
+      "stock_movements",
+      "suppliers",
+      "purchase_orders",
+      "purchase_items"
+    ],
+    "validationOrder": [
+      "purchase_items",
+      "purchase_orders",
+      "suppliers",
+      "stock_movements",
+      "sale_items",
+      "payments",
+      "sales",
+      "profiles",
+      "products",
+      "product_units",
+      "product_categories",
+      "expenses",
+      "expense_categories",
+      "daily_summaries",
+      "customers",
+      "businesses"
+    ],
+    "dependencyGraph": {
+      "businesses": {
+        "tableName": "businesses",
+        "dependsOn": [],
+        "referencedBy": [
+          "profiles",
+          "product_categories",
+          "product_units",
+          "products",
+          "stock_movements",
+          "customers",
+          "sales",
+          "sale_items",
+          "payments",
+          "suppliers",
+          "purchase_orders",
+          "purchase_items",
+          "expense_categories",
+          "expenses",
+          "daily_summaries"
+        ],
+        "hasCircularDependency": false
+      },
+      "profiles": {
+        "tableName": "profiles",
+        "dependsOn": [
+          "businesses"
+        ],
+        "referencedBy": [],
+        "hasCircularDependency": false
+      },
+      "product_categories": {
+        "tableName": "product_categories",
+        "dependsOn": [
+          "businesses"
+        ],
+        "referencedBy": [
+          "products"
+        ],
+        "hasCircularDependency": false
+      },
+      "product_units": {
+        "tableName": "product_units",
+        "dependsOn": [
+          "businesses"
+        ],
+        "referencedBy": [
+          "products"
+        ],
+        "hasCircularDependency": false
+      },
+      "products": {
+        "tableName": "products",
+        "dependsOn": [
+          "businesses",
+          "product_categories",
+          "product_units"
+        ],
+        "referencedBy": [
+          "stock_movements",
+          "sale_items",
+          "purchase_items"
+        ],
+        "hasCircularDependency": false
+      },
+      "stock_movements": {
+        "tableName": "stock_movements",
+        "dependsOn": [
+          "businesses",
+          "products"
+        ],
+        "referencedBy": [],
+        "hasCircularDependency": false
+      },
+      "customers": {
+        "tableName": "customers",
+        "dependsOn": [
+          "businesses"
+        ],
+        "referencedBy": [
+          "sales",
+          "payments"
+        ],
+        "hasCircularDependency": false
+      },
+      "sales": {
+        "tableName": "sales",
+        "dependsOn": [
+          "businesses",
+          "customers"
+        ],
+        "referencedBy": [
+          "sale_items",
+          "payments"
+        ],
+        "hasCircularDependency": false
+      },
+      "sale_items": {
+        "tableName": "sale_items",
+        "dependsOn": [
+          "businesses",
+          "sales",
+          "products"
+        ],
+        "referencedBy": [],
+        "hasCircularDependency": false
+      },
+      "payments": {
+        "tableName": "payments",
+        "dependsOn": [
+          "businesses",
+          "sales",
+          "customers"
+        ],
+        "referencedBy": [],
+        "hasCircularDependency": false
+      },
+      "suppliers": {
+        "tableName": "suppliers",
+        "dependsOn": [
+          "businesses"
+        ],
+        "referencedBy": [
+          "purchase_orders"
+        ],
+        "hasCircularDependency": false
+      },
+      "purchase_orders": {
+        "tableName": "purchase_orders",
+        "dependsOn": [
+          "businesses",
+          "suppliers"
+        ],
+        "referencedBy": [
+          "purchase_items"
+        ],
+        "hasCircularDependency": false
+      },
+      "purchase_items": {
+        "tableName": "purchase_items",
+        "dependsOn": [
+          "businesses",
+          "purchase_orders",
+          "products"
+        ],
+        "referencedBy": [],
+        "hasCircularDependency": false
+      },
+      "expense_categories": {
+        "tableName": "expense_categories",
+        "dependsOn": [
+          "businesses"
+        ],
+        "referencedBy": [
+          "expenses"
+        ],
+        "hasCircularDependency": false
+      },
+      "expenses": {
+        "tableName": "expenses",
+        "dependsOn": [
+          "businesses",
+          "expense_categories"
+        ],
+        "referencedBy": [],
+        "hasCircularDependency": false
+      },
+      "daily_summaries": {
+        "tableName": "daily_summaries",
+        "dependsOn": [
+          "businesses"
+        ],
+        "referencedBy": [],
+        "hasCircularDependency": false
+      }
+    },
+    "circularDependencies": []
+  },
+  "stages": [
+    {
+      "stageNumber": 1,
+      "stageId": "STAGE_1_FOUNDATION",
+      "name": "Foundation & Schemas",
+      "description": "PostgreSQL extensions, schemas, base system settings, and core foundation tables.",
+      "tables": [
+        "businesses"
+      ],
+      "taskCount": 1,
+      "estimatedDuration": "2s",
+      "risk": "LOW"
+    },
+    {
+      "stageNumber": 2,
+      "stageId": "STAGE_2_LOOKUPS",
+      "name": "Lookup & Reference Tables",
+      "description": "Product categories, units of measure, statuses, and reference domain models.",
+      "tables": [
+        "product_units"
+      ],
+      "taskCount": 8,
+      "estimatedDuration": "3s",
+      "risk": "LOW"
+    },
+    {
+      "stageNumber": 3,
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "name": "Core Entities & Inventory",
+      "description": "Products, customers, suppliers, stores, and primary business entity tables.",
+      "tables": [
+        "customers",
+        "product_categories",
+        "products",
+        "profiles",
+        "sale_items",
+        "suppliers",
+        "purchase_items"
+      ],
+      "taskCount": 62,
+      "estimatedDuration": "5s",
+      "risk": "MEDIUM"
+    },
+    {
+      "stageNumber": 4,
+      "stageId": "STAGE_4_LEDGER",
+      "name": "Ledger & Transactions",
+      "description": "Stock movements, sales orders, line items, payments, and transaction ledgers.",
+      "tables": [
+        "sales",
+        "payments",
+        "stock_movements",
+        "purchase_orders"
+      ],
+      "taskCount": 43,
+      "estimatedDuration": "8s",
+      "risk": "HIGH"
+    },
+    {
+      "stageNumber": 5,
+      "stageId": "STAGE_5_FINANCE",
+      "name": "Finance & Analytics",
+      "description": "Expenses, daily financial summaries, audit logs, and reporting structures.",
+      "tables": [
+        "daily_summaries",
+        "expense_categories",
+        "expenses"
+      ],
+      "taskCount": 34,
+      "estimatedDuration": "4s",
+      "risk": "MEDIUM"
+    },
+    {
+      "stageNumber": 6,
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "name": "Constraints & Indexes",
+      "description": "Foreign key referential integrity constraints, unique/check constraints, and performance btree indexes.",
+      "tables": [],
+      "taskCount": 54,
+      "estimatedDuration": "6s",
+      "risk": "MEDIUM"
+    }
+  ],
+  "executionPlan": [
+    {
+      "id": "TASK-101",
+      "stageId": "STAGE_1_FOUNDATION",
+      "stageNumber": 1,
+      "title": "Enable Extension 'pgcrypto'",
+      "description": "Install PostgreSQL extension 'pgcrypto' if not already present.",
+      "targetEntity": "pgcrypto",
+      "taskType": "CREATE_EXTENSION",
+      "dependencies": [],
+      "estimatedDuration": "200ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Can be safely dropped using DROP EXTENSION IF EXISTS pgcrypto."
+    },
+    {
+      "id": "TASK-104",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'business_id' to 'customers'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'customers'.",
+      "targetEntity": "customers.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-105",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'customer_code' to 'customers'",
+      "description": "Add missing column 'customer_code' (character varying(50)) to table 'customers'.",
+      "targetEntity": "customers.customer_code",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN customer_code."
+    },
+    {
+      "id": "TASK-106",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'phone' to 'customers'",
+      "description": "Add missing column 'phone' (character varying(50)) to table 'customers'.",
+      "targetEntity": "customers.phone",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN phone."
+    },
+    {
+      "id": "TASK-107",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'email' to 'customers'",
+      "description": "Add missing column 'email' (character varying(255)) to table 'customers'.",
+      "targetEntity": "customers.email",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN email."
+    },
+    {
+      "id": "TASK-108",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'address' to 'customers'",
+      "description": "Add missing column 'address' (text) to table 'customers'.",
+      "targetEntity": "customers.address",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN address."
+    },
+    {
+      "id": "TASK-109",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'credit_limit' to 'customers'",
+      "description": "Add missing column 'credit_limit' (numeric(12 NOT NULL DEFAULT 0.00) to table 'customers'.",
+      "targetEntity": "customers.credit_limit",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN credit_limit."
+    },
+    {
+      "id": "TASK-110",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'outstanding_balance' to 'customers'",
+      "description": "Add missing column 'outstanding_balance' (numeric(12 NOT NULL DEFAULT 0.00) to table 'customers'.",
+      "targetEntity": "customers.outstanding_balance",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN outstanding_balance."
+    },
+    {
+      "id": "TASK-111",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'is_active' to 'customers'",
+      "description": "Add missing column 'is_active' (boolean NOT NULL DEFAULT true) to table 'customers'.",
+      "targetEntity": "customers.is_active",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN is_active."
+    },
+    {
+      "id": "TASK-112",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_at' to 'customers'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'customers'.",
+      "targetEntity": "customers.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-113",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'deleted_at' to 'customers'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'customers'.",
+      "targetEntity": "customers.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-114",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'created_by' to 'customers'",
+      "description": "Add missing column 'created_by' (uuid) to table 'customers'.",
+      "targetEntity": "customers.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-115",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_by' to 'customers'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'customers'.",
+      "targetEntity": "customers.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-103"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE customers DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-117",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'business_id' to 'daily_summaries'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-118",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'summary_date' to 'daily_summaries'",
+      "description": "Add missing column 'summary_date' (date NOT NULL) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.summary_date",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN summary_date."
+    },
+    {
+      "id": "TASK-119",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_sales_amount' to 'daily_summaries'",
+      "description": "Add missing column 'total_sales_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_sales_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_sales_amount."
+    },
+    {
+      "id": "TASK-120",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_sales_count' to 'daily_summaries'",
+      "description": "Add missing column 'total_sales_count' (integer NOT NULL DEFAULT 0) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_sales_count",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_sales_count."
+    },
+    {
+      "id": "TASK-121",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_cost_amount' to 'daily_summaries'",
+      "description": "Add missing column 'total_cost_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_cost_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_cost_amount."
+    },
+    {
+      "id": "TASK-122",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_gross_profit' to 'daily_summaries'",
+      "description": "Add missing column 'total_gross_profit' (numeric(12 NOT NULL DEFAULT 0.00) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_gross_profit",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_gross_profit."
+    },
+    {
+      "id": "TASK-123",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_expenses_amount' to 'daily_summaries'",
+      "description": "Add missing column 'total_expenses_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_expenses_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_expenses_amount."
+    },
+    {
+      "id": "TASK-124",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_net_profit' to 'daily_summaries'",
+      "description": "Add missing column 'total_net_profit' (numeric(12 NOT NULL DEFAULT 0.00) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_net_profit",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_net_profit."
+    },
+    {
+      "id": "TASK-125",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_stock_in_qty' to 'daily_summaries'",
+      "description": "Add missing column 'total_stock_in_qty' (numeric(12 NOT NULL DEFAULT 0.000) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_stock_in_qty",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_stock_in_qty."
+    },
+    {
+      "id": "TASK-126",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'total_stock_out_qty' to 'daily_summaries'",
+      "description": "Add missing column 'total_stock_out_qty' (numeric(12 NOT NULL DEFAULT 0.000) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.total_stock_out_qty",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN total_stock_out_qty."
+    },
+    {
+      "id": "TASK-127",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'updated_at' to 'daily_summaries'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'daily_summaries'.",
+      "targetEntity": "daily_summaries.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE daily_summaries DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-129",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'business_id' to 'expense_categories'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-130",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'code' to 'expense_categories'",
+      "description": "Add missing column 'code' (character varying(50)) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.code",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN code."
+    },
+    {
+      "id": "TASK-131",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'description' to 'expense_categories'",
+      "description": "Add missing column 'description' (text) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.description",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN description."
+    },
+    {
+      "id": "TASK-132",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'is_active' to 'expense_categories'",
+      "description": "Add missing column 'is_active' (boolean NOT NULL DEFAULT true) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.is_active",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN is_active."
+    },
+    {
+      "id": "TASK-133",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'updated_at' to 'expense_categories'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-134",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'deleted_at' to 'expense_categories'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-135",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'created_by' to 'expense_categories'",
+      "description": "Add missing column 'created_by' (uuid) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-136",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'updated_by' to 'expense_categories'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'expense_categories'.",
+      "targetEntity": "expense_categories.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-128"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expense_categories DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-138",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'business_id' to 'expenses'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'expenses'.",
+      "targetEntity": "expenses.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-139",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'category_id' to 'expenses'",
+      "description": "Add missing column 'category_id' (uuid NOT NULL) to table 'expenses'.",
+      "targetEntity": "expenses.category_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN category_id."
+    },
+    {
+      "id": "TASK-140",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'expense_number' to 'expenses'",
+      "description": "Add missing column 'expense_number' (character varying(100) NOT NULL) to table 'expenses'.",
+      "targetEntity": "expenses.expense_number",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN expense_number."
+    },
+    {
+      "id": "TASK-141",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'title' to 'expenses'",
+      "description": "Add missing column 'title' (character varying(255) NOT NULL) to table 'expenses'.",
+      "targetEntity": "expenses.title",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN title."
+    },
+    {
+      "id": "TASK-142",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'amount' to 'expenses'",
+      "description": "Add missing column 'amount' (numeric(12 NOT NULL) to table 'expenses'.",
+      "targetEntity": "expenses.amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN amount."
+    },
+    {
+      "id": "TASK-143",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'currency' to 'expenses'",
+      "description": "Add missing column 'currency' (character varying(10) NOT NULL DEFAULT KHR) to table 'expenses'.",
+      "targetEntity": "expenses.currency",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN currency."
+    },
+    {
+      "id": "TASK-144",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'payment_method' to 'expenses'",
+      "description": "Add missing column 'payment_method' (character varying(50) NOT NULL) to table 'expenses'.",
+      "targetEntity": "expenses.payment_method",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN payment_method."
+    },
+    {
+      "id": "TASK-145",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'vendor_name' to 'expenses'",
+      "description": "Add missing column 'vendor_name' (character varying(255)) to table 'expenses'.",
+      "targetEntity": "expenses.vendor_name",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN vendor_name."
+    },
+    {
+      "id": "TASK-146",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'receipt_url' to 'expenses'",
+      "description": "Add missing column 'receipt_url' (text) to table 'expenses'.",
+      "targetEntity": "expenses.receipt_url",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN receipt_url."
+    },
+    {
+      "id": "TASK-147",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'notes' to 'expenses'",
+      "description": "Add missing column 'notes' (text) to table 'expenses'.",
+      "targetEntity": "expenses.notes",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN notes."
+    },
+    {
+      "id": "TASK-148",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'incurred_at' to 'expenses'",
+      "description": "Add missing column 'incurred_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'expenses'.",
+      "targetEntity": "expenses.incurred_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN incurred_at."
+    },
+    {
+      "id": "TASK-149",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'updated_at' to 'expenses'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'expenses'.",
+      "targetEntity": "expenses.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-150",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'deleted_at' to 'expenses'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'expenses'.",
+      "targetEntity": "expenses.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-151",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'created_by' to 'expenses'",
+      "description": "Add missing column 'created_by' (uuid) to table 'expenses'.",
+      "targetEntity": "expenses.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-152",
+      "stageId": "STAGE_5_FINANCE",
+      "stageNumber": 5,
+      "title": "Add Column 'updated_by' to 'expenses'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'expenses'.",
+      "targetEntity": "expenses.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE expenses DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-154",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'business_id' to 'product_categories'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'product_categories'.",
+      "targetEntity": "product_categories.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-155",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'code' to 'product_categories'",
+      "description": "Add missing column 'code' (character varying(50)) to table 'product_categories'.",
+      "targetEntity": "product_categories.code",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN code."
+    },
+    {
+      "id": "TASK-156",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'description' to 'product_categories'",
+      "description": "Add missing column 'description' (text) to table 'product_categories'.",
+      "targetEntity": "product_categories.description",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN description."
+    },
+    {
+      "id": "TASK-157",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'color' to 'product_categories'",
+      "description": "Add missing column 'color' (character varying(30)) to table 'product_categories'.",
+      "targetEntity": "product_categories.color",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN color."
+    },
+    {
+      "id": "TASK-158",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'icon' to 'product_categories'",
+      "description": "Add missing column 'icon' (character varying(50)) to table 'product_categories'.",
+      "targetEntity": "product_categories.icon",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN icon."
+    },
+    {
+      "id": "TASK-159",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'is_active' to 'product_categories'",
+      "description": "Add missing column 'is_active' (boolean NOT NULL DEFAULT true) to table 'product_categories'.",
+      "targetEntity": "product_categories.is_active",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN is_active."
+    },
+    {
+      "id": "TASK-160",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_at' to 'product_categories'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'product_categories'.",
+      "targetEntity": "product_categories.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-161",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'deleted_at' to 'product_categories'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'product_categories'.",
+      "targetEntity": "product_categories.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-162",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'created_by' to 'product_categories'",
+      "description": "Add missing column 'created_by' (uuid) to table 'product_categories'.",
+      "targetEntity": "product_categories.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-163",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_by' to 'product_categories'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'product_categories'.",
+      "targetEntity": "product_categories.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-153"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_categories DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-165",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'business_id' to 'product_units'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'product_units'.",
+      "targetEntity": "product_units.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-166",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'code' to 'product_units'",
+      "description": "Add missing column 'code' (character varying(50)) to table 'product_units'.",
+      "targetEntity": "product_units.code",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN code."
+    },
+    {
+      "id": "TASK-167",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'symbol' to 'product_units'",
+      "description": "Add missing column 'symbol' (character varying(20)) to table 'product_units'.",
+      "targetEntity": "product_units.symbol",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN symbol."
+    },
+    {
+      "id": "TASK-168",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'is_active' to 'product_units'",
+      "description": "Add missing column 'is_active' (boolean NOT NULL DEFAULT true) to table 'product_units'.",
+      "targetEntity": "product_units.is_active",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN is_active."
+    },
+    {
+      "id": "TASK-169",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'updated_at' to 'product_units'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'product_units'.",
+      "targetEntity": "product_units.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-170",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'deleted_at' to 'product_units'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'product_units'.",
+      "targetEntity": "product_units.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-171",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'created_by' to 'product_units'",
+      "description": "Add missing column 'created_by' (uuid) to table 'product_units'.",
+      "targetEntity": "product_units.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-172",
+      "stageId": "STAGE_2_LOOKUPS",
+      "stageNumber": 2,
+      "title": "Add Column 'updated_by' to 'product_units'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'product_units'.",
+      "targetEntity": "product_units.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-164"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE product_units DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-174",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'description' to 'products'",
+      "description": "Add missing column 'description' (text) to table 'products'.",
+      "targetEntity": "products.description",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE products DROP COLUMN description."
+    },
+    {
+      "id": "TASK-175",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'cost_price' in 'products'",
+      "description": "Modify column 'cost_price' in 'products' from numeric(12,2) to numeric(12.",
+      "targetEntity": "products.cost_price",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-176",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'selling_price' in 'products'",
+      "description": "Modify column 'selling_price' in 'products' from numeric(12,2) to numeric(12.",
+      "targetEntity": "products.selling_price",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-177",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'current_stock' in 'products'",
+      "description": "Modify column 'current_stock' in 'products' from numeric(12,3) to numeric(12.",
+      "targetEntity": "products.current_stock",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-178",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'min_stock_alert' in 'products'",
+      "description": "Modify column 'min_stock_alert' in 'products' from numeric(12,3) to numeric(12.",
+      "targetEntity": "products.min_stock_alert",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-180",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'business_id' to 'profiles'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'profiles'.",
+      "targetEntity": "profiles.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-181",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'full_name' to 'profiles'",
+      "description": "Add missing column 'full_name' (character varying(255) NOT NULL) to table 'profiles'.",
+      "targetEntity": "profiles.full_name",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN full_name."
+    },
+    {
+      "id": "TASK-182",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'phone' to 'profiles'",
+      "description": "Add missing column 'phone' (character varying(50)) to table 'profiles'.",
+      "targetEntity": "profiles.phone",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN phone."
+    },
+    {
+      "id": "TASK-183",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'role' to 'profiles'",
+      "description": "Add missing column 'role' (character varying(50) NOT NULL DEFAULT staff) to table 'profiles'.",
+      "targetEntity": "profiles.role",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN role."
+    },
+    {
+      "id": "TASK-184",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'is_active' to 'profiles'",
+      "description": "Add missing column 'is_active' (boolean NOT NULL DEFAULT true) to table 'profiles'.",
+      "targetEntity": "profiles.is_active",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN is_active."
+    },
+    {
+      "id": "TASK-185",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'avatar_url' to 'profiles'",
+      "description": "Add missing column 'avatar_url' (text) to table 'profiles'.",
+      "targetEntity": "profiles.avatar_url",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN avatar_url."
+    },
+    {
+      "id": "TASK-186",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_at' to 'profiles'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'profiles'.",
+      "targetEntity": "profiles.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-187",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'deleted_at' to 'profiles'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'profiles'.",
+      "targetEntity": "profiles.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-188",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'created_by' to 'profiles'",
+      "description": "Add missing column 'created_by' (uuid) to table 'profiles'.",
+      "targetEntity": "profiles.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-189",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_by' to 'profiles'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'profiles'.",
+      "targetEntity": "profiles.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE profiles DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-191",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'status' to 'sales'",
+      "description": "Add missing column 'status' (character varying(50) NOT NULL DEFAULT completed) to table 'sales'.",
+      "targetEntity": "sales.status",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE sales DROP COLUMN status."
+    },
+    {
+      "id": "TASK-192",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'subtotal_amount' to 'sales'",
+      "description": "Add missing column 'subtotal_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'sales'.",
+      "targetEntity": "sales.subtotal_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE sales DROP COLUMN subtotal_amount."
+    },
+    {
+      "id": "TASK-193",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'discount_amount' to 'sales'",
+      "description": "Add missing column 'discount_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'sales'.",
+      "targetEntity": "sales.discount_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE sales DROP COLUMN discount_amount."
+    },
+    {
+      "id": "TASK-194",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'tax_amount' to 'sales'",
+      "description": "Add missing column 'tax_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'sales'.",
+      "targetEntity": "sales.tax_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE sales DROP COLUMN tax_amount."
+    },
+    {
+      "id": "TASK-195",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'total_amount' in 'sales'",
+      "description": "Modify column 'total_amount' in 'sales' from numeric(12,2) to numeric(12.",
+      "targetEntity": "sales.total_amount",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-196",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'paid_amount' in 'sales'",
+      "description": "Modify column 'paid_amount' in 'sales' from numeric(12,2) to numeric(12.",
+      "targetEntity": "sales.paid_amount",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-197",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'due_amount' in 'sales'",
+      "description": "Modify column 'due_amount' in 'sales' from numeric(12,2) to numeric(12.",
+      "targetEntity": "sales.due_amount",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-198",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'notes' to 'sales'",
+      "description": "Add missing column 'notes' (text) to table 'sales'.",
+      "targetEntity": "sales.notes",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE sales DROP COLUMN notes."
+    },
+    {
+      "id": "TASK-200",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'business_id' to 'payments'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'payments'.",
+      "targetEntity": "payments.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-201",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'sale_id' to 'payments'",
+      "description": "Add missing column 'sale_id' (uuid) to table 'payments'.",
+      "targetEntity": "payments.sale_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN sale_id."
+    },
+    {
+      "id": "TASK-202",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'customer_id' to 'payments'",
+      "description": "Add missing column 'customer_id' (uuid) to table 'payments'.",
+      "targetEntity": "payments.customer_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN customer_id."
+    },
+    {
+      "id": "TASK-203",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'payment_number' to 'payments'",
+      "description": "Add missing column 'payment_number' (character varying(100) NOT NULL) to table 'payments'.",
+      "targetEntity": "payments.payment_number",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN payment_number."
+    },
+    {
+      "id": "TASK-204",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'payment_method' to 'payments'",
+      "description": "Add missing column 'payment_method' (character varying(50) NOT NULL) to table 'payments'.",
+      "targetEntity": "payments.payment_method",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN payment_method."
+    },
+    {
+      "id": "TASK-205",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'amount' to 'payments'",
+      "description": "Add missing column 'amount' (numeric(12 NOT NULL) to table 'payments'.",
+      "targetEntity": "payments.amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN amount."
+    },
+    {
+      "id": "TASK-206",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'currency' to 'payments'",
+      "description": "Add missing column 'currency' (character varying(10) NOT NULL DEFAULT KHR) to table 'payments'.",
+      "targetEntity": "payments.currency",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN currency."
+    },
+    {
+      "id": "TASK-207",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'exchange_rate' to 'payments'",
+      "description": "Add missing column 'exchange_rate' (numeric(10 NOT NULL DEFAULT 1.0000) to table 'payments'.",
+      "targetEntity": "payments.exchange_rate",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN exchange_rate."
+    },
+    {
+      "id": "TASK-208",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'reference_number' to 'payments'",
+      "description": "Add missing column 'reference_number' (character varying(100)) to table 'payments'.",
+      "targetEntity": "payments.reference_number",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN reference_number."
+    },
+    {
+      "id": "TASK-209",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'status' to 'payments'",
+      "description": "Add missing column 'status' (character varying(50) NOT NULL DEFAULT completed) to table 'payments'.",
+      "targetEntity": "payments.status",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN status."
+    },
+    {
+      "id": "TASK-210",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'notes' to 'payments'",
+      "description": "Add missing column 'notes' (text) to table 'payments'.",
+      "targetEntity": "payments.notes",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN notes."
+    },
+    {
+      "id": "TASK-211",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'paid_at' to 'payments'",
+      "description": "Add missing column 'paid_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'payments'.",
+      "targetEntity": "payments.paid_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN paid_at."
+    },
+    {
+      "id": "TASK-212",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'created_by' to 'payments'",
+      "description": "Add missing column 'created_by' (uuid) to table 'payments'.",
+      "targetEntity": "payments.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE payments DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-214",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'quantity' in 'sale_items'",
+      "description": "Modify column 'quantity' in 'sale_items' from numeric(12,3) to numeric(12.",
+      "targetEntity": "sale_items.quantity",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-213"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-215",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'unit_price' in 'sale_items'",
+      "description": "Modify column 'unit_price' in 'sale_items' from numeric(12,2) to numeric(12.",
+      "targetEntity": "sale_items.unit_price",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-213"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-216",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'unit_cost' in 'sale_items'",
+      "description": "Modify column 'unit_cost' in 'sale_items' from numeric(12,2) to numeric(12.",
+      "targetEntity": "sale_items.unit_cost",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-213"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-217",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'discount_amount' in 'sale_items'",
+      "description": "Modify column 'discount_amount' in 'sale_items' from numeric(12,2) to numeric(12.",
+      "targetEntity": "sale_items.discount_amount",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-213"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-218",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Modify Column Type 'subtotal' in 'sale_items'",
+      "description": "Modify column 'subtotal' in 'sale_items' from numeric(12,2) to numeric(12.",
+      "targetEntity": "sale_items.subtotal",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-213"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-220",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'quantity' in 'stock_movements'",
+      "description": "Modify column 'quantity' in 'stock_movements' from numeric(12,3) to numeric(12.",
+      "targetEntity": "stock_movements.quantity",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-221",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'balance_before' in 'stock_movements'",
+      "description": "Modify column 'balance_before' in 'stock_movements' from numeric(12,3) to numeric(12.",
+      "targetEntity": "stock_movements.balance_before",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-222",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'balance_after' in 'stock_movements'",
+      "description": "Modify column 'balance_after' in 'stock_movements' from numeric(12,3) to numeric(12.",
+      "targetEntity": "stock_movements.balance_after",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-223",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'unit_cost' in 'stock_movements'",
+      "description": "Modify column 'unit_cost' in 'stock_movements' from numeric(12,2) to numeric(12.",
+      "targetEntity": "stock_movements.unit_cost",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-224",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Modify Column Type 'total_cost' in 'stock_movements'",
+      "description": "Modify column 'total_cost' in 'stock_movements' from numeric(12,2) to numeric(12.",
+      "targetEntity": "stock_movements.total_cost",
+      "taskType": "ALTER_TABLE_MODIFY_COLUMN",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "500ms",
+      "risk": "HIGH",
+      "rollbackAvailability": "MANUAL",
+      "rollbackReason": "Type conversion may require explicit reverse casting and data verification."
+    },
+    {
+      "id": "TASK-225",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'notes' to 'stock_movements'",
+      "description": "Add missing column 'notes' (text) to table 'stock_movements'.",
+      "targetEntity": "stock_movements.notes",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE stock_movements DROP COLUMN notes."
+    },
+    {
+      "id": "TASK-226",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'created_by' to 'stock_movements'",
+      "description": "Add missing column 'created_by' (uuid) to table 'stock_movements'.",
+      "targetEntity": "stock_movements.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE stock_movements DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-228",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'business_id' to 'suppliers'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'suppliers'.",
+      "targetEntity": "suppliers.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-229",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'supplier_code' to 'suppliers'",
+      "description": "Add missing column 'supplier_code' (character varying(50)) to table 'suppliers'.",
+      "targetEntity": "suppliers.supplier_code",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN supplier_code."
+    },
+    {
+      "id": "TASK-230",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'company_name' to 'suppliers'",
+      "description": "Add missing column 'company_name' (character varying(255) NOT NULL) to table 'suppliers'.",
+      "targetEntity": "suppliers.company_name",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN company_name."
+    },
+    {
+      "id": "TASK-231",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'contact_name' to 'suppliers'",
+      "description": "Add missing column 'contact_name' (character varying(255)) to table 'suppliers'.",
+      "targetEntity": "suppliers.contact_name",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN contact_name."
+    },
+    {
+      "id": "TASK-232",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'phone' to 'suppliers'",
+      "description": "Add missing column 'phone' (character varying(50)) to table 'suppliers'.",
+      "targetEntity": "suppliers.phone",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN phone."
+    },
+    {
+      "id": "TASK-233",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'email' to 'suppliers'",
+      "description": "Add missing column 'email' (character varying(255)) to table 'suppliers'.",
+      "targetEntity": "suppliers.email",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN email."
+    },
+    {
+      "id": "TASK-234",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'address' to 'suppliers'",
+      "description": "Add missing column 'address' (text) to table 'suppliers'.",
+      "targetEntity": "suppliers.address",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN address."
+    },
+    {
+      "id": "TASK-235",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'outstanding_balance' to 'suppliers'",
+      "description": "Add missing column 'outstanding_balance' (numeric(12 NOT NULL DEFAULT 0.00) to table 'suppliers'.",
+      "targetEntity": "suppliers.outstanding_balance",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN outstanding_balance."
+    },
+    {
+      "id": "TASK-236",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'is_active' to 'suppliers'",
+      "description": "Add missing column 'is_active' (boolean NOT NULL DEFAULT true) to table 'suppliers'.",
+      "targetEntity": "suppliers.is_active",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN is_active."
+    },
+    {
+      "id": "TASK-237",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_at' to 'suppliers'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'suppliers'.",
+      "targetEntity": "suppliers.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-238",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'deleted_at' to 'suppliers'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'suppliers'.",
+      "targetEntity": "suppliers.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-239",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'created_by' to 'suppliers'",
+      "description": "Add missing column 'created_by' (uuid) to table 'suppliers'.",
+      "targetEntity": "suppliers.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-240",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'updated_by' to 'suppliers'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'suppliers'.",
+      "targetEntity": "suppliers.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE suppliers DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-242",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'business_id' to 'purchase_orders'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-243",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'supplier_id' to 'purchase_orders'",
+      "description": "Add missing column 'supplier_id' (uuid NOT NULL) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.supplier_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN supplier_id."
+    },
+    {
+      "id": "TASK-244",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'po_number' to 'purchase_orders'",
+      "description": "Add missing column 'po_number' (character varying(100) NOT NULL) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.po_number",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN po_number."
+    },
+    {
+      "id": "TASK-245",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'status' to 'purchase_orders'",
+      "description": "Add missing column 'status' (character varying(50) NOT NULL DEFAULT draft) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.status",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN status."
+    },
+    {
+      "id": "TASK-246",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'payment_status' to 'purchase_orders'",
+      "description": "Add missing column 'payment_status' (character varying(50) NOT NULL DEFAULT unpaid) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.payment_status",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN payment_status."
+    },
+    {
+      "id": "TASK-247",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'total_amount' to 'purchase_orders'",
+      "description": "Add missing column 'total_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.total_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN total_amount."
+    },
+    {
+      "id": "TASK-248",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'paid_amount' to 'purchase_orders'",
+      "description": "Add missing column 'paid_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.paid_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN paid_amount."
+    },
+    {
+      "id": "TASK-249",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'due_amount' to 'purchase_orders'",
+      "description": "Add missing column 'due_amount' (numeric(12 NOT NULL DEFAULT 0.00) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.due_amount",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN due_amount."
+    },
+    {
+      "id": "TASK-250",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'expected_delivery_date' to 'purchase_orders'",
+      "description": "Add missing column 'expected_delivery_date' (date) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.expected_delivery_date",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN expected_delivery_date."
+    },
+    {
+      "id": "TASK-251",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'received_at' to 'purchase_orders'",
+      "description": "Add missing column 'received_at' (timestamp with time zone) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.received_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN received_at."
+    },
+    {
+      "id": "TASK-252",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'notes' to 'purchase_orders'",
+      "description": "Add missing column 'notes' (text) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.notes",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN notes."
+    },
+    {
+      "id": "TASK-253",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'updated_at' to 'purchase_orders'",
+      "description": "Add missing column 'updated_at' (timestamp with time zone NOT NULL DEFAULT now()) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.updated_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN updated_at."
+    },
+    {
+      "id": "TASK-254",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'deleted_at' to 'purchase_orders'",
+      "description": "Add missing column 'deleted_at' (timestamp with time zone) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.deleted_at",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN deleted_at."
+    },
+    {
+      "id": "TASK-255",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'created_by' to 'purchase_orders'",
+      "description": "Add missing column 'created_by' (uuid) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.created_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN created_by."
+    },
+    {
+      "id": "TASK-256",
+      "stageId": "STAGE_4_LEDGER",
+      "stageNumber": 4,
+      "title": "Add Column 'updated_by' to 'purchase_orders'",
+      "description": "Add missing column 'updated_by' (uuid) to table 'purchase_orders'.",
+      "targetEntity": "purchase_orders.updated_by",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_orders DROP COLUMN updated_by."
+    },
+    {
+      "id": "TASK-258",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'business_id' to 'purchase_items'",
+      "description": "Add missing column 'business_id' (uuid NOT NULL) to table 'purchase_items'.",
+      "targetEntity": "purchase_items.business_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_items DROP COLUMN business_id."
+    },
+    {
+      "id": "TASK-259",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'purchase_order_id' to 'purchase_items'",
+      "description": "Add missing column 'purchase_order_id' (uuid NOT NULL) to table 'purchase_items'.",
+      "targetEntity": "purchase_items.purchase_order_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_items DROP COLUMN purchase_order_id."
+    },
+    {
+      "id": "TASK-260",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'product_id' to 'purchase_items'",
+      "description": "Add missing column 'product_id' (uuid NOT NULL) to table 'purchase_items'.",
+      "targetEntity": "purchase_items.product_id",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_items DROP COLUMN product_id."
+    },
+    {
+      "id": "TASK-261",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'quantity_ordered' to 'purchase_items'",
+      "description": "Add missing column 'quantity_ordered' (numeric(12 NOT NULL) to table 'purchase_items'.",
+      "targetEntity": "purchase_items.quantity_ordered",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_items DROP COLUMN quantity_ordered."
+    },
+    {
+      "id": "TASK-262",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'quantity_received' to 'purchase_items'",
+      "description": "Add missing column 'quantity_received' (numeric(12 NOT NULL DEFAULT 0.000) to table 'purchase_items'.",
+      "targetEntity": "purchase_items.quantity_received",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_items DROP COLUMN quantity_received."
+    },
+    {
+      "id": "TASK-263",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'unit_cost' to 'purchase_items'",
+      "description": "Add missing column 'unit_cost' (numeric(12 NOT NULL) to table 'purchase_items'.",
+      "targetEntity": "purchase_items.unit_cost",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_items DROP COLUMN unit_cost."
+    },
+    {
+      "id": "TASK-264",
+      "stageId": "STAGE_3_CORE_INVENTORY",
+      "stageNumber": 3,
+      "title": "Add Column 'subtotal' to 'purchase_items'",
+      "description": "Add missing column 'subtotal' (numeric(12 NOT NULL) to table 'purchase_items'.",
+      "targetEntity": "purchase_items.subtotal",
+      "taskType": "ALTER_TABLE_ADD_COLUMN",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "250ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Newly added column can be dropped via ALTER TABLE purchase_items DROP COLUMN subtotal."
+    },
+    {
+      "id": "TASK-265",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_profiles_business_id' on 'profiles'",
+      "description": "Add foreign key constraint 'fk_profiles_business_id' on profiles(business_id) referencing businesses(id).",
+      "targetEntity": "profiles.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-179",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE profiles DROP CONSTRAINT fk_profiles_business_id."
+    },
+    {
+      "id": "TASK-266",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_profiles_business_id' on 'profiles'",
+      "description": "Create index 'idx_profiles_business_id' on profiles(business_id).",
+      "targetEntity": "profiles.idx_profiles_business_id",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_profiles_business_id."
+    },
+    {
+      "id": "TASK-267",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_profiles_role' on 'profiles'",
+      "description": "Create index 'idx_profiles_role' on profiles(business_id, role).",
+      "targetEntity": "profiles.idx_profiles_role",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-179"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_profiles_role."
+    },
+    {
+      "id": "TASK-268",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_product_categories_business_id' on 'product_categories'",
+      "description": "Add foreign key constraint 'fk_product_categories_business_id' on product_categories(business_id) referencing businesses(id).",
+      "targetEntity": "product_categories.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-153",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE product_categories DROP CONSTRAINT fk_product_categories_business_id."
+    },
+    {
+      "id": "TASK-269",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_product_units_business_id' on 'product_units'",
+      "description": "Add foreign key constraint 'fk_product_units_business_id' on product_units(business_id) referencing businesses(id).",
+      "targetEntity": "product_units.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-164",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE product_units DROP CONSTRAINT fk_product_units_business_id."
+    },
+    {
+      "id": "TASK-270",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_products_business_id' on 'products'",
+      "description": "Add foreign key constraint 'fk_products_business_id' on products(business_id) referencing businesses(id).",
+      "targetEntity": "products.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-173",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE products DROP CONSTRAINT fk_products_business_id."
+    },
+    {
+      "id": "TASK-271",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_products_category_id' on 'products'",
+      "description": "Add foreign key constraint 'fk_products_category_id' on products(category_id) referencing product_categories(id).",
+      "targetEntity": "products.category_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-173",
+        "TASK-153"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE products DROP CONSTRAINT fk_products_category_id."
+    },
+    {
+      "id": "TASK-272",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_products_unit_id' on 'products'",
+      "description": "Add foreign key constraint 'fk_products_unit_id' on products(unit_id) referencing product_units(id).",
+      "targetEntity": "products.unit_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-173",
+        "TASK-164"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE products DROP CONSTRAINT fk_products_unit_id."
+    },
+    {
+      "id": "TASK-273",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'uq_products_biz_barcode' on 'products'",
+      "description": "Create UNIQUE index 'uq_products_biz_barcode' on products(business_id, barcode).",
+      "targetEntity": "products.uq_products_biz_barcode",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS uq_products_biz_barcode."
+    },
+    {
+      "id": "TASK-274",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_products_business_id' on 'products'",
+      "description": "Create index 'idx_products_business_id' on products(business_id).",
+      "targetEntity": "products.idx_products_business_id",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_products_business_id."
+    },
+    {
+      "id": "TASK-275",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_products_category_id' on 'products'",
+      "description": "Create index 'idx_products_category_id' on products(category_id).",
+      "targetEntity": "products.idx_products_category_id",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_products_category_id."
+    },
+    {
+      "id": "TASK-276",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_products_unit_id' on 'products'",
+      "description": "Create index 'idx_products_unit_id' on products(unit_id).",
+      "targetEntity": "products.idx_products_unit_id",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_products_unit_id."
+    },
+    {
+      "id": "TASK-277",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_products_search' on 'products'",
+      "description": "Create index 'idx_products_search' on products(business_id, name, sku).",
+      "targetEntity": "products.idx_products_search",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_products_search."
+    },
+    {
+      "id": "TASK-278",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_products_low_stock' on 'products'",
+      "description": "Create index 'idx_products_low_stock' on products(business_id, current_stock, min_stock_alert).",
+      "targetEntity": "products.idx_products_low_stock",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-173"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_products_low_stock."
+    },
+    {
+      "id": "TASK-279",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_stock_movements_business_id' on 'stock_movements'",
+      "description": "Add foreign key constraint 'fk_stock_movements_business_id' on stock_movements(business_id) referencing businesses(id).",
+      "targetEntity": "stock_movements.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-219",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE stock_movements DROP CONSTRAINT fk_stock_movements_business_id."
+    },
+    {
+      "id": "TASK-280",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_stock_movements_product_id' on 'stock_movements'",
+      "description": "Add foreign key constraint 'fk_stock_movements_product_id' on stock_movements(product_id) referencing products(id).",
+      "targetEntity": "stock_movements.product_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-219",
+        "TASK-173"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE stock_movements DROP CONSTRAINT fk_stock_movements_product_id."
+    },
+    {
+      "id": "TASK-281",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'uq_stock_movements_idempotency' on 'stock_movements'",
+      "description": "Create UNIQUE index 'uq_stock_movements_idempotency' on stock_movements(idempotency_key).",
+      "targetEntity": "stock_movements.uq_stock_movements_idempotency",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS uq_stock_movements_idempotency."
+    },
+    {
+      "id": "TASK-282",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_stock_movements_biz_product' on 'stock_movements'",
+      "description": "Create index 'idx_stock_movements_biz_product' on stock_movements(business_id, product_id, created_at DESC).",
+      "targetEntity": "stock_movements.idx_stock_movements_biz_product",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_stock_movements_biz_product."
+    },
+    {
+      "id": "TASK-283",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_stock_movements_type' on 'stock_movements'",
+      "description": "Create index 'idx_stock_movements_type' on stock_movements(business_id, movement_type, created_at DESC).",
+      "targetEntity": "stock_movements.idx_stock_movements_type",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_stock_movements_type."
+    },
+    {
+      "id": "TASK-284",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_stock_movements_ref' on 'stock_movements'",
+      "description": "Create index 'idx_stock_movements_ref' on stock_movements(reference_type, reference_id).",
+      "targetEntity": "stock_movements.idx_stock_movements_ref",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-219"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_stock_movements_ref."
+    },
+    {
+      "id": "TASK-285",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_customers_business_id' on 'customers'",
+      "description": "Add foreign key constraint 'fk_customers_business_id' on customers(business_id) referencing businesses(id).",
+      "targetEntity": "customers.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-103",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE customers DROP CONSTRAINT fk_customers_business_id."
+    },
+    {
+      "id": "TASK-286",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_sales_business_id' on 'sales'",
+      "description": "Add foreign key constraint 'fk_sales_business_id' on sales(business_id) referencing businesses(id).",
+      "targetEntity": "sales.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-190",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE sales DROP CONSTRAINT fk_sales_business_id."
+    },
+    {
+      "id": "TASK-287",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_sales_customer_id' on 'sales'",
+      "description": "Add foreign key constraint 'fk_sales_customer_id' on sales(customer_id) referencing customers(id).",
+      "targetEntity": "sales.customer_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-190",
+        "TASK-103"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE sales DROP CONSTRAINT fk_sales_customer_id."
+    },
+    {
+      "id": "TASK-288",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_sales_biz_created' on 'sales'",
+      "description": "Create index 'idx_sales_biz_created' on sales(business_id, created_at DESC).",
+      "targetEntity": "sales.idx_sales_biz_created",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_sales_biz_created."
+    },
+    {
+      "id": "TASK-289",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_sales_customer' on 'sales'",
+      "description": "Create index 'idx_sales_customer' on sales(customer_id).",
+      "targetEntity": "sales.idx_sales_customer",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_sales_customer."
+    },
+    {
+      "id": "TASK-290",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_sales_status' on 'sales'",
+      "description": "Create index 'idx_sales_status' on sales(business_id, status, payment_status).",
+      "targetEntity": "sales.idx_sales_status",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-190"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_sales_status."
+    },
+    {
+      "id": "TASK-291",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_sale_items_business_id' on 'sale_items'",
+      "description": "Add foreign key constraint 'fk_sale_items_business_id' on sale_items(business_id) referencing businesses(id).",
+      "targetEntity": "sale_items.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-213",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE sale_items DROP CONSTRAINT fk_sale_items_business_id."
+    },
+    {
+      "id": "TASK-292",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_sale_items_sale_id' on 'sale_items'",
+      "description": "Add foreign key constraint 'fk_sale_items_sale_id' on sale_items(sale_id) referencing sales(id).",
+      "targetEntity": "sale_items.sale_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-213",
+        "TASK-190"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE sale_items DROP CONSTRAINT fk_sale_items_sale_id."
+    },
+    {
+      "id": "TASK-293",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_sale_items_product_id' on 'sale_items'",
+      "description": "Add foreign key constraint 'fk_sale_items_product_id' on sale_items(product_id) referencing products(id).",
+      "targetEntity": "sale_items.product_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-213",
+        "TASK-173"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE sale_items DROP CONSTRAINT fk_sale_items_product_id."
+    },
+    {
+      "id": "TASK-294",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_sale_items_sale' on 'sale_items'",
+      "description": "Create index 'idx_sale_items_sale' on sale_items(sale_id).",
+      "targetEntity": "sale_items.idx_sale_items_sale",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-213"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_sale_items_sale."
+    },
+    {
+      "id": "TASK-295",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_sale_items_product' on 'sale_items'",
+      "description": "Create index 'idx_sale_items_product' on sale_items(product_id).",
+      "targetEntity": "sale_items.idx_sale_items_product",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-213"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_sale_items_product."
+    },
+    {
+      "id": "TASK-296",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_payments_business_id' on 'payments'",
+      "description": "Add foreign key constraint 'fk_payments_business_id' on payments(business_id) referencing businesses(id).",
+      "targetEntity": "payments.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-199",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE payments DROP CONSTRAINT fk_payments_business_id."
+    },
+    {
+      "id": "TASK-297",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_payments_sale_id' on 'payments'",
+      "description": "Add foreign key constraint 'fk_payments_sale_id' on payments(sale_id) referencing sales(id).",
+      "targetEntity": "payments.sale_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-199",
+        "TASK-190"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE payments DROP CONSTRAINT fk_payments_sale_id."
+    },
+    {
+      "id": "TASK-298",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_payments_customer_id' on 'payments'",
+      "description": "Add foreign key constraint 'fk_payments_customer_id' on payments(customer_id) referencing customers(id).",
+      "targetEntity": "payments.customer_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-199",
+        "TASK-103"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE payments DROP CONSTRAINT fk_payments_customer_id."
+    },
+    {
+      "id": "TASK-299",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_payments_biz_created' on 'payments'",
+      "description": "Create index 'idx_payments_biz_created' on payments(business_id, paid_at DESC).",
+      "targetEntity": "payments.idx_payments_biz_created",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_payments_biz_created."
+    },
+    {
+      "id": "TASK-300",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_payments_sale' on 'payments'",
+      "description": "Create index 'idx_payments_sale' on payments(sale_id).",
+      "targetEntity": "payments.idx_payments_sale",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_payments_sale."
+    },
+    {
+      "id": "TASK-301",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_payments_customer' on 'payments'",
+      "description": "Create index 'idx_payments_customer' on payments(customer_id).",
+      "targetEntity": "payments.idx_payments_customer",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-199"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_payments_customer."
+    },
+    {
+      "id": "TASK-302",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_suppliers_business_id' on 'suppliers'",
+      "description": "Add foreign key constraint 'fk_suppliers_business_id' on suppliers(business_id) referencing businesses(id).",
+      "targetEntity": "suppliers.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-227",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE suppliers DROP CONSTRAINT fk_suppliers_business_id."
+    },
+    {
+      "id": "TASK-303",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_suppliers_biz' on 'suppliers'",
+      "description": "Create index 'idx_suppliers_biz' on suppliers(business_id).",
+      "targetEntity": "suppliers.idx_suppliers_biz",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-227"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_suppliers_biz."
+    },
+    {
+      "id": "TASK-304",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_purchase_orders_business_id' on 'purchase_orders'",
+      "description": "Add foreign key constraint 'fk_purchase_orders_business_id' on purchase_orders(business_id) referencing businesses(id).",
+      "targetEntity": "purchase_orders.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-241",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE purchase_orders DROP CONSTRAINT fk_purchase_orders_business_id."
+    },
+    {
+      "id": "TASK-305",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_purchase_orders_supplier_id' on 'purchase_orders'",
+      "description": "Add foreign key constraint 'fk_purchase_orders_supplier_id' on purchase_orders(supplier_id) referencing suppliers(id).",
+      "targetEntity": "purchase_orders.supplier_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-241",
+        "TASK-227"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE purchase_orders DROP CONSTRAINT fk_purchase_orders_supplier_id."
+    },
+    {
+      "id": "TASK-306",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_purchase_orders_biz_status' on 'purchase_orders'",
+      "description": "Create index 'idx_purchase_orders_biz_status' on purchase_orders(business_id, status, created_at DESC).",
+      "targetEntity": "purchase_orders.idx_purchase_orders_biz_status",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_purchase_orders_biz_status."
+    },
+    {
+      "id": "TASK-307",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_purchase_orders_supplier' on 'purchase_orders'",
+      "description": "Create index 'idx_purchase_orders_supplier' on purchase_orders(supplier_id).",
+      "targetEntity": "purchase_orders.idx_purchase_orders_supplier",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-241"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_purchase_orders_supplier."
+    },
+    {
+      "id": "TASK-308",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_purchase_items_business_id' on 'purchase_items'",
+      "description": "Add foreign key constraint 'fk_purchase_items_business_id' on purchase_items(business_id) referencing businesses(id).",
+      "targetEntity": "purchase_items.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-257",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE purchase_items DROP CONSTRAINT fk_purchase_items_business_id."
+    },
+    {
+      "id": "TASK-309",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_purchase_items_purchase_order_id' on 'purchase_items'",
+      "description": "Add foreign key constraint 'fk_purchase_items_purchase_order_id' on purchase_items(purchase_order_id) referencing purchase_orders(id).",
+      "targetEntity": "purchase_items.purchase_order_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-257",
+        "TASK-241"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE purchase_items DROP CONSTRAINT fk_purchase_items_purchase_order_id."
+    },
+    {
+      "id": "TASK-310",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_purchase_items_product_id' on 'purchase_items'",
+      "description": "Add foreign key constraint 'fk_purchase_items_product_id' on purchase_items(product_id) referencing products(id).",
+      "targetEntity": "purchase_items.product_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-257",
+        "TASK-173"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE purchase_items DROP CONSTRAINT fk_purchase_items_product_id."
+    },
+    {
+      "id": "TASK-311",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_purchase_items_po' on 'purchase_items'",
+      "description": "Create index 'idx_purchase_items_po' on purchase_items(purchase_order_id).",
+      "targetEntity": "purchase_items.idx_purchase_items_po",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-257"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_purchase_items_po."
+    },
+    {
+      "id": "TASK-312",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_expense_categories_business_id' on 'expense_categories'",
+      "description": "Add foreign key constraint 'fk_expense_categories_business_id' on expense_categories(business_id) referencing businesses(id).",
+      "targetEntity": "expense_categories.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-128",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE expense_categories DROP CONSTRAINT fk_expense_categories_business_id."
+    },
+    {
+      "id": "TASK-313",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_expenses_business_id' on 'expenses'",
+      "description": "Add foreign key constraint 'fk_expenses_business_id' on expenses(business_id) referencing businesses(id).",
+      "targetEntity": "expenses.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-137",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE expenses DROP CONSTRAINT fk_expenses_business_id."
+    },
+    {
+      "id": "TASK-314",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_expenses_category_id' on 'expenses'",
+      "description": "Add foreign key constraint 'fk_expenses_category_id' on expenses(category_id) referencing expense_categories(id).",
+      "targetEntity": "expenses.category_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-137",
+        "TASK-128"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE expenses DROP CONSTRAINT fk_expenses_category_id."
+    },
+    {
+      "id": "TASK-315",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_expenses_biz_date' on 'expenses'",
+      "description": "Create index 'idx_expenses_biz_date' on expenses(business_id, incurred_at DESC).",
+      "targetEntity": "expenses.idx_expenses_biz_date",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_expenses_biz_date."
+    },
+    {
+      "id": "TASK-316",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_expenses_category' on 'expenses'",
+      "description": "Create index 'idx_expenses_category' on expenses(category_id).",
+      "targetEntity": "expenses.idx_expenses_category",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-137"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_expenses_category."
+    },
+    {
+      "id": "TASK-317",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Add Foreign Key 'fk_daily_summaries_business_id' on 'daily_summaries'",
+      "description": "Add foreign key constraint 'fk_daily_summaries_business_id' on daily_summaries(business_id) referencing businesses(id).",
+      "targetEntity": "daily_summaries.business_id",
+      "taskType": "ADD_FOREIGN_KEY",
+      "dependencies": [
+        "TASK-116",
+        "TASK-102"
+      ],
+      "estimatedDuration": "300ms",
+      "risk": "MEDIUM",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Constraint can be dropped using ALTER TABLE daily_summaries DROP CONSTRAINT fk_daily_summaries_business_id."
+    },
+    {
+      "id": "TASK-318",
+      "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+      "stageNumber": 6,
+      "title": "Create Index 'idx_daily_summaries_biz_date' on 'daily_summaries'",
+      "description": "Create index 'idx_daily_summaries_biz_date' on daily_summaries(business_id, summary_date DESC).",
+      "targetEntity": "daily_summaries.idx_daily_summaries_biz_date",
+      "taskType": "CREATE_INDEX",
+      "dependencies": [
+        "TASK-116"
+      ],
+      "estimatedDuration": "400ms",
+      "risk": "LOW",
+      "rollbackAvailability": "SAFE",
+      "rollbackReason": "Index can be dropped safely using DROP INDEX IF EXISTS idx_daily_summaries_biz_date."
+    }
+  ],
+  "rollbackPlan": {
+    "overallStrategy": "MANUAL",
+    "summary": "Rollback requires manual data verification and structured SQL scripts for column modifications.",
+    "stageRollbacks": [
+      {
+        "stageId": "STAGE_1_FOUNDATION",
+        "stageName": "Foundation & Schemas",
+        "rollbackStrategy": "SAFE",
+        "reason": "All tasks in this stage are fully reversible without data loss.",
+        "steps": [
+          "DROP EXTENSION IF EXISTS pgcrypto;"
+        ]
+      },
+      {
+        "stageId": "STAGE_2_LOOKUPS",
+        "stageName": "Lookup & Reference Tables",
+        "rollbackStrategy": "SAFE",
+        "reason": "All tasks in this stage are fully reversible without data loss.",
+        "steps": [
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS is_active;",
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS symbol;",
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS code;",
+          "ALTER TABLE product_units DROP COLUMN IF EXISTS business_id;"
+        ]
+      },
+      {
+        "stageId": "STAGE_3_CORE_INVENTORY",
+        "stageName": "Core Entities & Inventory",
+        "rollbackStrategy": "MANUAL",
+        "reason": "Stage contains column type conversions or table renames requiring manual backup restoration.",
+        "steps": [
+          "ALTER TABLE purchase_items DROP COLUMN IF EXISTS subtotal;",
+          "ALTER TABLE purchase_items DROP COLUMN IF EXISTS unit_cost;",
+          "ALTER TABLE purchase_items DROP COLUMN IF EXISTS quantity_received;",
+          "ALTER TABLE purchase_items DROP COLUMN IF EXISTS quantity_ordered;",
+          "ALTER TABLE purchase_items DROP COLUMN IF EXISTS product_id;",
+          "ALTER TABLE purchase_items DROP COLUMN IF EXISTS purchase_order_id;",
+          "ALTER TABLE purchase_items DROP COLUMN IF EXISTS business_id;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS is_active;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS outstanding_balance;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS address;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS email;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS phone;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS contact_name;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS company_name;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS supplier_code;",
+          "ALTER TABLE suppliers DROP COLUMN IF EXISTS business_id;",
+          "-- Manual rollback step required for Modify Column Type 'subtotal' in 'sale_items'",
+          "-- Manual rollback step required for Modify Column Type 'discount_amount' in 'sale_items'",
+          "-- Manual rollback step required for Modify Column Type 'unit_cost' in 'sale_items'",
+          "-- Manual rollback step required for Modify Column Type 'unit_price' in 'sale_items'",
+          "-- Manual rollback step required for Modify Column Type 'quantity' in 'sale_items'",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS avatar_url;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS is_active;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS role;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS phone;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS full_name;",
+          "ALTER TABLE profiles DROP COLUMN IF EXISTS business_id;",
+          "-- Manual rollback step required for Modify Column Type 'min_stock_alert' in 'products'",
+          "-- Manual rollback step required for Modify Column Type 'current_stock' in 'products'",
+          "-- Manual rollback step required for Modify Column Type 'selling_price' in 'products'",
+          "-- Manual rollback step required for Modify Column Type 'cost_price' in 'products'",
+          "ALTER TABLE products DROP COLUMN IF EXISTS description;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS is_active;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS icon;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS color;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS description;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS code;",
+          "ALTER TABLE product_categories DROP COLUMN IF EXISTS business_id;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS is_active;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS outstanding_balance;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS credit_limit;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS address;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS email;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS phone;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS customer_code;",
+          "ALTER TABLE customers DROP COLUMN IF EXISTS business_id;"
+        ]
+      },
+      {
+        "stageId": "STAGE_4_LEDGER",
+        "stageName": "Ledger & Transactions",
+        "rollbackStrategy": "MANUAL",
+        "reason": "Stage contains column type conversions or table renames requiring manual backup restoration.",
+        "steps": [
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS notes;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS received_at;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS expected_delivery_date;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS due_amount;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS paid_amount;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS total_amount;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS payment_status;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS status;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS po_number;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS supplier_id;",
+          "ALTER TABLE purchase_orders DROP COLUMN IF EXISTS business_id;",
+          "ALTER TABLE stock_movements DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE stock_movements DROP COLUMN IF EXISTS notes;",
+          "-- Manual rollback step required for Modify Column Type 'total_cost' in 'stock_movements'",
+          "-- Manual rollback step required for Modify Column Type 'unit_cost' in 'stock_movements'",
+          "-- Manual rollback step required for Modify Column Type 'balance_after' in 'stock_movements'",
+          "-- Manual rollback step required for Modify Column Type 'balance_before' in 'stock_movements'",
+          "-- Manual rollback step required for Modify Column Type 'quantity' in 'stock_movements'",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS paid_at;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS notes;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS status;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS reference_number;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS exchange_rate;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS currency;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS amount;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS payment_method;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS payment_number;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS customer_id;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS sale_id;",
+          "ALTER TABLE payments DROP COLUMN IF EXISTS business_id;",
+          "ALTER TABLE sales DROP COLUMN IF EXISTS notes;",
+          "-- Manual rollback step required for Modify Column Type 'due_amount' in 'sales'",
+          "-- Manual rollback step required for Modify Column Type 'paid_amount' in 'sales'",
+          "-- Manual rollback step required for Modify Column Type 'total_amount' in 'sales'",
+          "ALTER TABLE sales DROP COLUMN IF EXISTS tax_amount;",
+          "ALTER TABLE sales DROP COLUMN IF EXISTS discount_amount;",
+          "ALTER TABLE sales DROP COLUMN IF EXISTS subtotal_amount;",
+          "ALTER TABLE sales DROP COLUMN IF EXISTS status;"
+        ]
+      },
+      {
+        "stageId": "STAGE_5_FINANCE",
+        "stageName": "Finance & Analytics",
+        "rollbackStrategy": "SAFE",
+        "reason": "All tasks in this stage are fully reversible without data loss.",
+        "steps": [
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS incurred_at;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS notes;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS receipt_url;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS vendor_name;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS payment_method;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS currency;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS amount;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS title;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS expense_number;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS category_id;",
+          "ALTER TABLE expenses DROP COLUMN IF EXISTS business_id;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS updated_by;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS created_by;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS deleted_at;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS is_active;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS description;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS code;",
+          "ALTER TABLE expense_categories DROP COLUMN IF EXISTS business_id;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS updated_at;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_stock_out_qty;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_stock_in_qty;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_net_profit;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_expenses_amount;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_gross_profit;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_cost_amount;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_sales_count;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS total_sales_amount;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS summary_date;",
+          "ALTER TABLE daily_summaries DROP COLUMN IF EXISTS business_id;"
+        ]
+      },
+      {
+        "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+        "stageName": "Constraints & Indexes",
+        "rollbackStrategy": "SAFE",
+        "reason": "All tasks in this stage are fully reversible without data loss.",
+        "steps": [
+          "DROP INDEX IF EXISTS idx_daily_summaries_biz_date;",
+          "ALTER TABLE daily_summaries DROP CONSTRAINT IF EXISTS fk_daily_summaries_business_id;",
+          "DROP INDEX IF EXISTS idx_expenses_category;",
+          "DROP INDEX IF EXISTS idx_expenses_biz_date;",
+          "ALTER TABLE expenses DROP CONSTRAINT IF EXISTS fk_expenses_category_id;",
+          "ALTER TABLE expenses DROP CONSTRAINT IF EXISTS fk_expenses_business_id;",
+          "ALTER TABLE expense_categories DROP CONSTRAINT IF EXISTS fk_expense_categories_business_id;",
+          "DROP INDEX IF EXISTS idx_purchase_items_po;",
+          "ALTER TABLE purchase_items DROP CONSTRAINT IF EXISTS fk_purchase_items_product_id;",
+          "ALTER TABLE purchase_items DROP CONSTRAINT IF EXISTS fk_purchase_items_purchase_order_id;",
+          "ALTER TABLE purchase_items DROP CONSTRAINT IF EXISTS fk_purchase_items_business_id;",
+          "DROP INDEX IF EXISTS idx_purchase_orders_supplier;",
+          "DROP INDEX IF EXISTS idx_purchase_orders_biz_status;",
+          "ALTER TABLE purchase_orders DROP CONSTRAINT IF EXISTS fk_purchase_orders_supplier_id;",
+          "ALTER TABLE purchase_orders DROP CONSTRAINT IF EXISTS fk_purchase_orders_business_id;",
+          "DROP INDEX IF EXISTS idx_suppliers_biz;",
+          "ALTER TABLE suppliers DROP CONSTRAINT IF EXISTS fk_suppliers_business_id;",
+          "DROP INDEX IF EXISTS idx_payments_customer;",
+          "DROP INDEX IF EXISTS idx_payments_sale;",
+          "DROP INDEX IF EXISTS idx_payments_biz_created;",
+          "ALTER TABLE payments DROP CONSTRAINT IF EXISTS fk_payments_customer_id;",
+          "ALTER TABLE payments DROP CONSTRAINT IF EXISTS fk_payments_sale_id;",
+          "ALTER TABLE payments DROP CONSTRAINT IF EXISTS fk_payments_business_id;",
+          "DROP INDEX IF EXISTS idx_sale_items_product;",
+          "DROP INDEX IF EXISTS idx_sale_items_sale;",
+          "ALTER TABLE sale_items DROP CONSTRAINT IF EXISTS fk_sale_items_product_id;",
+          "ALTER TABLE sale_items DROP CONSTRAINT IF EXISTS fk_sale_items_sale_id;",
+          "ALTER TABLE sale_items DROP CONSTRAINT IF EXISTS fk_sale_items_business_id;",
+          "DROP INDEX IF EXISTS idx_sales_status;",
+          "DROP INDEX IF EXISTS idx_sales_customer;",
+          "DROP INDEX IF EXISTS idx_sales_biz_created;",
+          "ALTER TABLE sales DROP CONSTRAINT IF EXISTS fk_sales_customer_id;",
+          "ALTER TABLE sales DROP CONSTRAINT IF EXISTS fk_sales_business_id;",
+          "ALTER TABLE customers DROP CONSTRAINT IF EXISTS fk_customers_business_id;",
+          "DROP INDEX IF EXISTS idx_stock_movements_ref;",
+          "DROP INDEX IF EXISTS idx_stock_movements_type;",
+          "DROP INDEX IF EXISTS idx_stock_movements_biz_product;",
+          "DROP INDEX IF EXISTS uq_stock_movements_idempotency;",
+          "ALTER TABLE stock_movements DROP CONSTRAINT IF EXISTS fk_stock_movements_product_id;",
+          "ALTER TABLE stock_movements DROP CONSTRAINT IF EXISTS fk_stock_movements_business_id;",
+          "DROP INDEX IF EXISTS idx_products_low_stock;",
+          "DROP INDEX IF EXISTS idx_products_search;",
+          "DROP INDEX IF EXISTS idx_products_unit_id;",
+          "DROP INDEX IF EXISTS idx_products_category_id;",
+          "DROP INDEX IF EXISTS idx_products_business_id;",
+          "DROP INDEX IF EXISTS uq_products_biz_barcode;",
+          "ALTER TABLE products DROP CONSTRAINT IF EXISTS fk_products_unit_id;",
+          "ALTER TABLE products DROP CONSTRAINT IF EXISTS fk_products_category_id;",
+          "ALTER TABLE products DROP CONSTRAINT IF EXISTS fk_products_business_id;",
+          "ALTER TABLE product_units DROP CONSTRAINT IF EXISTS fk_product_units_business_id;",
+          "ALTER TABLE product_categories DROP CONSTRAINT IF EXISTS fk_product_categories_business_id;",
+          "DROP INDEX IF EXISTS idx_profiles_role;",
+          "DROP INDEX IF EXISTS idx_profiles_business_id;",
+          "ALTER TABLE profiles DROP CONSTRAINT IF EXISTS fk_profiles_business_id;"
+        ]
+      }
+    ]
+  },
+  "risks": {
+    "overallRiskLevel": "HIGH",
+    "riskSummary": {
+      "lowCount": 1,
+      "mediumCount": 2,
+      "highCount": 2,
+      "criticalCount": 0
+    },
+    "risksByCategory": [
+      {
+        "category": "DATA_LOSS",
+        "title": "Column Data Type Modifications",
+        "description": "17 column data type modifications detected. Potential data truncation or conversion failure if unhandled.",
+        "affectedEntities": [
+          "products.cost_price",
+          "products.selling_price",
+          "products.current_stock",
+          "products.min_stock_alert",
+          "sales.total_amount",
+          "sales.paid_amount",
+          "sales.due_amount",
+          "sale_items.quantity",
+          "sale_items.unit_price",
+          "sale_items.unit_cost",
+          "sale_items.discount_amount",
+          "sale_items.subtotal",
+          "stock_movements.quantity",
+          "stock_movements.balance_before",
+          "stock_movements.balance_after",
+          "stock_movements.unit_cost",
+          "stock_movements.total_cost"
+        ],
+        "riskLevel": "HIGH",
+        "mitigation": "Use explicit SQL USING clauses with type casting functions and verify staging data before applying to production."
+      },
+      {
+        "category": "CONSTRAINT_FAILURE",
+        "title": "Foreign Key Referential Integrity Validation",
+        "description": "7 foreign key constraints need creation or verification. Existing orphan records could cause constraint creation failures.",
+        "affectedEntities": [
+          "sale_items",
+          "payments",
+          "purchase_orders",
+          "purchase_items",
+          "expense_categories",
+          "expenses",
+          "daily_summaries"
+        ],
+        "riskLevel": "MEDIUM",
+        "mitigation": "Execute orphan record detection queries prior to applying ALTER TABLE ADD CONSTRAINT FOREIGN KEY."
+      },
+      {
+        "category": "PERFORMANCE",
+        "title": "Index Creation Overhead",
+        "description": "Creating 27 indexes concurrently may consume I/O resources during peak traffic.",
+        "affectedEntities": [
+          "profiles.idx_profiles_business_id",
+          "profiles.idx_profiles_role",
+          "products.uq_products_biz_barcode",
+          "products.idx_products_business_id",
+          "products.idx_products_category_id",
+          "products.idx_products_unit_id",
+          "products.idx_products_search",
+          "products.idx_products_low_stock",
+          "stock_movements.uq_stock_movements_idempotency",
+          "stock_movements.idx_stock_movements_biz_product",
+          "stock_movements.idx_stock_movements_type",
+          "stock_movements.idx_stock_movements_ref",
+          "sales.idx_sales_biz_created",
+          "sales.idx_sales_customer",
+          "sales.idx_sales_status",
+          "sale_items.idx_sale_items_sale",
+          "sale_items.idx_sale_items_product",
+          "payments.idx_payments_biz_created",
+          "payments.idx_payments_sale",
+          "payments.idx_payments_customer",
+          "suppliers.idx_suppliers_biz",
+          "purchase_orders.idx_purchase_orders_biz_status",
+          "purchase_orders.idx_purchase_orders_supplier",
+          "purchase_items.idx_purchase_items_po",
+          "expenses.idx_expenses_biz_date",
+          "expenses.idx_expenses_category",
+          "daily_summaries.idx_daily_summaries_biz_date"
+        ],
+        "riskLevel": "MEDIUM",
+        "mitigation": "Execute CREATE INDEX CONCURRENTLY outside peak business hours to prevent table write blocking."
+      },
+      {
+        "category": "LOCKING",
+        "title": "Access Exclusive Table Locking",
+        "description": "ALTER TABLE operations acquire ACCESS EXCLUSIVE locks on 147 tables, temporarily blocking concurrent queries.",
+        "affectedEntities": [
+          "customers.business_id",
+          "customers.customer_code",
+          "customers.phone",
+          "customers.email",
+          "customers.address",
+          "customers.credit_limit",
+          "customers.outstanding_balance",
+          "customers.is_active",
+          "customers.updated_at",
+          "customers.deleted_at",
+          "customers.created_by",
+          "customers.updated_by",
+          "daily_summaries.business_id",
+          "daily_summaries.summary_date",
+          "daily_summaries.total_sales_amount",
+          "daily_summaries.total_sales_count",
+          "daily_summaries.total_cost_amount",
+          "daily_summaries.total_gross_profit",
+          "daily_summaries.total_expenses_amount",
+          "daily_summaries.total_net_profit",
+          "daily_summaries.total_stock_in_qty",
+          "daily_summaries.total_stock_out_qty",
+          "daily_summaries.updated_at",
+          "expense_categories.business_id",
+          "expense_categories.code",
+          "expense_categories.description",
+          "expense_categories.is_active",
+          "expense_categories.updated_at",
+          "expense_categories.deleted_at",
+          "expense_categories.created_by",
+          "expense_categories.updated_by",
+          "expenses.business_id",
+          "expenses.category_id",
+          "expenses.expense_number",
+          "expenses.title",
+          "expenses.amount",
+          "expenses.currency",
+          "expenses.payment_method",
+          "expenses.vendor_name",
+          "expenses.receipt_url",
+          "expenses.notes",
+          "expenses.incurred_at",
+          "expenses.updated_at",
+          "expenses.deleted_at",
+          "expenses.created_by",
+          "expenses.updated_by",
+          "product_categories.business_id",
+          "product_categories.code",
+          "product_categories.description",
+          "product_categories.color",
+          "product_categories.icon",
+          "product_categories.is_active",
+          "product_categories.updated_at",
+          "product_categories.deleted_at",
+          "product_categories.created_by",
+          "product_categories.updated_by",
+          "product_units.business_id",
+          "product_units.code",
+          "product_units.symbol",
+          "product_units.is_active",
+          "product_units.updated_at",
+          "product_units.deleted_at",
+          "product_units.created_by",
+          "product_units.updated_by",
+          "products.description",
+          "products.cost_price",
+          "products.selling_price",
+          "products.current_stock",
+          "products.min_stock_alert",
+          "profiles.business_id",
+          "profiles.full_name",
+          "profiles.phone",
+          "profiles.role",
+          "profiles.is_active",
+          "profiles.avatar_url",
+          "profiles.updated_at",
+          "profiles.deleted_at",
+          "profiles.created_by",
+          "profiles.updated_by",
+          "sales.status",
+          "sales.subtotal_amount",
+          "sales.discount_amount",
+          "sales.tax_amount",
+          "sales.total_amount",
+          "sales.paid_amount",
+          "sales.due_amount",
+          "sales.notes",
+          "payments.business_id",
+          "payments.sale_id",
+          "payments.customer_id",
+          "payments.payment_number",
+          "payments.payment_method",
+          "payments.amount",
+          "payments.currency",
+          "payments.exchange_rate",
+          "payments.reference_number",
+          "payments.status",
+          "payments.notes",
+          "payments.paid_at",
+          "payments.created_by",
+          "sale_items.quantity",
+          "sale_items.unit_price",
+          "sale_items.unit_cost",
+          "sale_items.discount_amount",
+          "sale_items.subtotal",
+          "stock_movements.quantity",
+          "stock_movements.balance_before",
+          "stock_movements.balance_after",
+          "stock_movements.unit_cost",
+          "stock_movements.total_cost",
+          "stock_movements.notes",
+          "stock_movements.created_by",
+          "suppliers.business_id",
+          "suppliers.supplier_code",
+          "suppliers.company_name",
+          "suppliers.contact_name",
+          "suppliers.phone",
+          "suppliers.email",
+          "suppliers.address",
+          "suppliers.outstanding_balance",
+          "suppliers.is_active",
+          "suppliers.updated_at",
+          "suppliers.deleted_at",
+          "suppliers.created_by",
+          "suppliers.updated_by",
+          "purchase_orders.business_id",
+          "purchase_orders.supplier_id",
+          "purchase_orders.po_number",
+          "purchase_orders.status",
+          "purchase_orders.payment_status",
+          "purchase_orders.total_amount",
+          "purchase_orders.paid_amount",
+          "purchase_orders.due_amount",
+          "purchase_orders.expected_delivery_date",
+          "purchase_orders.received_at",
+          "purchase_orders.notes",
+          "purchase_orders.updated_at",
+          "purchase_orders.deleted_at",
+          "purchase_orders.created_by",
+          "purchase_orders.updated_by",
+          "purchase_items.business_id",
+          "purchase_items.purchase_order_id",
+          "purchase_items.product_id",
+          "purchase_items.quantity_ordered",
+          "purchase_items.quantity_received",
+          "purchase_items.unit_cost",
+          "purchase_items.subtotal"
+        ],
+        "riskLevel": "HIGH",
+        "mitigation": "Set statement_timeout = \"5s\" and lock_timeout = \"2s\" in PostgreSQL session to prevent lock queue blockage."
+      },
+      {
+        "category": "APPLICATION_COMPATIBILITY",
+        "title": "Application Backward Compatibility",
+        "description": "Zero destructive renames. New tables and columns added incrementally.",
+        "affectedEntities": [],
+        "riskLevel": "LOW",
+        "mitigation": "Deploy database migration prior to backend code release."
+      }
+    ]
+  },
+  "validationChecklist": {
+    "beforeMigration": [
+      {
+        "id": "VAL-PRE-001",
+        "check": "Verify Full Database Backup",
+        "details": "Ensure point-in-time snapshot or pg_dump backup is successfully generated and verified.",
+        "required": true
+      },
+      {
+        "id": "VAL-PRE-002",
+        "check": "Validate Schema Hash",
+        "details": "Confirm the current database schema hash matches the expected target hash in reports.",
+        "required": true
+      },
+      {
+        "id": "VAL-PRE-003",
+        "check": "Inspect Active Database Connections",
+        "details": "Ensure no active long-running write transactions exist on target tables.",
+        "required": true
+      },
+      {
+        "id": "VAL-PRE-004",
+        "check": "Set Session Lock Timeouts",
+        "details": "Configure lock_timeout = \"2s\" and statement_timeout = \"10s\" for the migration session.",
+        "required": true
+      }
+    ],
+    "duringMigration": [
+      {
+        "id": "VAL-DUR-001",
+        "check": "Stage-by-Stage Atomic Transactions",
+        "details": "Execute each migration stage within an explicit BEGIN ... COMMIT transaction block.",
+        "required": true
+      },
+      {
+        "id": "VAL-DUR-002",
+        "check": "Monitor Exclusive Table Lock Duration",
+        "details": "Track ACCESS EXCLUSIVE lock hold times during DDL execution.",
+        "required": true
+      },
+      {
+        "id": "VAL-DUR-003",
+        "check": "Error Log Trap",
+        "details": "Immediately rollback active transaction on any SQL execution error or constraint failure.",
+        "required": true
+      }
+    ],
+    "afterMigration": [
+      {
+        "id": "VAL-POST-001",
+        "check": "Re-run Database Inspector & Schema Comparator",
+        "details": "Verify schema match rate reaches 100% and zero differences remain.",
+        "required": true
+      },
+      {
+        "id": "VAL-POST-002",
+        "check": "Validate Foreign Key Referential Integrity",
+        "details": "Execute orphan record check across newly introduced foreign keys.",
+        "required": true
+      },
+      {
+        "id": "VAL-POST-003",
+        "check": "Verify Index Usability and Status",
+        "details": "Confirm all created btree indexes are marked as valid and ready for query optimizer.",
+        "required": true
+      },
+      {
+        "id": "VAL-POST-004",
+        "check": "Validate Record Counts",
+        "details": "Compare table row counts before and after migration to guarantee zero inadvertent data loss.",
+        "required": true
+      }
+    ]
+  },
+  "recommendations": [
+    "1. Execute full database snapshot backup prior to starting Stage 1.",
+    "2. Set lock_timeout = \"2s\" in migration session to protect production read queries.",
+    "3. Run migration stages in sequential order within explicit BEGIN ... COMMIT blocks.",
+    "5. Re-run Database Inspector post-migration to verify 100% schema match rate."
+  ]
+}

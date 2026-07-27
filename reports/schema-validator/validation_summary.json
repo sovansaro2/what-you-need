@@ -1,0 +1,11 @@
+{
+  "totalChecks": 7,
+  "passedChecks": 6,
+  "warningChecks": 0,
+  "failedChecks": 1,
+  "criticalFindingsCount": 1,
+  "warningFindingsCount": 0,
+  "healthScore": 19,
+  "healthStatus": "CRITICAL",
+  "finalDecision": "REJECTED"
+}

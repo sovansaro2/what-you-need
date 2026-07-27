@@ -1,0 +1,46 @@
+{
+  "totalModules": 14,
+  "passedModules": 14,
+  "failedModules": 0,
+  "skippedModules": 0,
+  "totalFindings": 0,
+  "findingsBySeverity": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "info": 0
+  },
+  "totalExecutionTimeMs": 4346,
+  "timestamp": "2026-07-27T11:47:54.525Z",
+  "outputFiles": [
+    {
+      "filePath": "reports/db-inspector/schema_hash.txt",
+      "format": "text",
+      "bytesWritten": 259,
+      "createdAt": "2026-07-27T11:47:54.526Z"
+    }
+  ],
+  "status": "success",
+  "inspectionScope": "all (public, auth, storage, extensions, realtime)",
+  "countingStrategy": "exact",
+  "schemaHash": "D9EE5C5C2FA0F9D6506A3B6B456CEB36529B2F4B2AE7BCBBE571B5B2745EC1D8",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schemasInspected": [
+    "public",
+    "auth",
+    "storage",
+    "extensions",
+    "realtime"
+  ],
+  "objectsInspected": 389,
+  "warnings": [],
+  "rlsCoverage": "100.0%",
+  "policiesCount": 11,
+  "functionsCount": 8,
+  "triggersCount": 7,
+  "viewsCount": 4,
+  "materializedViewsCount": 2,
+  "extensionsCount": 5,
+  "sequencesCount": 4
+}

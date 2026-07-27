@@ -1,0 +1,2282 @@
+{
+  "timestamp": "2026-07-27T10:50:37.746Z",
+  "targetFile": "database_v1.sql",
+  "schemaHash": "9CE49D71A0FEFF711A44EE7533CFF6B9810FC4ABF8B854A8D637D98CFCA29E26",
+  "summary": {
+    "totalDifferences": 253,
+    "missingTablesCount": 0,
+    "extraTablesCount": 6,
+    "columnDifferencesCount": 163,
+    "pkDifferencesCount": 0,
+    "fkDifferencesCount": 7,
+    "constraintDifferencesCount": 52,
+    "indexDifferencesCount": 25,
+    "schemaMatchPercentage": 5.9
+  },
+  "tableComparison": {
+    "missingTables": [],
+    "extraTables": [
+      "business_settings",
+      "categories",
+      "schema_migrations",
+      "stock_transactions",
+      "transactions",
+      "user_preferences"
+    ],
+    "matchingTables": [
+      "businesses",
+      "customers",
+      "daily_summaries",
+      "expense_categories",
+      "expenses",
+      "payments",
+      "product_categories",
+      "product_units",
+      "products",
+      "profiles",
+      "purchase_items",
+      "purchase_orders",
+      "sale_items",
+      "sales",
+      "stock_movements",
+      "suppliers"
+    ],
+    "renamedCandidates": []
+  },
+  "columnDifferences": [
+    {
+      "table": "profiles",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "full_name",
+      "diffType": "MISSING",
+      "target": "character varying(255) NOT NULL",
+      "description": "Column \"full_name\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "phone",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"phone\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "role",
+      "diffType": "MISSING",
+      "target": "character varying(50) NOT NULL DEFAULT staff",
+      "description": "Column \"role\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "is_active",
+      "diffType": "MISSING",
+      "target": "boolean NOT NULL DEFAULT true",
+      "description": "Column \"is_active\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "avatar_url",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"avatar_url\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "profiles",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"profiles\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "code",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"code\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "name",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"product_categories.name\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "product_categories",
+      "column": "description",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"description\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "color",
+      "diffType": "MISSING",
+      "target": "character varying(30)",
+      "description": "Column \"color\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "icon",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"icon\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "is_active",
+      "diffType": "MISSING",
+      "target": "boolean NOT NULL DEFAULT true",
+      "description": "Column \"is_active\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_categories",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"product_categories\"."
+    },
+    {
+      "table": "product_units",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "product_units",
+      "column": "code",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"code\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "product_units",
+      "column": "name",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"product_units.name\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "product_units",
+      "column": "symbol",
+      "diffType": "MISSING",
+      "target": "character varying(20)",
+      "description": "Column \"symbol\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "product_units",
+      "column": "is_active",
+      "diffType": "MISSING",
+      "target": "boolean NOT NULL DEFAULT true",
+      "description": "Column \"is_active\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "product_units",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "product_units",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "product_units",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "product_units",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"product_units\"."
+    },
+    {
+      "table": "products",
+      "column": "business_id",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"products.business_id\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "products",
+      "column": "description",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"description\" is missing in table \"products\"."
+    },
+    {
+      "table": "products",
+      "column": "cost_price",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"products.cost_price\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "products",
+      "column": "selling_price",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"products.selling_price\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "products",
+      "column": "current_stock",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"products.current_stock\": current \"numeric(12,3)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "products",
+      "column": "min_stock_alert",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"products.min_stock_alert\": current \"numeric(12,3)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "stock_movements",
+      "column": "business_id",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"stock_movements.business_id\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "stock_movements",
+      "column": "quantity",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"stock_movements.quantity\": current \"numeric(12,3)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "stock_movements",
+      "column": "balance_before",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"stock_movements.balance_before\": current \"numeric(12,3)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "stock_movements",
+      "column": "balance_after",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"stock_movements.balance_after\": current \"numeric(12,3)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "stock_movements",
+      "column": "unit_cost",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"stock_movements.unit_cost\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "stock_movements",
+      "column": "total_cost",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"stock_movements.total_cost\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "stock_movements",
+      "column": "notes",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"notes\" is missing in table \"stock_movements\"."
+    },
+    {
+      "table": "stock_movements",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"stock_movements\"."
+    },
+    {
+      "table": "customers",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "customer_code",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"customer_code\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "name",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"customers.name\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "customers",
+      "column": "phone",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"phone\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "email",
+      "diffType": "MISSING",
+      "target": "character varying(255)",
+      "description": "Column \"email\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "address",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"address\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "credit_limit",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"credit_limit\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "outstanding_balance",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"outstanding_balance\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "is_active",
+      "diffType": "MISSING",
+      "target": "boolean NOT NULL DEFAULT true",
+      "description": "Column \"is_active\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"customers\"."
+    },
+    {
+      "table": "customers",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"customers\"."
+    },
+    {
+      "table": "sales",
+      "column": "business_id",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"sales.business_id\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "sales",
+      "column": "status",
+      "diffType": "MISSING",
+      "target": "character varying(50) NOT NULL DEFAULT completed",
+      "description": "Column \"status\" is missing in table \"sales\"."
+    },
+    {
+      "table": "sales",
+      "column": "payment_status",
+      "diffType": "DEFAULT_VALUE",
+      "current": "'paid'",
+      "target": "unpaid",
+      "description": "Default value mismatch for \"sales.payment_status\": current \"'paid'\" vs target \"unpaid\"."
+    },
+    {
+      "table": "sales",
+      "column": "subtotal_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"subtotal_amount\" is missing in table \"sales\"."
+    },
+    {
+      "table": "sales",
+      "column": "discount_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"discount_amount\" is missing in table \"sales\"."
+    },
+    {
+      "table": "sales",
+      "column": "tax_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"tax_amount\" is missing in table \"sales\"."
+    },
+    {
+      "table": "sales",
+      "column": "total_amount",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sales.total_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "sales",
+      "column": "paid_amount",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sales.paid_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "sales",
+      "column": "due_amount",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sales.due_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "sales",
+      "column": "notes",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"notes\" is missing in table \"sales\"."
+    },
+    {
+      "table": "sale_items",
+      "column": "business_id",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"sale_items.business_id\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "sale_items",
+      "column": "quantity",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,3)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sale_items.quantity\": current \"numeric(12,3)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "sale_items",
+      "column": "unit_price",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sale_items.unit_price\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "sale_items",
+      "column": "unit_cost",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sale_items.unit_cost\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "sale_items",
+      "column": "discount_amount",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sale_items.discount_amount\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "sale_items",
+      "column": "subtotal",
+      "diffType": "DATA_TYPE",
+      "current": "numeric(12,2)",
+      "target": "numeric(12",
+      "description": "Data type mismatch for \"sale_items.subtotal\": current \"numeric(12,2)\" vs target \"numeric(12\"."
+    },
+    {
+      "table": "payments",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "sale_id",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"sale_id\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "customer_id",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"customer_id\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "payment_number",
+      "diffType": "MISSING",
+      "target": "character varying(100) NOT NULL",
+      "description": "Column \"payment_number\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "payment_method",
+      "diffType": "MISSING",
+      "target": "character varying(50) NOT NULL",
+      "description": "Column \"payment_method\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL",
+      "description": "Column \"amount\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "currency",
+      "diffType": "MISSING",
+      "target": "character varying(10) NOT NULL DEFAULT KHR",
+      "description": "Column \"currency\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "exchange_rate",
+      "diffType": "MISSING",
+      "target": "numeric(10 NOT NULL DEFAULT 1.0000",
+      "description": "Column \"exchange_rate\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "reference_number",
+      "diffType": "MISSING",
+      "target": "character varying(100)",
+      "description": "Column \"reference_number\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "status",
+      "diffType": "MISSING",
+      "target": "character varying(50) NOT NULL DEFAULT completed",
+      "description": "Column \"status\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "notes",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"notes\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "paid_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"paid_at\" is missing in table \"payments\"."
+    },
+    {
+      "table": "payments",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"payments\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "supplier_code",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"supplier_code\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "company_name",
+      "diffType": "MISSING",
+      "target": "character varying(255) NOT NULL",
+      "description": "Column \"company_name\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "contact_name",
+      "diffType": "MISSING",
+      "target": "character varying(255)",
+      "description": "Column \"contact_name\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "phone",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"phone\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "email",
+      "diffType": "MISSING",
+      "target": "character varying(255)",
+      "description": "Column \"email\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "address",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"address\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "outstanding_balance",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"outstanding_balance\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "is_active",
+      "diffType": "MISSING",
+      "target": "boolean NOT NULL DEFAULT true",
+      "description": "Column \"is_active\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "suppliers",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"suppliers\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "supplier_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"supplier_id\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "po_number",
+      "diffType": "MISSING",
+      "target": "character varying(100) NOT NULL",
+      "description": "Column \"po_number\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "status",
+      "diffType": "MISSING",
+      "target": "character varying(50) NOT NULL DEFAULT draft",
+      "description": "Column \"status\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "payment_status",
+      "diffType": "MISSING",
+      "target": "character varying(50) NOT NULL DEFAULT unpaid",
+      "description": "Column \"payment_status\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "total_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"total_amount\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "paid_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"paid_amount\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "due_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"due_amount\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "expected_delivery_date",
+      "diffType": "MISSING",
+      "target": "date",
+      "description": "Column \"expected_delivery_date\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "received_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"received_at\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "notes",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"notes\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"purchase_orders\"."
+    },
+    {
+      "table": "purchase_items",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"purchase_items\"."
+    },
+    {
+      "table": "purchase_items",
+      "column": "purchase_order_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"purchase_order_id\" is missing in table \"purchase_items\"."
+    },
+    {
+      "table": "purchase_items",
+      "column": "product_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"product_id\" is missing in table \"purchase_items\"."
+    },
+    {
+      "table": "purchase_items",
+      "column": "quantity_ordered",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL",
+      "description": "Column \"quantity_ordered\" is missing in table \"purchase_items\"."
+    },
+    {
+      "table": "purchase_items",
+      "column": "quantity_received",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.000",
+      "description": "Column \"quantity_received\" is missing in table \"purchase_items\"."
+    },
+    {
+      "table": "purchase_items",
+      "column": "unit_cost",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL",
+      "description": "Column \"unit_cost\" is missing in table \"purchase_items\"."
+    },
+    {
+      "table": "purchase_items",
+      "column": "subtotal",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL",
+      "description": "Column \"subtotal\" is missing in table \"purchase_items\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "code",
+      "diffType": "MISSING",
+      "target": "character varying(50)",
+      "description": "Column \"code\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "name",
+      "diffType": "NULLABILITY",
+      "current": "NULL",
+      "target": "NOT NULL",
+      "description": "Nullability mismatch for \"expense_categories.name\": current is NULL, target expects NOT NULL."
+    },
+    {
+      "table": "expense_categories",
+      "column": "description",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"description\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "is_active",
+      "diffType": "MISSING",
+      "target": "boolean NOT NULL DEFAULT true",
+      "description": "Column \"is_active\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expense_categories",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"expense_categories\"."
+    },
+    {
+      "table": "expenses",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "category_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"category_id\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "expense_number",
+      "diffType": "MISSING",
+      "target": "character varying(100) NOT NULL",
+      "description": "Column \"expense_number\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "title",
+      "diffType": "MISSING",
+      "target": "character varying(255) NOT NULL",
+      "description": "Column \"title\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL",
+      "description": "Column \"amount\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "currency",
+      "diffType": "MISSING",
+      "target": "character varying(10) NOT NULL DEFAULT KHR",
+      "description": "Column \"currency\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "payment_method",
+      "diffType": "MISSING",
+      "target": "character varying(50) NOT NULL",
+      "description": "Column \"payment_method\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "vendor_name",
+      "diffType": "MISSING",
+      "target": "character varying(255)",
+      "description": "Column \"vendor_name\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "receipt_url",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"receipt_url\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "notes",
+      "diffType": "MISSING",
+      "target": "text",
+      "description": "Column \"notes\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "incurred_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"incurred_at\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "deleted_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone",
+      "description": "Column \"deleted_at\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "created_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"created_by\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "expenses",
+      "column": "updated_by",
+      "diffType": "MISSING",
+      "target": "uuid",
+      "description": "Column \"updated_by\" is missing in table \"expenses\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "business_id",
+      "diffType": "MISSING",
+      "target": "uuid NOT NULL",
+      "description": "Column \"business_id\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "summary_date",
+      "diffType": "MISSING",
+      "target": "date NOT NULL",
+      "description": "Column \"summary_date\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_sales_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"total_sales_amount\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_sales_count",
+      "diffType": "MISSING",
+      "target": "integer NOT NULL DEFAULT 0",
+      "description": "Column \"total_sales_count\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_cost_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"total_cost_amount\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_gross_profit",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"total_gross_profit\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_expenses_amount",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"total_expenses_amount\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_net_profit",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.00",
+      "description": "Column \"total_net_profit\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_stock_in_qty",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.000",
+      "description": "Column \"total_stock_in_qty\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "total_stock_out_qty",
+      "diffType": "MISSING",
+      "target": "numeric(12 NOT NULL DEFAULT 0.000",
+      "description": "Column \"total_stock_out_qty\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "updated_at",
+      "diffType": "MISSING",
+      "target": "timestamp with time zone NOT NULL DEFAULT now()",
+      "description": "Column \"updated_at\" is missing in table \"daily_summaries\"."
+    },
+    {
+      "table": "profiles",
+      "column": "name",
+      "diffType": "EXTRA",
+      "current": "character varying(255)",
+      "description": "Extra column \"name\" found in current table \"profiles\" that is not defined in target SQL schema."
+    },
+    {
+      "table": "payments",
+      "column": "name",
+      "diffType": "EXTRA",
+      "current": "character varying(255)",
+      "description": "Extra column \"name\" found in current table \"payments\" that is not defined in target SQL schema."
+    },
+    {
+      "table": "suppliers",
+      "column": "name",
+      "diffType": "EXTRA",
+      "current": "character varying(255)",
+      "description": "Extra column \"name\" found in current table \"suppliers\" that is not defined in target SQL schema."
+    },
+    {
+      "table": "purchase_orders",
+      "column": "name",
+      "diffType": "EXTRA",
+      "current": "character varying(255)",
+      "description": "Extra column \"name\" found in current table \"purchase_orders\" that is not defined in target SQL schema."
+    },
+    {
+      "table": "purchase_items",
+      "column": "name",
+      "diffType": "EXTRA",
+      "current": "character varying(255)",
+      "description": "Extra column \"name\" found in current table \"purchase_items\" that is not defined in target SQL schema."
+    },
+    {
+      "table": "expenses",
+      "column": "name",
+      "diffType": "EXTRA",
+      "current": "character varying(255)",
+      "description": "Extra column \"name\" found in current table \"expenses\" that is not defined in target SQL schema."
+    },
+    {
+      "table": "daily_summaries",
+      "column": "name",
+      "diffType": "EXTRA",
+      "current": "character varying(255)",
+      "description": "Extra column \"name\" found in current table \"daily_summaries\" that is not defined in target SQL schema."
+    }
+  ],
+  "pkDifferences": [],
+  "fkDifferences": [
+    {
+      "table": "sale_items",
+      "constraintName": "fk_sale_items_business_id",
+      "sourceColumn": "business_id",
+      "targetTable": "businesses",
+      "diffType": "MISSING_FK",
+      "target": {
+        "constraintName": "fk_sale_items_business_id",
+        "sourceTable": "sale_items",
+        "sourceColumn": "business_id",
+        "targetTable": "businesses",
+        "targetColumn": "id",
+        "onDelete": "CASCADE"
+      },
+      "description": "Foreign key on \"sale_items.business_id\" referencing \"businesses(id)\" is missing."
+    },
+    {
+      "table": "payments",
+      "constraintName": "fk_payments_business_id",
+      "sourceColumn": "business_id",
+      "targetTable": "businesses",
+      "diffType": "MISSING_FK",
+      "target": {
+        "constraintName": "fk_payments_business_id",
+        "sourceTable": "payments",
+        "sourceColumn": "business_id",
+        "targetTable": "businesses",
+        "targetColumn": "id",
+        "onDelete": "CASCADE"
+      },
+      "description": "Foreign key on \"payments.business_id\" referencing \"businesses(id)\" is missing."
+    },
+    {
+      "table": "purchase_orders",
+      "constraintName": "fk_purchase_orders_business_id",
+      "sourceColumn": "business_id",
+      "targetTable": "businesses",
+      "diffType": "MISSING_FK",
+      "target": {
+        "constraintName": "fk_purchase_orders_business_id",
+        "sourceTable": "purchase_orders",
+        "sourceColumn": "business_id",
+        "targetTable": "businesses",
+        "targetColumn": "id",
+        "onDelete": "CASCADE"
+      },
+      "description": "Foreign key on \"purchase_orders.business_id\" referencing \"businesses(id)\" is missing."
+    },
+    {
+      "table": "purchase_items",
+      "constraintName": "fk_purchase_items_business_id",
+      "sourceColumn": "business_id",
+      "targetTable": "businesses",
+      "diffType": "MISSING_FK",
+      "target": {
+        "constraintName": "fk_purchase_items_business_id",
+        "sourceTable": "purchase_items",
+        "sourceColumn": "business_id",
+        "targetTable": "businesses",
+        "targetColumn": "id",
+        "onDelete": "CASCADE"
+      },
+      "description": "Foreign key on \"purchase_items.business_id\" referencing \"businesses(id)\" is missing."
+    },
+    {
+      "table": "expense_categories",
+      "constraintName": "fk_expense_categories_business_id",
+      "sourceColumn": "business_id",
+      "targetTable": "businesses",
+      "diffType": "MISSING_FK",
+      "target": {
+        "constraintName": "fk_expense_categories_business_id",
+        "sourceTable": "expense_categories",
+        "sourceColumn": "business_id",
+        "targetTable": "businesses",
+        "targetColumn": "id",
+        "onDelete": "CASCADE"
+      },
+      "description": "Foreign key on \"expense_categories.business_id\" referencing \"businesses(id)\" is missing."
+    },
+    {
+      "table": "expenses",
+      "constraintName": "fk_expenses_business_id",
+      "sourceColumn": "business_id",
+      "targetTable": "businesses",
+      "diffType": "MISSING_FK",
+      "target": {
+        "constraintName": "fk_expenses_business_id",
+        "sourceTable": "expenses",
+        "sourceColumn": "business_id",
+        "targetTable": "businesses",
+        "targetColumn": "id",
+        "onDelete": "CASCADE"
+      },
+      "description": "Foreign key on \"expenses.business_id\" referencing \"businesses(id)\" is missing."
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "fk_daily_summaries_business_id",
+      "sourceColumn": "business_id",
+      "targetTable": "businesses",
+      "diffType": "MISSING_FK",
+      "target": {
+        "constraintName": "fk_daily_summaries_business_id",
+        "sourceTable": "daily_summaries",
+        "sourceColumn": "business_id",
+        "targetTable": "businesses",
+        "targetColumn": "id",
+        "onDelete": "CASCADE"
+      },
+      "description": "Foreign key on \"daily_summaries.business_id\" referencing \"businesses(id)\" is missing."
+    }
+  ],
+  "constraintDifferences": [
+    {
+      "table": "businesses",
+      "constraintName": "chk_businesses_currency",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (currency IN ('KHR', 'USD'))",
+      "description": "Missing CHECK constraint \"chk_businesses_currency\" on table \"businesses\". Target definition: CHECK (currency IN ('KHR', 'USD'))"
+    },
+    {
+      "table": "profiles",
+      "constraintName": "chk_profiles_role",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (role IN ('owner', 'admin', 'manager', 'cashier', 'staff'))",
+      "description": "Missing CHECK constraint \"chk_profiles_role\" on table \"profiles\". Target definition: CHECK (role IN ('owner', 'admin', 'manager', 'cashier', 'staff'))"
+    },
+    {
+      "table": "stock_movements",
+      "constraintName": "chk_stock_movements_balance_before",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (balance_before >= 0)",
+      "description": "Missing CHECK constraint \"chk_stock_movements_balance_before\" on table \"stock_movements\". Target definition: CHECK (balance_before >= 0)"
+    },
+    {
+      "table": "stock_movements",
+      "constraintName": "chk_stock_movements_balance_after",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (balance_after >= 0)",
+      "description": "Missing CHECK constraint \"chk_stock_movements_balance_after\" on table \"stock_movements\". Target definition: CHECK (balance_after >= 0)"
+    },
+    {
+      "table": "customers",
+      "constraintName": "chk_customers_credit_limit",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (credit_limit >= 0)",
+      "description": "Missing CHECK constraint \"chk_customers_credit_limit\" on table \"customers\". Target definition: CHECK (credit_limit >= 0)"
+    },
+    {
+      "table": "sales",
+      "constraintName": "chk_sales_subtotal",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (subtotal_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_sales_subtotal\" on table \"sales\". Target definition: CHECK (subtotal_amount >= 0)"
+    },
+    {
+      "table": "sales",
+      "constraintName": "chk_sales_discount",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (discount_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_sales_discount\" on table \"sales\". Target definition: CHECK (discount_amount >= 0)"
+    },
+    {
+      "table": "sales",
+      "constraintName": "chk_sales_tax",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (tax_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_sales_tax\" on table \"sales\". Target definition: CHECK (tax_amount >= 0)"
+    },
+    {
+      "table": "sales",
+      "constraintName": "chk_sales_paid",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (paid_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_sales_paid\" on table \"sales\". Target definition: CHECK (paid_amount >= 0)"
+    },
+    {
+      "table": "sales",
+      "constraintName": "chk_sales_due",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (due_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_sales_due\" on table \"sales\". Target definition: CHECK (due_amount >= 0)"
+    },
+    {
+      "table": "sales",
+      "constraintName": "chk_sales_status",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (status IN ('draft', 'completed', 'cancelled', 'refunded'))",
+      "description": "Missing CHECK constraint \"chk_sales_status\" on table \"sales\". Target definition: CHECK (status IN ('draft', 'completed', 'cancelled', 'refunded'))"
+    },
+    {
+      "table": "sales",
+      "constraintName": "chk_sales_payment_status",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (payment_status IN ('unpaid', 'partial', 'paid', 'overdue'))",
+      "description": "Missing CHECK constraint \"chk_sales_payment_status\" on table \"sales\". Target definition: CHECK (payment_status IN ('unpaid', 'partial', 'paid', 'overdue'))"
+    },
+    {
+      "table": "sale_items",
+      "constraintName": "chk_sale_items_qty",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (quantity > 0)",
+      "description": "Missing CHECK constraint \"chk_sale_items_qty\" on table \"sale_items\". Target definition: CHECK (quantity > 0)"
+    },
+    {
+      "table": "sale_items",
+      "constraintName": "chk_sale_items_unit_price",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (unit_price >= 0)",
+      "description": "Missing CHECK constraint \"chk_sale_items_unit_price\" on table \"sale_items\". Target definition: CHECK (unit_price >= 0)"
+    },
+    {
+      "table": "sale_items",
+      "constraintName": "chk_sale_items_unit_cost",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (unit_cost >= 0)",
+      "description": "Missing CHECK constraint \"chk_sale_items_unit_cost\" on table \"sale_items\". Target definition: CHECK (unit_cost >= 0)"
+    },
+    {
+      "table": "sale_items",
+      "constraintName": "chk_sale_items_discount",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (discount_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_sale_items_discount\" on table \"sale_items\". Target definition: CHECK (discount_amount >= 0)"
+    },
+    {
+      "table": "sale_items",
+      "constraintName": "chk_sale_items_subtotal",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (subtotal >= 0)",
+      "description": "Missing CHECK constraint \"chk_sale_items_subtotal\" on table \"sale_items\". Target definition: CHECK (subtotal >= 0)"
+    },
+    {
+      "table": "payments",
+      "constraintName": "chk_payments_amount",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (amount > 0)",
+      "description": "Missing CHECK constraint \"chk_payments_amount\" on table \"payments\". Target definition: CHECK (amount > 0)"
+    },
+    {
+      "table": "payments",
+      "constraintName": "chk_payments_exchange_rate",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (exchange_rate > 0)",
+      "description": "Missing CHECK constraint \"chk_payments_exchange_rate\" on table \"payments\". Target definition: CHECK (exchange_rate > 0)"
+    },
+    {
+      "table": "payments",
+      "constraintName": "chk_payments_currency",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (currency IN ('KHR', 'USD'))",
+      "description": "Missing CHECK constraint \"chk_payments_currency\" on table \"payments\". Target definition: CHECK (currency IN ('KHR', 'USD'))"
+    },
+    {
+      "table": "payments",
+      "constraintName": "chk_payments_method",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (payment_method IN ('cash', 'khqr', 'bank_transfer', 'card', 'credit'))",
+      "description": "Missing CHECK constraint \"chk_payments_method\" on table \"payments\". Target definition: CHECK (payment_method IN ('cash', 'khqr', 'bank_transfer', 'card', 'credit'))"
+    },
+    {
+      "table": "payments",
+      "constraintName": "chk_payments_status",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (status IN ('completed', 'voided', 'refunded'))",
+      "description": "Missing CHECK constraint \"chk_payments_status\" on table \"payments\". Target definition: CHECK (status IN ('completed', 'voided', 'refunded'))"
+    },
+    {
+      "table": "payments",
+      "constraintName": "uq_payments_biz_payment_number",
+      "constraintType": "UNIQUE",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "UNIQUE (business_id, payment_number)",
+      "description": "Missing UNIQUE constraint \"uq_payments_biz_payment_number\" on table \"payments\". Target definition: UNIQUE (business_id, payment_number)"
+    },
+    {
+      "table": "purchase_orders",
+      "constraintName": "chk_purchase_orders_total",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (total_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_purchase_orders_total\" on table \"purchase_orders\". Target definition: CHECK (total_amount >= 0)"
+    },
+    {
+      "table": "purchase_orders",
+      "constraintName": "chk_purchase_orders_paid",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (paid_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_purchase_orders_paid\" on table \"purchase_orders\". Target definition: CHECK (paid_amount >= 0)"
+    },
+    {
+      "table": "purchase_orders",
+      "constraintName": "chk_purchase_orders_due",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (due_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_purchase_orders_due\" on table \"purchase_orders\". Target definition: CHECK (due_amount >= 0)"
+    },
+    {
+      "table": "purchase_orders",
+      "constraintName": "chk_purchase_orders_status",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (status IN ('draft', 'ordered', 'partially_received', 'received', 'cancelled'))",
+      "description": "Missing CHECK constraint \"chk_purchase_orders_status\" on table \"purchase_orders\". Target definition: CHECK (status IN ('draft', 'ordered', 'partially_received', 'received', 'cancelled'))"
+    },
+    {
+      "table": "purchase_orders",
+      "constraintName": "chk_purchase_orders_payment_status",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (payment_status IN ('unpaid', 'partial', 'paid'))",
+      "description": "Missing CHECK constraint \"chk_purchase_orders_payment_status\" on table \"purchase_orders\". Target definition: CHECK (payment_status IN ('unpaid', 'partial', 'paid'))"
+    },
+    {
+      "table": "purchase_orders",
+      "constraintName": "uq_purchase_orders_biz_po_number",
+      "constraintType": "UNIQUE",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "UNIQUE (business_id, po_number)",
+      "description": "Missing UNIQUE constraint \"uq_purchase_orders_biz_po_number\" on table \"purchase_orders\". Target definition: UNIQUE (business_id, po_number)"
+    },
+    {
+      "table": "purchase_items",
+      "constraintName": "chk_purchase_items_qty_ordered",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (quantity_ordered > 0)",
+      "description": "Missing CHECK constraint \"chk_purchase_items_qty_ordered\" on table \"purchase_items\". Target definition: CHECK (quantity_ordered > 0)"
+    },
+    {
+      "table": "purchase_items",
+      "constraintName": "chk_purchase_items_qty_received",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (quantity_received >= 0)",
+      "description": "Missing CHECK constraint \"chk_purchase_items_qty_received\" on table \"purchase_items\". Target definition: CHECK (quantity_received >= 0)"
+    },
+    {
+      "table": "purchase_items",
+      "constraintName": "chk_purchase_items_unit_cost",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (unit_cost >= 0)",
+      "description": "Missing CHECK constraint \"chk_purchase_items_unit_cost\" on table \"purchase_items\". Target definition: CHECK (unit_cost >= 0)"
+    },
+    {
+      "table": "purchase_items",
+      "constraintName": "chk_purchase_items_subtotal",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (subtotal >= 0)",
+      "description": "Missing CHECK constraint \"chk_purchase_items_subtotal\" on table \"purchase_items\". Target definition: CHECK (subtotal >= 0)"
+    },
+    {
+      "table": "expense_categories",
+      "constraintName": "uq_expense_categories_biz_code",
+      "constraintType": "UNIQUE",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "UNIQUE (business_id, code)",
+      "description": "Missing UNIQUE constraint \"uq_expense_categories_biz_code\" on table \"expense_categories\". Target definition: UNIQUE (business_id, code)"
+    },
+    {
+      "table": "expenses",
+      "constraintName": "chk_expenses_amount",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (amount > 0)",
+      "description": "Missing CHECK constraint \"chk_expenses_amount\" on table \"expenses\". Target definition: CHECK (amount > 0)"
+    },
+    {
+      "table": "expenses",
+      "constraintName": "chk_expenses_currency",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (currency IN ('KHR', 'USD'))",
+      "description": "Missing CHECK constraint \"chk_expenses_currency\" on table \"expenses\". Target definition: CHECK (currency IN ('KHR', 'USD'))"
+    },
+    {
+      "table": "expenses",
+      "constraintName": "chk_expenses_method",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (payment_method IN ('cash', 'khqr', 'bank_transfer', 'card', 'credit'))",
+      "description": "Missing CHECK constraint \"chk_expenses_method\" on table \"expenses\". Target definition: CHECK (payment_method IN ('cash', 'khqr', 'bank_transfer', 'card', 'credit'))"
+    },
+    {
+      "table": "expenses",
+      "constraintName": "uq_expenses_biz_expense_number",
+      "constraintType": "UNIQUE",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "UNIQUE (business_id, expense_number)",
+      "description": "Missing UNIQUE constraint \"uq_expenses_biz_expense_number\" on table \"expenses\". Target definition: UNIQUE (business_id, expense_number)"
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "chk_daily_summaries_sales_amt",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (total_sales_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_daily_summaries_sales_amt\" on table \"daily_summaries\". Target definition: CHECK (total_sales_amount >= 0)"
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "chk_daily_summaries_sales_cnt",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (total_sales_count >= 0)",
+      "description": "Missing CHECK constraint \"chk_daily_summaries_sales_cnt\" on table \"daily_summaries\". Target definition: CHECK (total_sales_count >= 0)"
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "chk_daily_summaries_cost_amt",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (total_cost_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_daily_summaries_cost_amt\" on table \"daily_summaries\". Target definition: CHECK (total_cost_amount >= 0)"
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "chk_daily_summaries_expenses_amt",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (total_expenses_amount >= 0)",
+      "description": "Missing CHECK constraint \"chk_daily_summaries_expenses_amt\" on table \"daily_summaries\". Target definition: CHECK (total_expenses_amount >= 0)"
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "chk_daily_summaries_stock_in",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (total_stock_in_qty >= 0)",
+      "description": "Missing CHECK constraint \"chk_daily_summaries_stock_in\" on table \"daily_summaries\". Target definition: CHECK (total_stock_in_qty >= 0)"
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "chk_daily_summaries_stock_out",
+      "constraintType": "CHECK",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "CHECK (total_stock_out_qty >= 0)",
+      "description": "Missing CHECK constraint \"chk_daily_summaries_stock_out\" on table \"daily_summaries\". Target definition: CHECK (total_stock_out_qty >= 0)"
+    },
+    {
+      "table": "daily_summaries",
+      "constraintName": "uq_daily_summaries_biz_date",
+      "constraintType": "UNIQUE",
+      "diffType": "MISSING_CONSTRAINT",
+      "target": "UNIQUE (business_id, summary_date)",
+      "description": "Missing UNIQUE constraint \"uq_daily_summaries_biz_date\" on table \"daily_summaries\". Target definition: UNIQUE (business_id, summary_date)"
+    },
+    {
+      "table": "businesses",
+      "constraintName": "nn_businesses_name",
+      "constraintType": "NOT NULL",
+      "diffType": "EXTRA_CONSTRAINT",
+      "current": "NOT NULL (name)",
+      "description": "Extra NOT NULL constraint \"nn_businesses_name\" found on table \"businesses\" in current database."
+    },
+    {
+      "table": "products",
+      "constraintName": "uq_products_biz_barcode",
+      "constraintType": "UNIQUE",
+      "diffType": "EXTRA_CONSTRAINT",
+      "current": "UNIQUE (business_id, barcode) WHERE barcode IS NOT NULL",
+      "description": "Extra UNIQUE constraint \"uq_products_biz_barcode\" found on table \"products\" in current database."
+    },
+    {
+      "table": "products",
+      "constraintName": "nn_products_name",
+      "constraintType": "NOT NULL",
+      "diffType": "EXTRA_CONSTRAINT",
+      "current": "NOT NULL (name)",
+      "description": "Extra NOT NULL constraint \"nn_products_name\" found on table \"products\" in current database."
+    },
+    {
+      "table": "products",
+      "constraintName": "nn_products_current_stock",
+      "constraintType": "NOT NULL",
+      "diffType": "EXTRA_CONSTRAINT",
+      "current": "NOT NULL (current_stock)",
+      "description": "Extra NOT NULL constraint \"nn_products_current_stock\" found on table \"products\" in current database."
+    },
+    {
+      "table": "stock_movements",
+      "constraintName": "uq_stock_movements_idempotency",
+      "constraintType": "UNIQUE",
+      "diffType": "EXTRA_CONSTRAINT",
+      "current": "UNIQUE (idempotency_key) WHERE idempotency_key IS NOT NULL",
+      "description": "Extra UNIQUE constraint \"uq_stock_movements_idempotency\" found on table \"stock_movements\" in current database."
+    },
+    {
+      "table": "stock_movements",
+      "constraintName": "nn_stock_movements_reason",
+      "constraintType": "NOT NULL",
+      "diffType": "EXTRA_CONSTRAINT",
+      "current": "NOT NULL (reason)",
+      "description": "Extra NOT NULL constraint \"nn_stock_movements_reason\" found on table \"stock_movements\" in current database."
+    },
+    {
+      "table": "sales",
+      "constraintName": "nn_sales_sold_at",
+      "constraintType": "NOT NULL",
+      "diffType": "EXTRA_CONSTRAINT",
+      "current": "NOT NULL (sold_at)",
+      "description": "Extra NOT NULL constraint \"nn_sales_sold_at\" found on table \"sales\" in current database."
+    }
+  ],
+  "indexDifferences": [
+    {
+      "table": "profiles",
+      "indexName": "idx_profiles_business_id",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_profiles_business_id",
+        "table": "profiles",
+        "columns": [
+          "business_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_profiles_business_id ON profiles(business_id);"
+      },
+      "description": "Missing index \"idx_profiles_business_id\" on table \"profiles\" (business_id)."
+    },
+    {
+      "table": "profiles",
+      "indexName": "idx_profiles_role",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_profiles_role",
+        "table": "profiles",
+        "columns": [
+          "business_id",
+          "role"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_profiles_role ON profiles(business_id, role);"
+      },
+      "description": "Missing index \"idx_profiles_role\" on table \"profiles\" (business_id, role)."
+    },
+    {
+      "table": "products",
+      "indexName": "idx_products_business_id",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_products_business_id",
+        "table": "products",
+        "columns": [
+          "business_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_products_business_id ON products(business_id);"
+      },
+      "description": "Missing index \"idx_products_business_id\" on table \"products\" (business_id)."
+    },
+    {
+      "table": "products",
+      "indexName": "idx_products_category_id",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_products_category_id",
+        "table": "products",
+        "columns": [
+          "category_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_products_category_id ON products(category_id);"
+      },
+      "description": "Missing index \"idx_products_category_id\" on table \"products\" (category_id)."
+    },
+    {
+      "table": "products",
+      "indexName": "idx_products_unit_id",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_products_unit_id",
+        "table": "products",
+        "columns": [
+          "unit_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_products_unit_id ON products(unit_id);"
+      },
+      "description": "Missing index \"idx_products_unit_id\" on table \"products\" (unit_id)."
+    },
+    {
+      "table": "products",
+      "indexName": "idx_products_search",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_products_search",
+        "table": "products",
+        "columns": [
+          "business_id",
+          "name",
+          "sku"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_products_search ON products(business_id, name, sku);"
+      },
+      "description": "Missing index \"idx_products_search\" on table \"products\" (business_id, name, sku)."
+    },
+    {
+      "table": "products",
+      "indexName": "idx_products_stock_alert",
+      "diffType": "DEFINITION_MISMATCH",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": true,
+      "current": {
+        "indexName": "idx_products_stock_alert",
+        "table": "products",
+        "columns": [
+          "business_id",
+          "current_stock",
+          "min_stock_alert"
+        ],
+        "isUnique": false,
+        "isPrimary": false,
+        "method": "btree",
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_products_stock_alert ON public.products USING btree (business_id, current_stock, min_stock_alert)"
+      },
+      "target": {
+        "indexName": "idx_products_low_stock",
+        "table": "products",
+        "columns": [
+          "business_id",
+          "current_stock",
+          "min_stock_alert"
+        ],
+        "isUnique": false,
+        "isPartial": true,
+        "whereClause": "is_archived = false AND deleted_at IS NULL",
+        "definition": "CREATE INDEX idx_products_low_stock ON products(business_id, current_stock, min_stock_alert) \n  WHERE is_archived = false AND deleted_at IS NULL;"
+      },
+      "description": "Index definition mismatch for \"idx_products_stock_alert\" on \"products\": uniqueness current false vs target false, partial current false vs target true."
+    },
+    {
+      "table": "stock_movements",
+      "indexName": "idx_stock_movements_type",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_stock_movements_type",
+        "table": "stock_movements",
+        "columns": [
+          "business_id",
+          "movement_type",
+          "created_at DESC"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_stock_movements_type ON stock_movements(business_id, movement_type, created_at DESC);"
+      },
+      "description": "Missing index \"idx_stock_movements_type\" on table \"stock_movements\" (business_id, movement_type, created_at DESC)."
+    },
+    {
+      "table": "stock_movements",
+      "indexName": "idx_stock_movements_ref",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_stock_movements_ref",
+        "table": "stock_movements",
+        "columns": [
+          "reference_type",
+          "reference_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_stock_movements_ref ON stock_movements(reference_type, reference_id);"
+      },
+      "description": "Missing index \"idx_stock_movements_ref\" on table \"stock_movements\" (reference_type, reference_id)."
+    },
+    {
+      "table": "sales",
+      "indexName": "idx_sales_biz_created",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_sales_biz_created",
+        "table": "sales",
+        "columns": [
+          "business_id",
+          "created_at DESC"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_sales_biz_created ON sales(business_id, created_at DESC);"
+      },
+      "description": "Missing index \"idx_sales_biz_created\" on table \"sales\" (business_id, created_at DESC)."
+    },
+    {
+      "table": "sales",
+      "indexName": "idx_sales_status",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_sales_status",
+        "table": "sales",
+        "columns": [
+          "business_id",
+          "status",
+          "payment_status"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_sales_status ON sales(business_id, status, payment_status);"
+      },
+      "description": "Missing index \"idx_sales_status\" on table \"sales\" (business_id, status, payment_status)."
+    },
+    {
+      "table": "payments",
+      "indexName": "idx_payments_biz_created",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_payments_biz_created",
+        "table": "payments",
+        "columns": [
+          "business_id",
+          "paid_at DESC"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_payments_biz_created ON payments(business_id, paid_at DESC);"
+      },
+      "description": "Missing index \"idx_payments_biz_created\" on table \"payments\" (business_id, paid_at DESC)."
+    },
+    {
+      "table": "payments",
+      "indexName": "idx_payments_sale",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_payments_sale",
+        "table": "payments",
+        "columns": [
+          "sale_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_payments_sale ON payments(sale_id);"
+      },
+      "description": "Missing index \"idx_payments_sale\" on table \"payments\" (sale_id)."
+    },
+    {
+      "table": "payments",
+      "indexName": "idx_payments_customer",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_payments_customer",
+        "table": "payments",
+        "columns": [
+          "customer_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_payments_customer ON payments(customer_id);"
+      },
+      "description": "Missing index \"idx_payments_customer\" on table \"payments\" (customer_id)."
+    },
+    {
+      "table": "suppliers",
+      "indexName": "idx_suppliers_biz",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_suppliers_biz",
+        "table": "suppliers",
+        "columns": [
+          "business_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_suppliers_biz ON suppliers(business_id);"
+      },
+      "description": "Missing index \"idx_suppliers_biz\" on table \"suppliers\" (business_id)."
+    },
+    {
+      "table": "purchase_orders",
+      "indexName": "idx_purchase_orders_biz_status",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_purchase_orders_biz_status",
+        "table": "purchase_orders",
+        "columns": [
+          "business_id",
+          "status",
+          "created_at DESC"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_purchase_orders_biz_status ON purchase_orders(business_id, status, created_at DESC);"
+      },
+      "description": "Missing index \"idx_purchase_orders_biz_status\" on table \"purchase_orders\" (business_id, status, created_at DESC)."
+    },
+    {
+      "table": "purchase_orders",
+      "indexName": "idx_purchase_orders_supplier",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_purchase_orders_supplier",
+        "table": "purchase_orders",
+        "columns": [
+          "supplier_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_purchase_orders_supplier ON purchase_orders(supplier_id);"
+      },
+      "description": "Missing index \"idx_purchase_orders_supplier\" on table \"purchase_orders\" (supplier_id)."
+    },
+    {
+      "table": "purchase_items",
+      "indexName": "idx_purchase_items_po",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_purchase_items_po",
+        "table": "purchase_items",
+        "columns": [
+          "purchase_order_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_purchase_items_po ON purchase_items(purchase_order_id);"
+      },
+      "description": "Missing index \"idx_purchase_items_po\" on table \"purchase_items\" (purchase_order_id)."
+    },
+    {
+      "table": "expenses",
+      "indexName": "idx_expenses_biz_date",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_expenses_biz_date",
+        "table": "expenses",
+        "columns": [
+          "business_id",
+          "incurred_at DESC"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_expenses_biz_date ON expenses(business_id, incurred_at DESC);"
+      },
+      "description": "Missing index \"idx_expenses_biz_date\" on table \"expenses\" (business_id, incurred_at DESC)."
+    },
+    {
+      "table": "expenses",
+      "indexName": "idx_expenses_category",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_expenses_category",
+        "table": "expenses",
+        "columns": [
+          "category_id"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_expenses_category ON expenses(category_id);"
+      },
+      "description": "Missing index \"idx_expenses_category\" on table \"expenses\" (category_id)."
+    },
+    {
+      "table": "daily_summaries",
+      "indexName": "idx_daily_summaries_biz_date",
+      "diffType": "MISSING_INDEX",
+      "isUniqueMismatch": false,
+      "isPartialMismatch": false,
+      "target": {
+        "indexName": "idx_daily_summaries_biz_date",
+        "table": "daily_summaries",
+        "columns": [
+          "business_id",
+          "summary_date DESC"
+        ],
+        "isUnique": false,
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_daily_summaries_biz_date ON daily_summaries(business_id, summary_date DESC);"
+      },
+      "description": "Missing index \"idx_daily_summaries_biz_date\" on table \"daily_summaries\" (business_id, summary_date DESC)."
+    },
+    {
+      "table": "products",
+      "indexName": "idx_products_biz_category",
+      "diffType": "EXTRA_INDEX",
+      "current": {
+        "indexName": "idx_products_biz_category",
+        "table": "products",
+        "columns": [
+          "business_id",
+          "category_id"
+        ],
+        "isUnique": false,
+        "isPrimary": false,
+        "method": "btree",
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_products_biz_category ON public.products USING btree (business_id, category_id)"
+      },
+      "description": "Extra index \"idx_products_biz_category\" found on table \"products\" in current database."
+    },
+    {
+      "table": "products",
+      "indexName": "idx_products_biz_sku",
+      "diffType": "EXTRA_INDEX",
+      "current": {
+        "indexName": "idx_products_biz_sku",
+        "table": "products",
+        "columns": [
+          "business_id",
+          "sku"
+        ],
+        "isUnique": true,
+        "isPrimary": false,
+        "method": "btree",
+        "isPartial": false,
+        "definition": "CREATE UNIQUE INDEX idx_products_biz_sku ON public.products USING btree (business_id, sku)"
+      },
+      "description": "Extra index \"idx_products_biz_sku\" found on table \"products\" in current database."
+    },
+    {
+      "table": "customers",
+      "indexName": "idx_customers_biz_phone",
+      "diffType": "EXTRA_INDEX",
+      "current": {
+        "indexName": "idx_customers_biz_phone",
+        "table": "customers",
+        "columns": [
+          "business_id",
+          "phone"
+        ],
+        "isUnique": false,
+        "isPrimary": false,
+        "method": "btree",
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_customers_biz_phone ON public.customers USING btree (business_id, phone)"
+      },
+      "description": "Extra index \"idx_customers_biz_phone\" found on table \"customers\" in current database."
+    },
+    {
+      "table": "sales",
+      "indexName": "idx_sales_biz_sold_at",
+      "diffType": "EXTRA_INDEX",
+      "current": {
+        "indexName": "idx_sales_biz_sold_at",
+        "table": "sales",
+        "columns": [
+          "business_id",
+          "sold_at"
+        ],
+        "isUnique": false,
+        "isPrimary": false,
+        "method": "btree",
+        "isPartial": false,
+        "definition": "CREATE INDEX idx_sales_biz_sold_at ON public.sales USING btree (business_id, sold_at DESC)"
+      },
+      "description": "Extra index \"idx_sales_biz_sold_at\" found on table \"sales\" in current database."
+    }
+  ],
+  "health": {
+    "overallScore": 19,
+    "completeness": {
+      "score": 60,
+      "status": "WARNING",
+      "details": [
+        "130 target column(s) missing from existing tables."
+      ],
+      "findingsCount": 130
+    },
+    "integrity": {
+      "score": 0,
+      "status": "CRITICAL",
+      "details": [
+        "7 foreign key constraint(s) missing.",
+        "45 CHECK/UNIQUE constraint(s) missing."
+      ],
+      "findingsCount": 52
+    },
+    "performance": {
+      "score": 0,
+      "status": "CRITICAL",
+      "details": [
+        "20 performance search or unique index(es) missing.",
+        "1 index definition mismatch(es)."
+      ],
+      "findingsCount": 21
+    },
+    "security": {
+      "score": 0,
+      "status": "CRITICAL",
+      "details": [
+        "11 multi-tenant table(s) missing critical 'business_id' scoping column."
+      ],
+      "findingsCount": 11
+    },
+    "maintainability": {
+      "score": 26,
+      "status": "CRITICAL",
+      "details": [
+        "6 extra table(s) found in database that are not in target DDL.",
+        "7 extra column(s) detected."
+      ],
+      "findingsCount": 13
+    },
+    "timestamp": "2026-07-27T10:50:37.746Z"
+  }
+}

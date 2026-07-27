@@ -1,0 +1,200 @@
+[
+  {
+    "currentTable": "businesses",
+    "targetTable": "businesses",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "customers",
+    "targetTable": "customers",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "daily_summaries",
+    "targetTable": "daily_summaries",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "expense_categories",
+    "targetTable": "expense_categories",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "expenses",
+    "targetTable": "expenses",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "payments",
+    "targetTable": "payments",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "product_categories",
+    "targetTable": "product_categories",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "product_units",
+    "targetTable": "product_units",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "products",
+    "targetTable": "products",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "profiles",
+    "targetTable": "profiles",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "purchase_items",
+    "targetTable": "purchase_items",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "purchase_orders",
+    "targetTable": "purchase_orders",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "sale_items",
+    "targetTable": "sale_items",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "sales",
+    "targetTable": "sales",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "stock_movements",
+    "targetTable": "stock_movements",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "suppliers",
+    "targetTable": "suppliers",
+    "matchType": "DIRECT_MATCH",
+    "confidenceScore": 100,
+    "confidenceLevel": "VERY_HIGH",
+    "risk": "LOW",
+    "reason": "Exact table name match between current database and target DDL."
+  },
+  {
+    "currentTable": "business_settings",
+    "targetTable": "business_settings",
+    "matchType": "DEPRECATED_TABLE",
+    "confidenceScore": 90,
+    "confidenceLevel": "HIGH",
+    "risk": "HIGH",
+    "reason": "Table exists in current database but is not defined in target DDL."
+  },
+  {
+    "currentTable": "categories",
+    "targetTable": "categories",
+    "matchType": "DEPRECATED_TABLE",
+    "confidenceScore": 90,
+    "confidenceLevel": "HIGH",
+    "risk": "HIGH",
+    "reason": "Table exists in current database but is not defined in target DDL."
+  },
+  {
+    "currentTable": "schema_migrations",
+    "targetTable": "schema_migrations",
+    "matchType": "DEPRECATED_TABLE",
+    "confidenceScore": 90,
+    "confidenceLevel": "HIGH",
+    "risk": "HIGH",
+    "reason": "Table exists in current database but is not defined in target DDL."
+  },
+  {
+    "currentTable": "stock_transactions",
+    "targetTable": "stock_transactions",
+    "matchType": "DEPRECATED_TABLE",
+    "confidenceScore": 90,
+    "confidenceLevel": "HIGH",
+    "risk": "HIGH",
+    "reason": "Table exists in current database but is not defined in target DDL."
+  },
+  {
+    "currentTable": "transactions",
+    "targetTable": "transactions",
+    "matchType": "DEPRECATED_TABLE",
+    "confidenceScore": 90,
+    "confidenceLevel": "HIGH",
+    "risk": "HIGH",
+    "reason": "Table exists in current database but is not defined in target DDL."
+  },
+  {
+    "currentTable": "user_preferences",
+    "targetTable": "user_preferences",
+    "matchType": "DEPRECATED_TABLE",
+    "confidenceScore": 90,
+    "confidenceLevel": "HIGH",
+    "risk": "HIGH",
+    "reason": "Table exists in current database but is not defined in target DDL."
+  }
+]

@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "totalModules": 6,
+    "passedModules": 6,
+    "failedModules": 0,
+    "skippedModules": 0,
+    "totalFindings": 0,
+    "findingsBySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "totalExecutionTimeMs": 3400,
+    "timestamp": "2026-07-26T14:05:12.835Z",
+    "outputFiles": [],
+    "status": "success"
+  },
+  "modules": [
+    {
+      "moduleName": "TablesInspector",
+      "status": "success",
+      "executionTimeMs": 2406,
+      "tablesAnalyzed": 22,
+      "findings": [],
+      "summaryData": {
+        "totalTables": 22,
+        "outputFile": "tables.json"
+      }
+    },
+    {
+      "moduleName": "ColumnsInspector",
+      "status": "success",
+      "executionTimeMs": 84,
+      "tablesAnalyzed": 22,
+      "findings": [],
+      "summaryData": {
+        "totalColumns": 121,
+        "outputFile": "columns.json"
+      }
+    },
+    {
+      "moduleName": "PrimaryKeysInspector",
+      "status": "success",
+      "executionTimeMs": 1,
+      "tablesAnalyzed": 22,
+      "findings": [],
+      "summaryData": {
+        "totalPrimaryKeys": 22,
+        "outputFile": "primary_keys.json"
+      }
+    },
+    {
+      "moduleName": "ForeignKeysInspector",
+      "status": "success",
+      "executionTimeMs": 1,
+      "tablesAnalyzed": 13,
+      "findings": [],
+      "summaryData": {
+        "totalForeignKeys": 20,
+        "outputFile": "foreign_keys.json"
+      }
+    },
+    {
+      "moduleName": "ConstraintsInspector",
+      "status": "success",
+      "executionTimeMs": 1,
+      "tablesAnalyzed": 6,
+      "findings": [],
+      "summaryData": {
+        "totalConstraints": 19,
+        "outputFile": "constraints.json"
+      }
+    },
+    {
+      "moduleName": "IndexesInspector",
+      "status": "success",
+      "executionTimeMs": 1,
+      "tablesAnalyzed": 22,
+      "findings": [],
+      "summaryData": {
+        "totalIndexes": 33,
+        "outputFile": "indexes.json"
+      }
+    }
+  ]
+}

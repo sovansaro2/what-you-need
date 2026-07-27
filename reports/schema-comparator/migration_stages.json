@@ -1,0 +1,83 @@
+[
+  {
+    "stageNumber": 1,
+    "stageId": "STAGE_1_FOUNDATION",
+    "name": "Foundation & Schemas",
+    "description": "PostgreSQL extensions, schemas, base system settings, and core foundation tables.",
+    "tables": [
+      "businesses"
+    ],
+    "taskCount": 1,
+    "estimatedDuration": "2s",
+    "risk": "LOW"
+  },
+  {
+    "stageNumber": 2,
+    "stageId": "STAGE_2_LOOKUPS",
+    "name": "Lookup & Reference Tables",
+    "description": "Product categories, units of measure, statuses, and reference domain models.",
+    "tables": [
+      "product_units"
+    ],
+    "taskCount": 8,
+    "estimatedDuration": "3s",
+    "risk": "LOW"
+  },
+  {
+    "stageNumber": 3,
+    "stageId": "STAGE_3_CORE_INVENTORY",
+    "name": "Core Entities & Inventory",
+    "description": "Products, customers, suppliers, stores, and primary business entity tables.",
+    "tables": [
+      "customers",
+      "product_categories",
+      "products",
+      "profiles",
+      "sale_items",
+      "suppliers",
+      "purchase_items"
+    ],
+    "taskCount": 62,
+    "estimatedDuration": "5s",
+    "risk": "MEDIUM"
+  },
+  {
+    "stageNumber": 4,
+    "stageId": "STAGE_4_LEDGER",
+    "name": "Ledger & Transactions",
+    "description": "Stock movements, sales orders, line items, payments, and transaction ledgers.",
+    "tables": [
+      "sales",
+      "payments",
+      "stock_movements",
+      "purchase_orders"
+    ],
+    "taskCount": 43,
+    "estimatedDuration": "8s",
+    "risk": "HIGH"
+  },
+  {
+    "stageNumber": 5,
+    "stageId": "STAGE_5_FINANCE",
+    "name": "Finance & Analytics",
+    "description": "Expenses, daily financial summaries, audit logs, and reporting structures.",
+    "tables": [
+      "daily_summaries",
+      "expense_categories",
+      "expenses"
+    ],
+    "taskCount": 34,
+    "estimatedDuration": "4s",
+    "risk": "MEDIUM"
+  },
+  {
+    "stageNumber": 6,
+    "stageId": "STAGE_6_CONSTRAINTS_INDEXES",
+    "name": "Constraints & Indexes",
+    "description": "Foreign key referential integrity constraints, unique/check constraints, and performance btree indexes.",
+    "tables": [],
+    "taskCount": 54,
+    "estimatedDuration": "6s",
+    "risk": "MEDIUM"
+  }
+]

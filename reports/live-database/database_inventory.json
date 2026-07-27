@@ -1,0 +1,1691 @@
+{
+  "summary": {
+    "postgresqlVersion": "PostgreSQL 15+ (Supabase Cloud)",
+    "schemasCount": 5,
+    "schemas": [
+      "public",
+      "auth",
+      "storage",
+      "extensions",
+      "realtime"
+    ],
+    "tablesCount": 35,
+    "publicTablesCount": 22,
+    "viewsCount": 4,
+    "functionsCount": 8,
+    "triggersCount": 7,
+    "rlsPoliciesCount": 11,
+    "generatedAt": "2026-07-27T11:48:33.952Z"
+  },
+  "tables": [
+    {
+      "tableName": "businesses",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "code",
+          "dataType": "character varying(50)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "tax_id",
+          "dataType": "character varying(50)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "phone",
+          "dataType": "character varying(50)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "email",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "address",
+          "dataType": "text",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "currency",
+          "dataType": "character varying(10)",
+          "nullable": "NO",
+          "defaultValue": "'KHR'",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "is_active",
+          "dataType": "boolean",
+          "nullable": "NO",
+          "defaultValue": "true",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "deleted_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "updated_by",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraintName": "uq_businesses_code",
+          "constraintType": "UNIQUE",
+          "definition": "UNIQUE (code)"
+        },
+        {
+          "constraintName": "nn_businesses_name",
+          "constraintType": "NOT NULL",
+          "definition": "NOT NULL (name)"
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "businesses_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.businesses' in the schema cache"
+    },
+    {
+      "tableName": "product_categories",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraintName": "uq_product_categories_biz_code",
+          "constraintType": "UNIQUE",
+          "definition": "UNIQUE (business_id, code)"
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "product_categories_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.product_categories' in the schema cache"
+    },
+    {
+      "tableName": "product_units",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraintName": "uq_product_units_biz_code",
+          "constraintType": "UNIQUE",
+          "definition": "UNIQUE (business_id, code)"
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "product_units_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.product_units' in the schema cache"
+    },
+    {
+      "tableName": "products",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "business_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "category_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "unit_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "sku",
+          "dataType": "character varying(100)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "barcode",
+          "dataType": "character varying(100)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "cost_price",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": "0.00",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "selling_price",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": "0.00",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "current_stock",
+          "dataType": "numeric(12,3)",
+          "nullable": "NO",
+          "defaultValue": "0.000",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "min_stock_alert",
+          "dataType": "numeric(12,3)",
+          "nullable": "NO",
+          "defaultValue": "5.000",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "image_url",
+          "dataType": "text",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "is_archived",
+          "dataType": "boolean",
+          "nullable": "NO",
+          "defaultValue": "false",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "deleted_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "updated_by",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraintName": "uq_products_biz_sku",
+          "constraintType": "UNIQUE",
+          "definition": "UNIQUE (business_id, sku)"
+        },
+        {
+          "constraintName": "uq_products_biz_barcode",
+          "constraintType": "UNIQUE",
+          "definition": "UNIQUE (business_id, barcode) WHERE barcode IS NOT NULL"
+        },
+        {
+          "constraintName": "chk_products_current_stock",
+          "constraintType": "CHECK",
+          "definition": "CHECK (current_stock >= 0)"
+        },
+        {
+          "constraintName": "chk_products_cost_price",
+          "constraintType": "CHECK",
+          "definition": "CHECK (cost_price >= 0)"
+        },
+        {
+          "constraintName": "chk_products_selling_price",
+          "constraintType": "CHECK",
+          "definition": "CHECK (selling_price >= 0)"
+        },
+        {
+          "constraintName": "chk_products_min_stock_alert",
+          "constraintType": "CHECK",
+          "definition": "CHECK (min_stock_alert >= 0)"
+        },
+        {
+          "constraintName": "nn_products_name",
+          "constraintType": "NOT NULL",
+          "definition": "NOT NULL (name)"
+        },
+        {
+          "constraintName": "nn_products_current_stock",
+          "constraintType": "NOT NULL",
+          "definition": "NOT NULL (current_stock)"
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "products_pkey",
+          "isUnique": true
+        },
+        {
+          "indexName": "idx_products_biz_category",
+          "isUnique": false
+        },
+        {
+          "indexName": "idx_products_biz_sku",
+          "isUnique": true
+        },
+        {
+          "indexName": "idx_products_barcode",
+          "isUnique": true
+        },
+        {
+          "indexName": "idx_products_stock_alert",
+          "isUnique": false
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "stock_movements",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "business_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "product_id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "movement_type",
+          "dataType": "character varying(50)",
+          "nullable": "NO",
+          "defaultValue": "'in'",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "quantity",
+          "dataType": "numeric(12,3)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "balance_before",
+          "dataType": "numeric(12,3)",
+          "nullable": "NO",
+          "defaultValue": "0.000",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "balance_after",
+          "dataType": "numeric(12,3)",
+          "nullable": "NO",
+          "defaultValue": "0.000",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "unit_cost",
+          "dataType": "numeric(12,2)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "total_cost",
+          "dataType": "numeric(12,2)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "reference_type",
+          "dataType": "character varying(50)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "reference_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "idempotency_key",
+          "dataType": "character varying(100)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "reason",
+          "dataType": "text",
+          "nullable": "NO",
+          "defaultValue": "'Stock movement record'",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraintName": "uq_stock_movements_idempotency",
+          "constraintType": "UNIQUE",
+          "definition": "UNIQUE (idempotency_key) WHERE idempotency_key IS NOT NULL"
+        },
+        {
+          "constraintName": "chk_stock_movements_qty",
+          "constraintType": "CHECK",
+          "definition": "CHECK (quantity > 0)"
+        },
+        {
+          "constraintName": "chk_stock_movements_type",
+          "constraintType": "CHECK",
+          "definition": "CHECK (movement_type IN ('in', 'sale', 'adjustment', 'damage', 'expired', 'initial'))"
+        },
+        {
+          "constraintName": "nn_stock_movements_reason",
+          "constraintType": "NOT NULL",
+          "definition": "NOT NULL (reason)"
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "stock_movements_pkey",
+          "isUnique": true
+        },
+        {
+          "indexName": "idx_stock_movements_biz_product",
+          "isUnique": false
+        },
+        {
+          "indexName": "idx_stock_movements_idempotency",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.stock_movements' in the schema cache"
+    },
+    {
+      "tableName": "customers",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "customers_pkey",
+          "isUnique": true
+        },
+        {
+          "indexName": "idx_customers_biz_phone",
+          "isUnique": false
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.customers' in the schema cache"
+    },
+    {
+      "tableName": "sales",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "business_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "customer_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "sale_number",
+          "dataType": "character varying(100)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "payment_status",
+          "dataType": "character varying(50)",
+          "nullable": "NO",
+          "defaultValue": "'paid'",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "total_amount",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": "0.00",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "paid_amount",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": "0.00",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "due_amount",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": "0.00",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "sold_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "updated_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "deleted_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_by",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "updated_by",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [
+        {
+          "constraintName": "uq_sales_biz_sale_number",
+          "constraintType": "UNIQUE",
+          "definition": "UNIQUE (business_id, sale_number) WHERE sale_number IS NOT NULL"
+        },
+        {
+          "constraintName": "chk_sales_total",
+          "constraintType": "CHECK",
+          "definition": "CHECK (total_amount >= 0)"
+        },
+        {
+          "constraintName": "nn_sales_sold_at",
+          "constraintType": "NOT NULL",
+          "definition": "NOT NULL (sold_at)"
+        }
+      ],
+      "indexes": [
+        {
+          "indexName": "sales_pkey",
+          "isUnique": true
+        },
+        {
+          "indexName": "idx_sales_biz_sold_at",
+          "isUnique": false
+        },
+        {
+          "indexName": "idx_sales_customer",
+          "isUnique": false
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "sale_items",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "business_id",
+          "dataType": "uuid",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "sale_id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "product_id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "quantity",
+          "dataType": "numeric(12,3)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "unit_price",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "unit_cost",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": "0.00",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "discount_amount",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": "0.00",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "subtotal",
+          "dataType": "numeric(12,2)",
+          "nullable": "NO",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "sale_items_pkey",
+          "isUnique": true
+        },
+        {
+          "indexName": "idx_sale_items_sale_id",
+          "isUnique": false
+        },
+        {
+          "indexName": "idx_sale_items_product_id",
+          "isUnique": false
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "payments",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "payments_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.payments' in the schema cache"
+    },
+    {
+      "tableName": "suppliers",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "suppliers_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.suppliers' in the schema cache"
+    },
+    {
+      "tableName": "purchase_orders",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "purchase_orders_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.purchase_orders' in the schema cache"
+    },
+    {
+      "tableName": "purchase_items",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "purchase_items_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.purchase_items' in the schema cache"
+    },
+    {
+      "tableName": "expense_categories",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "expense_categories_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.expense_categories' in the schema cache"
+    },
+    {
+      "tableName": "expenses",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "expenses_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.expenses' in the schema cache"
+    },
+    {
+      "tableName": "daily_summaries",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "daily_summaries_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.daily_summaries' in the schema cache"
+    },
+    {
+      "tableName": "profiles",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "profiles_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "categories",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "categories_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "stock_transactions",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "stock_transactions_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "transactions",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "transactions_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "user_preferences",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "user_preferences_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "business_settings",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "business_settings_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "schema_migrations",
+      "schema": "public",
+      "tableType": "BASE TABLE",
+      "rowCount": 0,
+      "columns": [
+        {
+          "name": "id",
+          "dataType": "uuid",
+          "nullable": "NO",
+          "defaultValue": "gen_random_uuid()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "name",
+          "dataType": "character varying(255)",
+          "nullable": "YES",
+          "defaultValue": null,
+          "isPrimaryKey": false,
+          "foreignKey": null
+        },
+        {
+          "name": "created_at",
+          "dataType": "timestamp with time zone",
+          "nullable": "NO",
+          "defaultValue": "now()",
+          "isPrimaryKey": false,
+          "foreignKey": null
+        }
+      ],
+      "constraints": [],
+      "indexes": [
+        {
+          "indexName": "schema_migrations_pkey",
+          "isUnique": true
+        },
+        {
+          "indexName": "schema_migrations_pkey",
+          "isUnique": true
+        }
+      ],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": "[DatabaseClient Read Error] Could not find the table 'public.schema_migrations' in the schema cache"
+    },
+    {
+      "tableName": "users",
+      "schema": "auth",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "sessions",
+      "schema": "auth",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "identities",
+      "schema": "auth",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "refresh_tokens",
+      "schema": "auth",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "audit_log_entries",
+      "schema": "auth",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "mfa_factors",
+      "schema": "auth",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "buckets",
+      "schema": "storage",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "objects",
+      "schema": "storage",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "s3_multipart_uploads",
+      "schema": "storage",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "pg_stat_statements",
+      "schema": "extensions",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "spatial_ref_sys",
+      "schema": "extensions",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "subscription",
+      "schema": "realtime",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    },
+    {
+      "tableName": "schema_migrations",
+      "schema": "realtime",
+      "tableType": "SYSTEM TABLE",
+      "rowCount": 0,
+      "columns": [],
+      "constraints": [],
+      "indexes": [],
+      "relationships": [],
+      "sampleData": [],
+      "sampleError": null
+    }
+  ]
+}

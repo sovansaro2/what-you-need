@@ -1,0 +1,233 @@
+{
+  "creationOrder": [
+    "businesses",
+    "customers",
+    "daily_summaries",
+    "expense_categories",
+    "expenses",
+    "product_categories",
+    "product_units",
+    "products",
+    "profiles",
+    "sales",
+    "payments",
+    "sale_items",
+    "stock_movements",
+    "suppliers",
+    "purchase_orders",
+    "purchase_items"
+  ],
+  "updateOrder": [
+    "businesses",
+    "customers",
+    "daily_summaries",
+    "expense_categories",
+    "expenses",
+    "product_categories",
+    "product_units",
+    "products",
+    "profiles",
+    "sales",
+    "payments",
+    "sale_items",
+    "stock_movements",
+    "suppliers",
+    "purchase_orders",
+    "purchase_items"
+  ],
+  "validationOrder": [
+    "purchase_items",
+    "purchase_orders",
+    "suppliers",
+    "stock_movements",
+    "sale_items",
+    "payments",
+    "sales",
+    "profiles",
+    "products",
+    "product_units",
+    "product_categories",
+    "expenses",
+    "expense_categories",
+    "daily_summaries",
+    "customers",
+    "businesses"
+  ],
+  "dependencyGraph": {
+    "businesses": {
+      "tableName": "businesses",
+      "dependsOn": [],
+      "referencedBy": [
+        "profiles",
+        "product_categories",
+        "product_units",
+        "products",
+        "stock_movements",
+        "customers",
+        "sales",
+        "sale_items",
+        "payments",
+        "suppliers",
+        "purchase_orders",
+        "purchase_items",
+        "expense_categories",
+        "expenses",
+        "daily_summaries"
+      ],
+      "hasCircularDependency": false
+    },
+    "profiles": {
+      "tableName": "profiles",
+      "dependsOn": [
+        "businesses"
+      ],
+      "referencedBy": [],
+      "hasCircularDependency": false
+    },
+    "product_categories": {
+      "tableName": "product_categories",
+      "dependsOn": [
+        "businesses"
+      ],
+      "referencedBy": [
+        "products"
+      ],
+      "hasCircularDependency": false
+    },
+    "product_units": {
+      "tableName": "product_units",
+      "dependsOn": [
+        "businesses"
+      ],
+      "referencedBy": [
+        "products"
+      ],
+      "hasCircularDependency": false
+    },
+    "products": {
+      "tableName": "products",
+      "dependsOn": [
+        "businesses",
+        "product_categories",
+        "product_units"
+      ],
+      "referencedBy": [
+        "stock_movements",
+        "sale_items",
+        "purchase_items"
+      ],
+      "hasCircularDependency": false
+    },
+    "stock_movements": {
+      "tableName": "stock_movements",
+      "dependsOn": [
+        "businesses",
+        "products"
+      ],
+      "referencedBy": [],
+      "hasCircularDependency": false
+    },
+    "customers": {
+      "tableName": "customers",
+      "dependsOn": [
+        "businesses"
+      ],
+      "referencedBy": [
+        "sales",
+        "payments"
+      ],
+      "hasCircularDependency": false
+    },
+    "sales": {
+      "tableName": "sales",
+      "dependsOn": [
+        "businesses",
+        "customers"
+      ],
+      "referencedBy": [
+        "sale_items",
+        "payments"
+      ],
+      "hasCircularDependency": false
+    },
+    "sale_items": {
+      "tableName": "sale_items",
+      "dependsOn": [
+        "businesses",
+        "sales",
+        "products"
+      ],
+      "referencedBy": [],
+      "hasCircularDependency": false
+    },
+    "payments": {
+      "tableName": "payments",
+      "dependsOn": [
+        "businesses",
+        "sales",
+        "customers"
+      ],
+      "referencedBy": [],
+      "hasCircularDependency": false
+    },
+    "suppliers": {
+      "tableName": "suppliers",
+      "dependsOn": [
+        "businesses"
+      ],
+      "referencedBy": [
+        "purchase_orders"
+      ],
+      "hasCircularDependency": false
+    },
+    "purchase_orders": {
+      "tableName": "purchase_orders",
+      "dependsOn": [
+        "businesses",
+        "suppliers"
+      ],
+      "referencedBy": [
+        "purchase_items"
+      ],
+      "hasCircularDependency": false
+    },
+    "purchase_items": {
+      "tableName": "purchase_items",
+      "dependsOn": [
+        "businesses",
+        "purchase_orders",
+        "products"
+      ],
+      "referencedBy": [],
+      "hasCircularDependency": false
+    },
+    "expense_categories": {
+      "tableName": "expense_categories",
+      "dependsOn": [
+        "businesses"
+      ],
+      "referencedBy": [
+        "expenses"
+      ],
+      "hasCircularDependency": false
+    },
+    "expenses": {
+      "tableName": "expenses",
+      "dependsOn": [
+        "businesses",
+        "expense_categories"
+      ],
+      "referencedBy": [],
+      "hasCircularDependency": false
+    },
+    "daily_summaries": {
+      "tableName": "daily_summaries",
+      "dependsOn": [
+        "businesses"
+      ],
+      "referencedBy": [],
+      "hasCircularDependency": false
+    }
+  },
+  "circularDependencies": []
+}

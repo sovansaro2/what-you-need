@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.519Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "schema": "public",
+      "functionName": "handle_new_user",
+      "arguments": "",
+      "returnType": "trigger",
+      "language": "plpgsql",
+      "securityDefiner": true,
+      "volatility": "VOLATILE"
+    },
+    {
+      "schema": "public",
+      "functionName": "update_updated_at_column",
+      "arguments": "",
+      "returnType": "trigger",
+      "language": "plpgsql",
+      "securityDefiner": false,
+      "volatility": "VOLATILE"
+    },
+    {
+      "schema": "public",
+      "functionName": "get_business_summary",
+      "arguments": "p_business_id uuid",
+      "returnType": "json",
+      "language": "plpgsql",
+      "securityDefiner": false,
+      "volatility": "STABLE"
+    },
+    {
+      "schema": "public",
+      "functionName": "calculate_stock_movement",
+      "arguments": "",
+      "returnType": "trigger",
+      "language": "plpgsql",
+      "securityDefiner": false,
+      "volatility": "VOLATILE"
+    },
+    {
+      "schema": "public",
+      "functionName": "process_sale_transaction",
+      "arguments": "p_sale_id uuid",
+      "returnType": "boolean",
+      "language": "plpgsql",
+      "securityDefiner": true,
+      "volatility": "VOLATILE"
+    },
+    {
+      "schema": "public",
+      "functionName": "calculate_daily_summary",
+      "arguments": "",
+      "returnType": "trigger",
+      "language": "plpgsql",
+      "securityDefiner": false,
+      "volatility": "VOLATILE"
+    },
+    {
+      "schema": "auth",
+      "functionName": "uid",
+      "arguments": "",
+      "returnType": "uuid",
+      "language": "sql",
+      "securityDefiner": false,
+      "volatility": "STABLE"
+    },
+    {
+      "schema": "storage",
+      "functionName": "foldername",
+      "arguments": "name text",
+      "returnType": "text[]",
+      "language": "plpgsql",
+      "securityDefiner": false,
+      "volatility": "IMMUTABLE"
+    }
+  ],
+  "count": 8
+}

@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.522Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "viewName": "mv_monthly_financial_report",
+      "owner": "postgres",
+      "populated": true,
+      "definition": "SELECT business_id, date_trunc('month', created_at) AS month, sum(total_amount) AS total_revenue, sum(tax_amount) AS total_tax FROM sales GROUP BY business_id, date_trunc('month', created_at)"
+    },
+    {
+      "viewName": "mv_product_sales_analytics",
+      "owner": "postgres",
+      "populated": true,
+      "definition": "SELECT product_id, sum(quantity) AS units_sold, sum(subtotal) AS gross_sales FROM sale_items GROUP BY product_id"
+    }
+  ],
+  "count": 2
+}

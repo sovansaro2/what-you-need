@@ -1,342 +1,258 @@
 import { supabase } from '@/lib/supabase';
-import { ProductCategory, CreateProductCategoryInput, UpdateProductCategoryInput, ProductCategoryFilter } from '../types';
+import {
+  ProductCategory,
+  CreateProductCategoryInput,
+  UpdateProductCategoryInput,
+  ProductCategoryFilter,
+} from '../types';
 import { DEFAULT_KHMER_CATEGORIES, KHMER_CATEGORY_MESSAGES } from '../constants';
-
-const getLocalStorageKey = (userId: string) => `wyn_product_categories_${userId}`;
-
-const getLocalCategories = (userId: string): ProductCategory[] => {
-  try {
-    const data = localStorage.getItem(getLocalStorageKey(userId));
-    if (data) {
-      const parsed = JSON.parse(data);
-      if (Array.isArray(parsed)) return parsed;
-    }
-  } catch (e) {
-    console.error('Failed to parse local product categories', e);
-  }
-  return [];
-};
-
-const setLocalCategories = (userId: string, categories: ProductCategory[]): void => {
-  try {
-    localStorage.setItem(getLocalStorageKey(userId), JSON.stringify(categories));
-  } catch (e) {
-    console.error('Failed to save local product categories', e);
-  }
-};
+import {
+  businessContext,
+  handleInventoryError,
+  queryHelpers,
+  inventoryMapper,
+  inventoryValidator,
+} from '../../foundation';
 
 export const productCategoryService = {
   /**
-   * Seed default categories for a new user if none exist.
+   * Seed default categories into live Supabase product_categories table if empty.
    */
   async ensureDefaultCategories(userId: string): Promise<ProductCategory[]> {
-    let existing = getLocalCategories(userId);
+    try {
+      // 1. Fetch existing categories from Supabase
+      const { data: existing, error } = await supabase
+        .from('product_categories')
+        .select('*')
+        .order('created_at', { ascending: true });
 
-    if (existing.length === 0) {
-      const now = new Date().toISOString();
-      const initialCategories: ProductCategory[] = DEFAULT_KHMER_CATEGORIES.map((cat, idx) => ({
-        id: `default-cat-${idx + 1}-${Date.now()}`,
-        user_id: userId,
-        name: cat.name,
-        description: cat.description,
-        color: cat.color,
-        is_default: cat.is_default,
-        is_archived: false,
-        created_at: now,
-        updated_at: now,
+      if (error) {
+        throw error;
+      }
+
+      if (existing && existing.length > 0) {
+        return existing.map((cat: any) => inventoryMapper.mapDbRecordToCategory(cat, userId));
+      }
+
+      // 2. If table is empty, insert default categories (only valid DB column 'name')
+      const payloads = DEFAULT_KHMER_CATEGORIES.map((c) => ({
+        name: c.name.trim(),
       }));
 
-      setLocalCategories(userId, initialCategories);
-      existing = initialCategories;
+      const { data: inserted, error: insertError } = await supabase
+        .from('product_categories')
+        .insert(payloads)
+        .select('*');
 
-      // Try inserting into Supabase
-      try {
-        const payload = initialCategories.map((c) => ({
-          user_id: c.user_id,
-          name: c.name,
-          description: c.description,
-          color: c.color,
-          is_default: c.is_default,
-          is_archived: false,
-        }));
-        await supabase.from('product_categories').insert(payload);
-      } catch (e) {
-        console.warn('Supabase product_categories seed fallback:', e);
+      if (insertError) {
+        throw insertError;
       }
-    }
 
-    return existing;
+      return (inserted || []).map((cat: any) => inventoryMapper.mapDbRecordToCategory(cat, userId));
+    } catch (err: any) {
+      handleInventoryError(err, 'ProductCategoryService.ensureDefaultCategories');
+    }
   },
 
   /**
-   * Calculate product counts per category ID or name.
+   * Calculate product counts per category ID from Supabase products table.
    */
   async getCategoryProductCounts(userId: string): Promise<Record<string, number>> {
     const counts: Record<string, number> = {};
 
     try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('id, category, category_id')
-        .eq('user_id', userId);
+      let query = supabase.from('products').select('id, category_id');
+      query = queryHelpers.notDeleted(query);
+
+      if (businessContext.validateBusinessId(userId)) {
+        query = queryHelpers.byBusiness(query, userId);
+      }
+
+      const { data, error } = await query;
 
       if (!error && data) {
         data.forEach((p: any) => {
           if (p.category_id) {
             counts[p.category_id] = (counts[p.category_id] || 0) + 1;
           }
-          if (p.category) {
-            counts[p.category] = (counts[p.category] || 0) + 1;
-          }
         });
       }
-    } catch {}
-
-    try {
-      const rawProducts = localStorage.getItem(`wyn_products_${userId}`);
-      if (rawProducts) {
-        const list = JSON.parse(rawProducts);
-        if (Array.isArray(list)) {
-          list.forEach((p: any) => {
-            if (p.category_id) {
-              counts[p.category_id] = (counts[p.category_id] || 0) + 1;
-            }
-            if (p.category) {
-              counts[p.category] = (counts[p.category] || 0) + 1;
-            }
-          });
-        }
-      }
-    } catch {}
+    } catch (err) {
+      console.warn('[ProductCategoryService] Error getting category product counts:', err);
+    }
 
     return counts;
   },
 
   /**
-   * Fetch categories with filtering and product counts.
+   * Fetch all categories directly from live Supabase DB with product counts attached.
    */
-  async getCategories(userId: string, filter: ProductCategoryFilter = 'active'): Promise<ProductCategory[]> {
-    let categories = getLocalCategories(userId);
-    if (categories.length === 0) {
-      categories = await this.ensureDefaultCategories(userId);
-    }
+  async getCategories(
+    userId: string,
+    _filter: ProductCategoryFilter = 'active'
+  ): Promise<ProductCategory[]> {
+    try {
+      const categories = await this.ensureDefaultCategories(userId);
+      const productCounts = await this.getCategoryProductCounts(userId);
 
-    const productCounts = await this.getCategoryProductCounts(userId);
+      return categories.map((c) => ({
+        ...c,
+        product_count: productCounts[c.id] || 0,
+      }));
+    } catch (err: any) {
+      handleInventoryError(err, 'ProductCategoryService.getCategories');
+    }
+  },
+
+  /**
+   * Check if category name already exists (case-insensitive & trimmed) in DB.
+   */
+  async isNameDuplicate(userId: string, name: string, excludeId?: string): Promise<boolean> {
+    if (!name || !name.trim()) return false;
+    const cleanName = name.trim();
 
     try {
       let query = supabase
         .from('product_categories')
-        .select('*')
-        .eq('user_id', userId);
+        .select('id')
+        .ilike('name', cleanName);
 
-      if (filter === 'active') {
-        query = query.eq('is_archived', false);
-      } else if (filter === 'archived') {
-        query = query.eq('is_archived', true);
+      if (excludeId) {
+        query = query.neq('id', excludeId);
       }
 
       const { data, error } = await query;
-
-      if (!error && data && data.length > 0) {
-        const remoteList: ProductCategory[] = data.map((item: any) => ({
-          id: item.id,
-          user_id: item.user_id,
-          name: item.name,
-          description: item.description || '',
-          color: item.color || '#6366f1',
-          is_default: Boolean(item.is_default),
-          is_archived: Boolean(item.is_archived),
-          created_at: item.created_at || new Date().toISOString(),
-          updated_at: item.updated_at || new Date().toISOString(),
-        }));
-
-        const mergedMap = new Map<string, ProductCategory>();
-        categories.forEach((c) => mergedMap.set(c.id, c));
-        remoteList.forEach((c) => mergedMap.set(c.id, c));
-
-        setLocalCategories(userId, Array.from(mergedMap.values()));
-        categories = remoteList;
+      if (error) {
+        throw error;
       }
+
+      return Boolean(data && data.length > 0);
     } catch (err: any) {
-      console.warn('productCategoryService.getCategories network warning:', err?.message || err);
+      handleInventoryError(err, 'ProductCategoryService.isNameDuplicate');
     }
-
-    if (filter === 'active') {
-      categories = categories.filter((c) => !c.is_archived);
-    } else if (filter === 'archived') {
-      categories = categories.filter((c) => c.is_archived);
-    }
-
-    return categories.map((c) => {
-      const count = (productCounts[c.id] || 0) + (productCounts[c.name] || 0);
-      return {
-        ...c,
-        product_count: count,
-      };
-    });
   },
 
   /**
-   * Check if category name already exists (case-insensitive & trimmed)
+   * Create a new custom category in live Supabase DB.
    */
-  async isNameDuplicate(userId: string, name: string, excludeId?: string): Promise<boolean> {
-    const trimmed = name.trim().toLowerCase();
-    const categories = await this.getCategories(userId, 'all');
-
-    return categories.some(
-      (c) => c.id !== excludeId && c.name.trim().toLowerCase() === trimmed
-    );
-  },
-
-  /**
-   * Create a new custom category.
-   */
-  async createCategory(userId: string, input: CreateProductCategoryInput): Promise<ProductCategory> {
-    const trimmedName = input.name.trim();
-    if (!trimmedName) {
+  async createCategory(
+    userId: string,
+    input: CreateProductCategoryInput
+  ): Promise<ProductCategory> {
+    const nameErrors = inventoryValidator.validateCategoryName(input.name);
+    if (nameErrors.length > 0) {
       throw new Error(KHMER_CATEGORY_MESSAGES.NAME_REQUIRED);
     }
+
+    const trimmedName = input.name.trim();
 
     const isDup = await this.isNameDuplicate(userId, trimmedName);
     if (isDup) {
       throw new Error(KHMER_CATEGORY_MESSAGES.NAME_DUPLICATE);
     }
 
-    const now = new Date().toISOString();
-    const newCategory: ProductCategory = {
-      id: `cat-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
-      user_id: userId,
-      name: trimmedName,
-      description: input.description?.trim() || '',
-      color: input.color || '#6366f1',
-      is_default: false,
-      is_archived: false,
-      created_at: now,
-      updated_at: now,
-    };
-
-    // Save local
-    const allLocal = getLocalCategories(userId);
-    allLocal.unshift(newCategory);
-    setLocalCategories(userId, allLocal);
-
-    // Sync remote
     try {
+      const payload = inventoryMapper.mapCategoryInputToDbPayload(trimmedName);
+
       const { data, error } = await supabase
         .from('product_categories')
-        .insert([
-          {
-            user_id: userId,
-            name: newCategory.name,
-            description: newCategory.description,
-            color: newCategory.color,
-            is_default: false,
-            is_archived: false,
-          },
-        ])
-        .select()
+        .insert([payload])
+        .select('*')
         .single();
 
-      if (!error && data) {
-        newCategory.id = data.id;
-        const updatedLocal = allLocal.map((c) => (c.name === newCategory.name ? { ...c, id: data.id } : c));
-        setLocalCategories(userId, updatedLocal);
+      if (error || !data) {
+        throw error || new Error('Failed to create category');
       }
-    } catch (e) {
-      console.warn('Supabase create category offline fallback:', e);
-    }
 
-    return newCategory;
+      return inventoryMapper.mapDbRecordToCategory(data, userId);
+    } catch (err: any) {
+      handleInventoryError(err, 'ProductCategoryService.createCategory');
+    }
   },
 
   /**
-   * Update existing category.
+   * Update existing category in live Supabase DB.
    */
   async updateCategory(
     userId: string,
     id: string,
     input: UpdateProductCategoryInput
   ): Promise<ProductCategory> {
-    const allLocal = getLocalCategories(userId);
-    const targetIndex = allLocal.findIndex((c) => c.id === id);
-
-    if (targetIndex === -1) {
-      throw new Error('រកមិនឃើញប្រភេទទំនិញឡើយ');
-    }
-
-    const target = allLocal[targetIndex];
-
-    if (input.name !== undefined) {
-      const trimmedName = input.name.trim();
-      if (!trimmedName) {
-        throw new Error(KHMER_CATEGORY_MESSAGES.NAME_REQUIRED);
-      }
-      const isDup = await this.isNameDuplicate(userId, trimmedName, id);
-      if (isDup) {
-        throw new Error(KHMER_CATEGORY_MESSAGES.NAME_DUPLICATE);
-      }
-      target.name = trimmedName;
-    }
-
-    if (input.description !== undefined) {
-      target.description = input.description.trim();
-    }
-
-    if (input.color !== undefined) {
-      target.color = input.color;
-    }
-
-    if (input.is_archived !== undefined) {
-      if (target.is_default && input.is_archived) {
-        throw new Error(KHMER_CATEGORY_MESSAGES.CANNOT_ARCHIVE_DEFAULT);
-      }
-      target.is_archived = input.is_archived;
-    }
-
-    target.updated_at = new Date().toISOString();
-    allLocal[targetIndex] = target;
-    setLocalCategories(userId, allLocal);
-
     try {
-      await supabase
-        .from('product_categories')
-        .update({
-          name: target.name,
-          description: target.description,
-          color: target.color,
-          is_archived: target.is_archived,
-        })
-        .eq('id', id)
-        .eq('user_id', userId);
-    } catch (e) {
-      console.warn('Supabase update category fallback:', e);
-    }
+      const payload: Record<string, any> = {};
 
-    return target;
+      if (input.name !== undefined) {
+        const nameErrors = inventoryValidator.validateCategoryName(input.name);
+        if (nameErrors.length > 0) {
+          throw new Error(KHMER_CATEGORY_MESSAGES.NAME_REQUIRED);
+        }
+        const trimmedName = input.name.trim();
+        const isDup = await this.isNameDuplicate(userId, trimmedName, id);
+        if (isDup) {
+          throw new Error(KHMER_CATEGORY_MESSAGES.NAME_DUPLICATE);
+        }
+        payload.name = trimmedName;
+      }
+
+      if (Object.keys(payload).length === 0) {
+        const { data, error } = await supabase
+          .from('product_categories')
+          .select('*')
+          .eq('id', id)
+          .single();
+
+        if (error || !data) throw error || new Error('Category not found');
+        return inventoryMapper.mapDbRecordToCategory(data, userId);
+      }
+
+      const { data, error } = await supabase
+        .from('product_categories')
+        .update(payload)
+        .eq('id', id)
+        .select('*')
+        .single();
+
+      if (error || !data) {
+        throw error || new Error('Failed to update category');
+      }
+
+      return inventoryMapper.mapDbRecordToCategory(data, userId);
+    } catch (err: any) {
+      handleInventoryError(err, 'ProductCategoryService.updateCategory');
+    }
   },
 
   /**
-   * Archive a category
+   * Delete category permanently from live Supabase DB.
+   */
+  async deleteCategory(userId: string, id: string): Promise<boolean> {
+    try {
+      const counts = await this.getCategoryProductCounts(userId);
+      if ((counts[id] || 0) > 0) {
+        throw new Error(KHMER_CATEGORY_MESSAGES.CANNOT_ARCHIVE_IN_USE);
+      }
+
+      const { error } = await supabase.from('product_categories').delete().eq('id', id);
+
+      if (error) {
+        throw error;
+      }
+
+      return true;
+    } catch (err: any) {
+      handleInventoryError(err, 'ProductCategoryService.deleteCategory');
+    }
+  },
+
+  /**
+   * Archive category.
    */
   async archiveCategory(userId: string, id: string): Promise<ProductCategory> {
-    const counts = await this.getCategoryProductCounts(userId);
-    const categories = await this.getCategories(userId, 'all');
-    const target = categories.find((c) => c.id === id);
-
-    if (target && target.is_default) {
-      throw new Error(KHMER_CATEGORY_MESSAGES.CANNOT_ARCHIVE_DEFAULT);
-    }
-
-    const inUse = target && ((counts[target.id] || 0) > 0 || (counts[target.name] || 0) > 0);
-    if (inUse) {
-      throw new Error(KHMER_CATEGORY_MESSAGES.CANNOT_ARCHIVE_IN_USE);
-    }
-
     return this.updateCategory(userId, id, { is_archived: true });
   },
 
   /**
-   * Unarchive a category
+   * Unarchive category.
    */
   async unarchiveCategory(userId: string, id: string): Promise<ProductCategory> {
     return this.updateCategory(userId, id, { is_archived: false });

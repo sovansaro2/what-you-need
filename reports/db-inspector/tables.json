@@ -1,0 +1,288 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.211Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "tableName": "businesses",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "product_categories",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "product_units",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "products",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "stock_movements",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "customers",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "sales",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "sale_items",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "payments",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "suppliers",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "purchase_orders",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "purchase_items",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "expense_categories",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "expenses",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "daily_summaries",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "profiles",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "categories",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "stock_transactions",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "transactions",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "user_preferences",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "business_settings",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "schema_migrations",
+      "schema": "public",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "BASE TABLE"
+    },
+    {
+      "tableName": "users",
+      "schema": "auth",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "sessions",
+      "schema": "auth",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "identities",
+      "schema": "auth",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "refresh_tokens",
+      "schema": "auth",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "audit_log_entries",
+      "schema": "auth",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "mfa_factors",
+      "schema": "auth",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "buckets",
+      "schema": "storage",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "objects",
+      "schema": "storage",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "s3_multipart_uploads",
+      "schema": "storage",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "pg_stat_statements",
+      "schema": "extensions",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "spatial_ref_sys",
+      "schema": "extensions",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "subscription",
+      "schema": "realtime",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    },
+    {
+      "tableName": "schema_migrations",
+      "schema": "realtime",
+      "tableOwner": "postgres",
+      "estimatedRowCount": 0,
+      "estimatedSize": "16 kB",
+      "tableType": "SYSTEM TABLE"
+    }
+  ],
+  "count": 35
+}

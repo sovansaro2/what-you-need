@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-07-27T11:47:54.523Z",
+  "databaseVersion": "PostgreSQL 15+ (Supabase Cloud)",
+  "schema": "all",
+  "records": [
+    {
+      "extensionName": "pgcrypto",
+      "version": "1.3",
+      "schema": "extensions"
+    },
+    {
+      "extensionName": "uuid-ossp",
+      "version": "1.1",
+      "schema": "extensions"
+    },
+    {
+      "extensionName": "pg_stat_statements",
+      "version": "1.10",
+      "schema": "extensions"
+    },
+    {
+      "extensionName": "plpgsql",
+      "version": "1.0",
+      "schema": "pg_catalog"
+    },
+    {
+      "extensionName": "vector",
+      "version": "0.5.1",
+      "schema": "extensions"
+    }
+  ],
+  "count": 5
+}
